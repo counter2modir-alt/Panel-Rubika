@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050a12">
+<meta name="description" content="پنل خدمات رایگان روبیکا">
+<title>پنل خدمات روبیکا</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --bg:#050912;
+    --bg2:#091321;
+    --glass:rgba(17,27,42,.72);
+    --glass2:rgba(24,37,57,.58);
+    --border:rgba(255,255,255,.09);
+    --border2:rgba(255,255,255,.14);
+    --text:#f4f7fb;
+    --muted:#91a0b5;
+    --primary:#4da3ff;
+    --primary2:#756cff;
+    --green:#27d59a;
+    --red:#ff5e78;
+    --orange:#ffb454;
+    --shadow:0 20px 55px rgba(0,0,0,.38);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 5%,rgba(77,163,255,.12),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(117,108,255,.10),transparent 30%),
+        linear-gradient(145deg,#040811,#091321 55%,#050912);
+    color:var(--text);
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* floating lights */
+
+.bg-light{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    filter:blur(1px);
+    opacity:.22;
+    z-index:0;
+    animation:float 9s ease-in-out infinite;
+}
+
+.bg-light.one{
+    width:170px;
+    height:170px;
+    background:#1877ff;
+    top:8%;
+    right:-90px;
+}
+
+.bg-light.two{
+    width:120px;
+    height:120px;
+    background:#735cff;
+    bottom:20%;
+    left:-60px;
+    animation-delay:2s;
+}
+
+.bg-light.three{
+    width:80px;
+    height:80px;
+    background:#16d6b2;
+    top:48%;
+    right:5%;
+    animation-delay:4s;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0) translateX(0)}
+    50%{transform:translateY(-25px) translateX(12px)}
+}
+
+/* app */
+
+.app{
+    width:min(100%,520px);
+    min-height:100vh;
+    margin:auto;
+    position:relative;
+    z-index:2;
+    padding-bottom:95px;
+}
+
+/* header */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    padding:14px 14px 10px;
+    background:rgba(5,9,18,.72);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+    min-height:68px;
+    padding:10px 12px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    border:1px solid var(--border);
+    border-radius:23px;
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.025)
+    );
+    box-shadow:var(--shadow);
+}
+
+.logo{
+    width:48px;
+    height:48px;
+    border-radius:16px;
+    display:grid;
+    place-items:center;
+    flex-shrink:0;
+    font-size:24px;
+    background:
+        linear-gradient(145deg,rgba(77,163,255,.30),rgba(117,108,255,.22));
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.1),
+        0 10px 25px rgba(20,100,255,.15);
+}
+
+.header-title{
+    flex:1;
+    min-width:0;
+}
+
+.header-title strong{
+    display:block;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.header-title span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 10px;
+    border-radius:13px;
+    background:rgba(39,213,154,.08);
+    border:1px solid rgba(39,213,154,.15);
+    color:#7df2c6;
+    font-size:10px;
+    white-space:nowrap;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 10px var(--green);
+}
+
+/* hero */
+
+.hero{
+    margin:18px 14px;
+    padding:24px 20px;
+    border-radius:28px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,163,255,.13),
+            rgba(117,108,255,.09) 45%,
+            rgba(255,255,255,.025)
+        );
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:rgba(77,163,255,.09);
+    top:-100px;
+    left:-70px;
+}
+
+.hero h1{
+    position:relative;
+    font-size:23px;
+    margin-bottom:9px;
+}
+
+.hero p{
+    position:relative;
+    color:var(--muted);
+    font-size:12px;
+    line-height:2;
+}
+
+.hero-badges{
+    position:relative;
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.badge{
+    padding:7px 10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.055);
+    border:1px solid var(--border);
+    color:#cbd7e8;
+    font-size:10px;
+}
+
+/* section */
+
+.section{
+    padding:0 14px;
+}
+
+.section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:22px 2px 12px;
+}
+
+.section-head h2{
+    font-size:15px;
+}
+
+.section-head span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* tabs */
+
+.tabs{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+    margin-bottom:14px;
+}
+
+.tab{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.035);
+    color:var(--muted);
+    border-radius:15px;
+    padding:12px 8px;
+    font-size:11px;
+    transition:.2s;
+}
+
+.tab.active{
+    color:#fff;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,163,255,.20),
+            rgba(117,108,255,.16)
+        );
+    border-color:rgba(77,163,255,.28);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* services */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+}
+
+.service{
+    position:relative;
+    padding:15px;
+    min-height:155px;
+    border-radius:22px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+    box-shadow:0 12px 30px rgba(0,0,0,.20);
+    transition:.2s;
+    overflow:hidden;
+}
+
+.service:hover{
+    transform:translateY(-2px);
+    border-color:rgba(77,163,255,.25);
+}
+
+.service-icon{
+    width:43px;
+    height:43px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    font-size:21px;
+    background:rgba(77,163,255,.09);
+    border:1px solid rgba(77,163,255,.14);
+    margin-bottom:11px;
+}
+
+.service h3{
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.service p{
+    font-size:10px;
+    color:var(--muted);
+    line-height:1.8;
+    min-height:36px;
+}
+
+.service-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:11px;
+    gap:7px;
+}
+
+.free{
+    color:#6cebb8;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.order-btn{
+    border:0;
+    color:white;
+    border-radius:11px;
+    padding:8px 12px;
+    font-size:10px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    box-shadow:0 7px 18px rgba(77,163,255,.18);
+}
+
+/* order box */
+
+.order-box{
+    display:none;
+    margin-top:18px;
+    padding:18px;
+    border-radius:24px;
+    border:1px solid var(--border2);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,32,50,.92),
+            rgba(9,17,29,.88)
+        );
+    box-shadow:var(--shadow);
+    animation:show .25s ease;
+}
+
+.order-box.show{
+    display:block;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.order-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.order-head strong{
+    font-size:15px;
+}
+
+.close-order{
+    width:32px;
+    height:32px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    background:rgba(255,255,255,.05);
+    color:#fff;
+}
+
+.field{
+    margin-bottom:12px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:7px;
+    color:#c4d0df;
+    font-size:11px;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    border:1px solid var(--border2);
+    outline:none;
+    border-radius:14px;
+    background:rgba(255,255,255,.045);
+    color:#fff;
+    padding:12px;
+    font-size:12px;
+    transition:.2s;
+}
+
+.field textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:rgba(77,163,255,.55);
+    box-shadow:0 0 0 3px rgba(77,163,255,.08);
+}
+
+.field select option{
+    background:#101a29;
+    color:#fff;
+}
+
+.emoji-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:7px;
+}
+
+.emoji{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    border-radius:12px;
+    padding:9px 4px;
+    font-size:19px;
+}
+
+.emoji.active{
+    border-color:var(--primary);
+    background:rgba(77,163,255,.15);
+    transform:scale(1.04);
+}
+
+.mode{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-bottom:10px;
+}
+
+.mode button{
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    color:var(--muted);
+    background:rgba(255,255,255,.035);
+    font-size:10px;
+}
+
+.mode button.active{
+    color:white;
+    border-color:rgba(77,163,255,.4);
+    background:rgba(77,163,255,.12);
+}
+
+.submit{
+    width:100%;
+    margin-top:7px;
+    border:0;
+    border-radius:15px;
+    padding:14px;
+    color:#fff;
+    font-weight:bold;
+    font-size:12px;
+    background:linear-gradient(135deg,#248cff,#756cff);
+    box-shadow:0 12px 30px rgba(50,120,255,.18);
+}
+
+.submit:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.cancel{
+    width:100%;
+    margin-top:8px;
+    padding:11px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    color:var(--muted);
+    background:rgba(255,255,255,.03);
+}
+
+/* progress */
+
+.progress-box{
+    display:none;
+    margin-top:16px;
+    padding:16px;
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+    border:1px solid var(--border);
+}
+
+.progress-box.show{
+    display:block;
+}
+
+.progress-text{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:var(--muted);
+    margin-bottom:9px;
+}
+
+.progress{
+    height:9px;
+    border-radius:20px;
+    overflow:hidden;
+    background:rgba(255,255,255,.07);
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#248cff,#756cff,#27d59a);
+    transition:width .35s ease;
+}
+
+/* success */
+
+.success{
+    display:none;
+    margin-top:14px;
+    padding:17px;
+    border-radius:18px;
+    background:rgba(39,213,154,.07);
+    border:1px solid rgba(39,213,154,.20);
+}
+
+.success.show{
+    display:block;
+}
+
+.success-title{
+    color:#6cebb8;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.success p{
+    color:#a9b8c9;
+    font-size:10px;
+    line-height:2;
+}
+
+.order-number{
+    display:inline-block;
+    margin-top:8px;
+    padding:7px 10px;
+    border-radius:10px;
+    background:rgba(0,0,0,.20);
+    color:#fff;
+    direction:ltr;
+    font-size:11px;
+}
+
+/* orders */
+
+.orders{
+    display:none;
+    margin-top:18px;
+}
+
+.orders.show{
+    display:block;
+}
+
+.order-item{
+    padding:14px;
+    margin-bottom:9px;
+    border-radius:18px;
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+}
+
+.order-item-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:9px;
+}
+
+.order-item strong{
+    font-size:12px;
+}
+
+.order-item small{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.order-status{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:9px;
+    font-size:9px;
+    color:#6cebb8;
+    background:rgba(39,213,154,.08);
+}
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    padding:25px;
+}
+
+/* bottom */
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(100%,520px);
+    z-index:60;
+    padding:10px 14px 13px;
+    background:linear-gradient(
+        to top,
+        rgba(5,9,18,.97),
+        rgba(5,9,18,.72),
+        transparent
+    );
+}
+
+.bottom-inner{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    padding:7px;
+    border-radius:21px;
+    border:1px solid var(--border);
+    background:rgba(12,21,34,.84);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    box-shadow:var(--shadow);
+}
+
+.nav-btn{
+    border:0;
+    border-radius:15px;
+    background:transparent;
+    color:var(--muted);
+    padding:9px 5px;
+    font-size:9px;
+}
+
+.nav-btn span{
+    display:block;
+    font-size:19px;
+    margin-bottom:4px;
+}
+
+.nav-btn.active{
+    color:#fff;
+    background:rgba(77,163,255,.11);
+}
+
+/* toast */
+
+.toast{
+    position:fixed;
+    z-index:100;
+    left:50%;
+    bottom:94px;
+    transform:translate(-50%,20px);
+    width:calc(100% - 30px);
+    max-width:470px;
+    padding:13px 15px;
+    border-radius:15px;
+    background:rgba(15,25,40,.94);
+    border:1px solid var(--border2);
+    color:#fff;
+    font-size:11px;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    backdrop-filter:blur(15px);
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* responsive */
+
+@media(max-width:360px){
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .status{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-light one"></div>
+<div class="bg-light two"></div>
+<div class="bg-light three"></div>
+
+<div class="app">
+
+    <header class="header">
+        <div class="header-inner">
+
+            <div class="logo">🛒</div>
+
+            <div class="header-title">
+                <strong>پنل خدمات روبیکا</strong>
+                <span>سفارش خدمات به‌صورت کاملاً رایگان</span>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                آنلاین
+            </div>
+
+        </div>
+    </header>
+
+    <section class="hero">
+
+        <h1>خدمات رایگان روبیکا</h1>
+
+        <p>
+            خدمات موردنظر خودت را انتخاب کن،
+            اطلاعات سفارش را وارد کن و درخواستت را ثبت کن.
+        </p>
+
+        <div class="hero-badges">
+            <span class="badge">🆓 بدون هزینه</span>
+            <span class="badge">⚡ ثبت سریع</span>
+            <span class="badge">🔐 امن</span>
+            <span class="badge">📱 موبایل‌پسند</span>
+        </div>
+
+    </section>
+
+    <main class="section">
+
+        <div class="tabs">
+            <button class="tab active" data-tab="rubika">
+                💬 خدمات روبیکا
+            </button>
+
+            <button class="tab" data-tab="rubino">
+                📸 خدمات روبینو
+            </button>
+        </div>
+
+        <section id="rubikaTab">
+
+            <div class="section-head">
+                <h2>خدمات روبیکا</h2>
+                <span>همه رایگان</span>
+            </div>
+
+            <div class="services">
+
+                <article class="service">
+                    <div class="service-icon">❤️</div>
+                    <h3>ری‌اکشن پیام</h3>
+                    <p>ثبت سفارش ریکشن روی پیام روبیکا</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="ری‌اکشن پیام"
+                            data-type="reaction">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">👁️</div>
+                    <h3>سین / بازدید پیام</h3>
+                    <p>ثبت سفارش بازدید برای پیام یا پست</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="سین / بازدید پیام"
+                            data-type="views">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">👥</div>
+                    <h3>عضو کانال</h3>
+                    <p>ثبت درخواست افزایش عضو کانال</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="عضو کانال"
+                            data-type="members">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">📊</div>
+                    <h3>نظرسنجی</h3>
+                    <p>ثبت درخواست برای خدمات نظرسنجی</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="نظرسنجی"
+                            data-type="poll">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section id="rubinoTab" style="display:none">
+
+            <div class="section-head">
+                <h2>خدمات روبینو</h2>
+                <span>همه رایگان</span>
+            </div>
+
+            <div class="services">
+
+                <article class="service">
+                    <div class="service-icon">👍</div>
+                    <h3>لایک پست</h3>
+                    <p>ثبت سفارش لایک برای پست روبینو</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="لایک پست روبینو"
+                            data-type="like">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">👁️</div>
+                    <h3>بازدید پست</h3>
+                    <p>ثبت سفارش بازدید برای پست روبینو</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="بازدید پست روبینو"
+                            data-type="rubino_views">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">👤</div>
+                    <h3>فالوور</h3>
+                    <p>ثبت درخواست دنبال‌کننده برای پروفایل</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="فالوور روبینو"
+                            data-type="followers">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+                <article class="service">
+                    <div class="service-icon">💬</div>
+                    <h3>کامنت</h3>
+                    <p>ثبت درخواست کامنت برای پست</p>
+                    <div class="service-bottom">
+                        <span class="free">رایگان</span>
+                        <button class="order-btn"
+                            data-service="کامنت روبینو"
+                            data-type="comment">
+                            سفارش
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- order -->
+
+        <section id="orderBox" class="order-box">
+
+            <div class="order-head">
+                <strong id="orderTitle">ثبت سفارش</strong>
+                <button class="close-order" id="closeOrder">×</button>
+            </div>
+
+            <form id="orderForm">
+
+                <div class="field">
+                    <label>لینک پیام / پست / کانال / پروفایل</label>
+                    <input
+                        id="target"
+                        type="url"
+                        dir="ltr"
+                        placeholder="https://rubika.ir/..."
+                        autocomplete="off"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label>تعداد موردنظر</label>
+                    <input
+                        id="amount"
+                        type="number"
+                        min="1"
+                        max="10000"
+                        value="10"
+                        required>
+                </div>
+
+                <div id="reactionArea" style="display:none">
+
+                    <div class="field">
+                        <label>نوع انتخاب ریکشن</label>
+
+                        <div class="mode">
+
+                            <button
+                                type="button"
+                                class="mode-btn active"
+                                data-mode="single">
+                                ✨ تک انتخابی
+                            </button>
+
+                            <button
+                                type="button"
+                                class="mode-btn"
+                                data-mode="random">
+                                🎲 رندم
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="field">
+
+                        <label>انتخاب ریکشن</label>
+
+                        <div class="emoji-grid">
+
+                            <button type="button" class="emoji" data-emoji="❤️">❤️</button>
+                            <button type="button" class="emoji" data-emoji="👍">👍</button>
+                            <button type="button" class="emoji" data-emoji="😂">😂</button>
+                            <button type="button" class="emoji" data-emoji="😱">😱</button>
+                            <button type="button" class="emoji" data-emoji="😍">😍</button>
+                            <button type="button" class="emoji" data-emoji="😢">😢</button>
+                            <button type="button" class="emoji" data-emoji="😎">😎</button>
+                            <button type="button" class="emoji" data-emoji="🤔">🤔</button>
+                            <button type="button" class="emoji" data-emoji="🙏">🙏</button>
+                            <button type="button" class="emoji" data-emoji="🔥">🔥</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="commentArea" class="field" style="display:none">
+
+                    <label>متن کامنت</label>
+
+                    <textarea
+                        id="comment"
+                        placeholder="متن کامنت را وارد کنید..."></textarea>
+
+                </div>
+
+                <div class="field">
+
+                    <label>توضیحات اضافی</label>
+
+                    <textarea
+                        id="description"
+                        placeholder="در صورت نیاز توضیحات خود را بنویسید..."></textarea>
+
+                </div>
+
+                <button
+                    class="submit"
+                    id="submitBtn"
+                    type="submit">
+                    ثبت سفارش رایگان
+                </button>
+
+                <button
+                    class="cancel"
+                    type="button"
+                    id="cancelBtn">
+                    انصراف
+                </button>
+
+            </form>
+
+            <div class="progress-box" id="progressBox">
+
+                <div class="progress-text">
+                    <span id="progressText">در حال ثبت سفارش...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+            </div>
+
+            <div class="success" id="successBox">
+
+                <div class="success-title">
+                    ✅ سفارش با موفقیت ثبت شد
+                </div>
+
+                <p>
+                    درخواست شما ثبت شده و شماره سفارش برای پیگیری ایجاد شد.
+                </p>
+
+                <span class="order-number" id="orderNumber"></span>
+
+            </div>
+
+        </section>
+
+        <!-- orders -->
+
+        <section class="orders" id="ordersSection">
+
+            <div class="section-head">
+                <h2>📋 سفارش‌های من</h2>
+                <span id="ordersCount">0 سفارش</span>
+            </div>
+
+            <div id="ordersList"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<nav class="bottom">
+
+    <div class="bottom-inner">
+
+        <button class="nav-btn active" data-nav="home">
+            <span>🏠</span>
+            خانه
+        </button>
+
+        <button class="nav-btn" data-nav="orders">
+            <span>📋</span>
+            سفارش‌ها
+        </button>
+
+        <button class="nav-btn" data-nav="info">
+            <span>ℹ️</span>
+            درباره
+        </button>
+
+    </div>
+
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/*
+====================================================
+ BACKEND CONFIGURATION
+====================================================
+
+بعداً آدرس Backend رایگان را اینجا قرار می‌دهیم.
+
+مثال:
+const API_URL = "https://your-worker.workers.dev";
+
+فعلاً خالی است تا HTML بدون Backend هم اجرا شود.
+====================================================
+*/
+
+const API_URL = "";
+
+
+/* ===============================
+   DATA
+================================ */
+
+const services = {
+    reaction: "ری‌اکشن پیام",
+    views: "سین / بازدید پیام",
+    members: "عضو کانال",
+    poll: "نظرسنجی",
+    like: "لایک پست روبینو",
+    rubino_views: "بازدید پست روبینو",
+    followers: "فالوور روبینو",
+    comment: "کامنت روبینو"
+};
+
+const emojis = [
+    "❤️",
+    "👍",
+    "😂",
+    "😱",
+    "😍",
+    "😢",
+    "😎",
+    "🤔",
+    "🙏",
+    "🔥"
+];
+
+let selectedService = null;
+let selectedType = null;
+let selectedEmoji = "❤️";
+let reactionMode = "single";
+
+
+/* ===============================
+   ELEMENTS
+================================ */
+
+const orderBox = document.getElementById("orderBox");
+const orderTitle = document.getElementById("orderTitle");
+const orderForm = document.getElementById("orderForm");
+const target = document.getElementById("target");
+const amount = document.getElementById("amount");
+const description = document.getElementById("description");
+const comment = document.getElementById("comment");
+
+const reactionArea = document.getElementById("reactionArea");
+const commentArea = document.getElementById("commentArea");
+
+const progressBox = document.getElementById("progressBox");
+const progressBar = document.getElementById("progressBar");
+const progressPercent = document.getElementById("progressPercent");
+const progressText = document.getElementById("progressText");
+
+const successBox = document.getElementById("successBox");
+const orderNumber = document.getElementById("orderNumber");
+
+const submitBtn = document.getElementById("submitBtn");
+const toast = document.getElementById("toast");
+
+
+/* ===============================
+   TOAST
+================================ */
+
+function showToast(message){
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timer);
+
+    showToast.timer = setTimeout(()=>{
+        toast.classList.remove("show");
+    },2600);
+}
+
+
+/* ===============================
+   ORDER NUMBER
+================================ */
+
+function generateOrderId(){
+
+    const now = Date.now().toString(36).toUpperCase();
+
+    const random = Math.random()
+        .toString(36)
+        .substring(2,7)
+        .toUpperCase();
+
+    return "RB-" + now.slice(-6) + "-" + random;
+}
+
+
+/* ===============================
+   OPEN ORDER
+================================ */
+
+document.querySelectorAll(".order-btn").forEach(button => {
+
+    button.addEventListener("click",()=>{
+
+        selectedService = button.dataset.service;
+        selectedType = button.dataset.type;
+
+        orderTitle.textContent =
+            "ثبت سفارش: " + selectedService;
+
+        reactionArea.style.display =
+            selectedType === "reaction"
+            ? "block"
+            : "none";
+
+        commentArea.style.display =
+            selectedType === "comment"
+            ? "block"
+            : "none";
+
+        orderBox.classList.add("show");
+
+        progressBox.classList.remove("show");
+        successBox.classList.remove("show");
+
+        orderForm.style.display = "block";
+
+        target.value = "";
+        amount.value = "10";
+        description.value = "";
+        comment.value = "";
+
+        orderBox.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    });
+
+});
+
+
+/* ===============================
+   CLOSE
+================================ */
+
+function closeOrder(){
+
+    orderBox.classList.remove("show");
+
+    orderForm.reset();
+
+    progressBox.classList.remove("show");
+    successBox.classList.remove("show");
+
+    selectedService = null;
+    selectedType = null;
+}
+
+document
+    .getElementById("closeOrder")
+    .addEventListener("click",closeOrder);
+
+document
+    .getElementById("cancelBtn")
+    .addEventListener("click",closeOrder);
+
+
+/* ===============================
+   TABS
+================================ */
+
+document.querySelectorAll(".tab").forEach(tab => {
+
+    tab.addEventListener("click",()=>{
+
+        document
+            .querySelectorAll(".tab")
+            .forEach(x=>x.classList.remove("active"));
+
+        tab.classList.add("active");
+
+        const type = tab.dataset.tab;
+
+        document.getElementById("rubikaTab").style.display =
+            type === "rubika" ? "block" : "none";
+
+        document.getElementById("rubinoTab").style.display =
+            type === "rubino" ? "block" : "none";
+
+    });
+
+});
+
+
+/* ===============================
+   REACTION MODE
+================================ */
+
+document.querySelectorAll(".mode-btn").forEach(button => {
+
+    button.addEventListener("click",()=>{
+
+        document
+            .querySelectorAll(".mode-btn")
+            .forEach(x=>x.classList.remove("active"));
+
+        button.classList.add("active");
+
+        reactionMode = button.dataset.mode;
+
+        if(reactionMode === "random"){
+            showToast("حالت رندم فعال شد");
+        }else{
+            showToast("حالت انتخابی فعال شد");
+        }
+
+    });
+
+});
+
+
+/* ===============================
+   EMOJI
+================================ */
+
+document.querySelectorAll(".emoji").forEach(button => {
+
+    button.addEventListener("click",()=>{
+
+        document
+            .querySelectorAll(".emoji")
+            .forEach(x=>x.classList.remove("active"));
+
+        button.classList.add("active");
+
+        selectedEmoji = button.dataset.emoji;
+
+    });
+
+});
+
+document
+    .querySelector('.emoji[data-emoji="❤️"]')
+    .classList.add("active");
+
+
+/* ===============================
+   VALIDATE
+================================ */
+
+function validateOrder(){
+
+    const link = target.value.trim();
+
+    if(!link){
+        showToast("لطفاً لینک موردنظر را وارد کنید");
+        target.focus();
+        return false;
+    }
+
+    if(!/^https?:\/\//i.test(link)){
+        showToast("لینک باید با http یا https شروع شود");
+        target.focus();
+        return false;
+    }
+
+    const count = Number(amount.value);
+
+    if(!count || count < 1){
+        showToast("تعداد سفارش معتبر نیست");
+        amount.focus();
+        return false;
+    }
+
+    if(count > 10000){
+        showToast("حداکثر تعداد فعلی 10000 است");
+        amount.focus();
+        return false;
+    }
+
+    if(selectedType === "comment" &&
+       !comment.value.trim()){
+
+        showToast("متن کامنت را وارد کنید");
+        comment.focus();
+        return false;
+    }
+
+    return true;
+}
+
+
+/* ===============================
+   LOCAL STORAGE
+================================ */
+
+function getOrders(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem("rubika_orders") || "[]"
+        );
+
+    }catch{
+
+        return [];
+
+    }
+}
+
+
+function saveOrder(order){
+
+    const orders = getOrders();
+
+    orders.unshift(order);
+
+    localStorage.setItem(
+        "rubika_orders",
+        JSON.stringify(orders.slice(0,100))
+    );
+}
+
+
+/* ===============================
+   RENDER ORDERS
+================================ */
+
+function renderOrders(){
+
+    const list = document.getElementById("ordersList");
+    const count = document.getElementById("ordersCount");
+
+    const orders = getOrders();
+
+    count.textContent =
+        orders.length + " سفارش";
+
+    if(!orders.length){
+
+        list.innerHTML =
+            '<div class="empty">هنوز سفارشی ثبت نشده است.</div>';
+
+        return;
+    }
+
+    list.innerHTML = orders.map(order => {
+
+        return `
+            <div class="order-item">
+
+                <div class="order-item-top">
+
+                    <div>
+                        <strong>${escapeHtml(order.service)}</strong>
+                        <br>
+                        <small>${escapeHtml(order.id)}</small>
+                    </div>
+
+                    <span class="order-status">
+                        ${escapeHtml(order.status)}
+                    </span>
+
+                </div>
+
+                <small>
+                    تعداد: ${escapeHtml(String(order.amount))}
+                </small>
+
+                <br>
+
+                <small>
+                    ${escapeHtml(order.date)}
+                </small>
+
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* ===============================
+   REAL BACKEND REQUEST
+================================ */
+
+async function sendToBackend(order){
+
+    /*
+      اگر API_URL خالی باشد،
+      فعلاً سفارش محلی ثبت می‌شود.
+
+      وقتی Backend ساخته شد:
+      API_URL = "https://....workers.dev"
+
+      سپس همین تابع سفارش را به سرور می‌فرستد.
+    */
+
+    if(!API_URL){
+
+        await new Promise(resolve =>
+            setTimeout(resolve,500)
+        );
+
+        return {
+            success:true,
+            local:true
+        };
+    }
+
+    const response = await fetch(
+        API_URL + "/api/order",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(order)
+        }
+    );
+
+    if(!response.ok){
+
+        throw new Error(
+            "خطا در ارتباط با سرور"
+        );
+
+    }
+
+    return await response.json();
+}
+
+
+/* ===============================
+   SUBMIT
+================================ */
+
+orderForm.addEventListener("submit",async event => {
+
+    event.preventDefault();
+
+    if(!validateOrder()){
+        return;
+    }
+
+    submitBtn.disabled = true;
+
+    orderForm.style.display = "none";
+
+    progressBox.classList.add("show");
+
+    successBox.classList.remove("show");
+
+    const id = generateOrderId();
+
+    const order = {
+
+        id:id,
+
+        service:selectedService,
+
+        type:selectedType,
+
+        target:target.value.trim(),
+
+        amount:Number(amount.value),
+
+        reaction:
+            selectedType === "reaction"
+            ? (
+                reactionMode === "random"
+                ? "random"
+                : selectedEmoji
+              )
+            : null,
+
+        reactionMode:
+            selectedType === "reaction"
+            ? reactionMode
+            : null,
+
+        comment:
+            selectedType === "comment"
+            ? comment.value.trim()
+            : null,
+
+        description:
+            description.value.trim(),
+
+        status:"در حال بررسی",
+
+        date:new Date().toLocaleString(
+            "fa-IR"
+        )
+
+    };
+
+
+    try{
+
+        let percent = 0;
+
+        progressText.textContent =
+            "در حال ارسال سفارش...";
+
+        const timer = setInterval(()=>{
+
+            percent += Math.floor(
+                Math.random() * 12
+            ) + 5;
+
+            if(percent > 90){
+                percent = 90;
+            }
+
+            progressBar.style.width =
+                percent + "%";
+
+            progressPercent.textContent =
+                percent + "%";
+
+        },180);
+
+
+        const result =
+            await sendToBackend(order);
+
+
+        clearInterval(timer);
+
+        progressBar.style.width = "100%";
+        progressPercent.textContent = "100%";
+
+        progressText.textContent =
+            "سفارش ثبت شد";
+
+
+        if(result && result.order_id){
+
+            order.id = result.order_id;
+
+        }
+
+
+        order.status =
+            result && result.status
+            ? result.status
+            : "ثبت شده";
+
+
+        saveOrder(order);
+
+        renderOrders();
+
+        setTimeout(()=>{
+
+            successBox.classList.add("show");
+
+            orderNumber.textContent =
+                order.id;
+
+            showToast(
+                "سفارش با موفقیت ثبت شد"
+            );
+
+            submitBtn.disabled = false;
+
+        },400);
+
+
+    }catch(error){
+
+        progressBox.classList.remove("show");
+
+        orderForm.style.display = "block";
+
+        submitBtn.disabled = false;
+
+        showToast(
+            error.message ||
+            "ثبت سفارش انجام نشد"
+        );
+
+    }
+
+});
+
+
+/* ===============================
+   BOTTOM NAVIGATION
+================================ */
+
+document.querySelectorAll(".nav-btn").forEach(button => {
+
+    button.addEventListener("click",()=>{
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(x=>x.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const nav = button.dataset.nav;
+
+        if(nav === "home"){
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+
+        if(nav === "orders"){
+
+            const section =
+                document.getElementById(
+                    "ordersSection"
+                );
+
+            section.classList.add("show");
+
+            renderOrders();
+
+            section.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        }
+
+        if(nav === "info"){
+
+            showToast(
+                "پنل خدمات روبیکا — تمام خدمات رایگان"
+            );
+
+        }
+
+    });
+
+});
+
+
+/* ===============================
+   INITIAL
+================================ */
+
+renderOrders();
+
+</script>
+
+</body>
+  </html>

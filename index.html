@@ -16,11 +16,11 @@
 
 :root{
     --bg:#050912;
-    --bg2:#091321;
-    --glass:rgba(17,27,42,.76);
+    --card:rgba(15,25,40,.78);
+    --card2:rgba(255,255,255,.045);
     --border:rgba(255,255,255,.09);
     --border2:rgba(255,255,255,.15);
-    --text:#f4f7fb;
+    --text:#f5f7fb;
     --muted:#91a0b5;
     --blue:#4da3ff;
     --blue2:#756cff;
@@ -36,7 +36,7 @@ body{
     min-height:100vh;
     overflow-x:hidden;
     background:
-        radial-gradient(circle at 10% 5%,rgba(77,163,255,.12),transparent 30%),
+        radial-gradient(circle at 10% 5%,rgba(77,163,255,.13),transparent 30%),
         radial-gradient(circle at 90% 20%,rgba(117,108,255,.10),transparent 30%),
         linear-gradient(145deg,#040811,#091321 55%,#050912);
     color:var(--text);
@@ -44,9 +44,7 @@ body{
 }
 
 button,
-input,
-textarea,
-select{
+input{
     font-family:inherit;
 }
 
@@ -55,77 +53,86 @@ button{
 }
 
 a{
-    color:inherit;
     text-decoration:none;
+    color:inherit;
 }
 
-.bg{
+/* پس زمینه */
+
+.ball{
     position:fixed;
     border-radius:50%;
     pointer-events:none;
     opacity:.18;
-    z-index:0;
     filter:blur(2px);
-    animation:float 9s ease-in-out infinite;
+    z-index:0;
+    animation:float 10s ease-in-out infinite;
 }
 
-.bg.one{
+.ball1{
     width:170px;
     height:170px;
-    right:-80px;
+    right:-90px;
     top:8%;
-    background:#1877ff;
+    background:#1977ff;
 }
 
-.bg.two{
+.ball2{
     width:120px;
     height:120px;
-    left:-55px;
+    left:-60px;
     bottom:20%;
-    background:#735cff;
+    background:#6d5cff;
     animation-delay:2s;
 }
 
-.bg.three{
-    width:75px;
-    height:75px;
-    right:7%;
+.ball3{
+    width:70px;
+    height:70px;
+    right:8%;
     top:48%;
-    background:#16d6b2;
+    background:#17d6b3;
     animation-delay:4s;
 }
 
 @keyframes float{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-25px)}
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-25px);
+    }
 }
 
+/* برنامه */
+
 .app{
+    position:relative;
+    z-index:2;
     width:min(100%,520px);
     min-height:100vh;
     margin:auto;
-    position:relative;
-    z-index:2;
-    padding-bottom:100px;
+    padding-bottom:105px;
 }
+
+/* هدر */
 
 .header{
     position:sticky;
     top:0;
     z-index:50;
-    padding:14px 14px 10px;
-    background:rgba(5,9,18,.72);
+    padding:13px 14px 10px;
+    background:rgba(5,9,18,.75);
     backdrop-filter:blur(22px);
     -webkit-backdrop-filter:blur(22px);
-    border-bottom:1px solid var(--border);
 }
 
-.header-inner{
+.headerBox{
     min-height:68px;
-    padding:10px 12px;
     display:flex;
     align-items:center;
     gap:11px;
+    padding:10px 12px;
     border:1px solid var(--border);
     border-radius:23px;
     background:
@@ -134,57 +141,58 @@ a{
             rgba(255,255,255,.08),
             rgba(255,255,255,.025)
         );
-    box-shadow:0 20px 55px rgba(0,0,0,.38);
+    box-shadow:0 20px 55px rgba(0,0,0,.35);
 }
 
 .logo{
     width:48px;
     height:48px;
-    border-radius:16px;
     display:grid;
     place-items:center;
     flex-shrink:0;
+    border-radius:16px;
     font-size:24px;
-    background:rgba(77,163,255,.16);
+    background:rgba(77,163,255,.14);
     border:1px solid rgba(255,255,255,.12);
 }
 
-.header-title{
+.headerText{
     flex:1;
     min-width:0;
 }
 
-.header-title strong{
+.headerText strong{
     display:block;
     font-size:16px;
     margin-bottom:5px;
 }
 
-.header-title span{
-    display:block;
+.headerText span{
     color:var(--muted);
     font-size:10px;
 }
 
-.status{
+.online{
     display:flex;
     align-items:center;
     gap:6px;
     padding:8px 10px;
-    border-radius:13px;
-    background:rgba(39,213,154,.08);
-    border:1px solid rgba(39,213,154,.15);
-    color:#7df2c6;
+    border-radius:12px;
+    color:#78efc1;
     font-size:10px;
+    background:rgba(39,213,154,.07);
+    border:1px solid rgba(39,213,154,.15);
 }
 
-.status-dot{
+.onlineDot{
     width:7px;
     height:7px;
     border-radius:50%;
     background:var(--green);
     box-shadow:0 0 10px var(--green);
 }
+
+/* هیرو */
 
 .hero{
     margin:18px 14px;
@@ -195,7 +203,7 @@ a{
         linear-gradient(
             135deg,
             rgba(77,163,255,.13),
-            rgba(117,108,255,.09),
+            rgba(117,108,255,.08),
             rgba(255,255,255,.025)
         );
     box-shadow:0 20px 55px rgba(0,0,0,.30);
@@ -221,53 +229,57 @@ a{
 
 .badge{
     padding:7px 10px;
-    border-radius:12px;
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--border);
+    border-radius:11px;
     color:#cbd7e8;
     font-size:10px;
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
 }
 
-.section{
+/* محتوا */
+
+.content{
     padding:0 14px;
 }
 
 .tabs{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:8px;
 }
 
 .tab{
     border:1px solid var(--border);
-    background:rgba(255,255,255,.035);
-    color:var(--muted);
     border-radius:15px;
-    padding:12px 8px;
+    padding:12px;
+    color:var(--muted);
+    background:rgba(255,255,255,.035);
     font-size:11px;
 }
 
 .tab.active{
     color:#fff;
-    background:rgba(77,163,255,.14);
-    border-color:rgba(77,163,255,.3);
+    border-color:rgba(77,163,255,.35);
+    background:rgba(77,163,255,.13);
 }
 
-.section-head{
+.sectionTitle{
     display:flex;
     align-items:center;
     justify-content:space-between;
     margin:22px 2px 12px;
 }
 
-.section-head h2{
+.sectionTitle h2{
     font-size:15px;
 }
 
-.section-head span{
+.sectionTitle span{
     color:var(--muted);
     font-size:10px;
 }
+
+/* خدمات */
 
 .services{
     display:grid;
@@ -276,8 +288,8 @@ a{
 }
 
 .service{
-    padding:15px;
     min-height:150px;
+    padding:15px;
     border-radius:22px;
     border:1px solid var(--border);
     background:
@@ -289,7 +301,7 @@ a{
     box-shadow:0 12px 30px rgba(0,0,0,.20);
 }
 
-.service-icon{
+.serviceIcon{
     width:43px;
     height:43px;
     display:grid;
@@ -307,12 +319,12 @@ a{
 }
 
 .service p{
-    font-size:10px;
     color:var(--muted);
+    font-size:10px;
     line-height:1.8;
 }
 
-.service-bottom{
+.serviceBottom{
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -324,16 +336,18 @@ a{
     font-size:10px;
 }
 
-.order-btn{
+.orderButton{
     border:0;
-    color:#fff;
     border-radius:11px;
     padding:8px 12px;
+    color:#fff;
     font-size:10px;
     background:linear-gradient(135deg,var(--blue),var(--blue2));
 }
 
-.order-box{
+/* فرم سفارش */
+
+.orderBox{
     display:none;
     margin-top:18px;
     padding:18px;
@@ -342,75 +356,77 @@ a{
     background:
         linear-gradient(
             145deg,
-            rgba(20,32,50,.94),
-            rgba(9,17,29,.90)
+            rgba(20,32,50,.95),
+            rgba(9,17,29,.92)
         );
-    box-shadow:0 20px 55px rgba(0,0,0,.38);
+    box-shadow:0 20px 55px rgba(0,0,0,.40);
 }
 
-.order-box.show{
+.orderBox.show{
     display:block;
 }
 
-.order-head{
+.orderHeader{
     display:flex;
     align-items:center;
     justify-content:space-between;
     margin-bottom:16px;
 }
 
-.order-head strong{
+.orderHeader strong{
     font-size:15px;
 }
 
-.close{
+.closeButton{
     width:32px;
     height:32px;
     border:1px solid var(--border);
     border-radius:11px;
-    background:rgba(255,255,255,.05);
     color:#fff;
+    background:rgba(255,255,255,.05);
 }
 
 .field{
-    margin-bottom:13px;
+    margin-bottom:14px;
 }
 
 .field label{
     display:block;
     margin-bottom:7px;
-    color:#c4d0df;
+    color:#c7d2e0;
     font-size:11px;
 }
 
-.field input{
+.input{
     width:100%;
     border:1px solid var(--border2);
-    outline:none;
     border-radius:14px;
-    background:rgba(255,255,255,.045);
-    color:#fff;
+    outline:none;
     padding:12px;
+    color:#fff;
+    background:rgba(255,255,255,.045);
     font-size:12px;
 }
 
-.field input:focus{
+.input:focus{
     border-color:rgba(77,163,255,.55);
     box-shadow:0 0 0 3px rgba(77,163,255,.08);
 }
 
-.limit{
+.limitText{
     color:#6cebb8;
     font-size:10px;
 }
 
-.mode{
+/* حالت ریکشن */
+
+.reactionModes{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:7px;
 }
 
-.mode button{
+.modeButton{
     padding:10px 5px;
     border:1px solid var(--border);
     border-radius:12px;
@@ -419,48 +435,83 @@ a{
     font-size:10px;
 }
 
-.mode button.active{
+.modeButton.active{
     color:#fff;
-    border-color:rgba(77,163,255,.4);
-    background:rgba(77,163,255,.12);
+    border-color:rgba(77,163,255,.45);
+    background:rgba(77,163,255,.13);
 }
 
-.all-info{
+.allInfo{
     display:none;
     margin-top:8px;
     padding:10px;
     border-radius:12px;
-    border:1px solid rgba(77,163,255,.2);
-    background:rgba(77,163,255,.07);
     color:#b9d9ff;
+    background:rgba(77,163,255,.07);
+    border:1px solid rgba(77,163,255,.18);
     font-size:10px;
     line-height:1.9;
 }
 
-.all-info.show{
+.allInfo.show{
     display:block;
 }
 
-.emoji-grid{
+/* ریکشن ها */
+
+.emojiGrid{
     display:grid;
     grid-template-columns:repeat(6,1fr);
     gap:7px;
+    max-height:420px;
+    overflow-y:auto;
+    padding:2px;
+}
+
+.emojiGrid::-webkit-scrollbar{
+    width:5px;
+}
+
+.emojiGrid::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.12);
+    border-radius:20px;
 }
 
 .emoji{
-    min-height:43px;
+    min-height:44px;
     border:1px solid var(--border);
-    background:rgba(255,255,255,.04);
     border-radius:12px;
+    color:#fff;
+    background:rgba(255,255,255,.04);
     font-size:20px;
     transition:.15s;
 }
 
 .emoji.active{
     border-color:var(--blue);
-    background:rgba(77,163,255,.15);
+    background:rgba(77,163,255,.16);
     transform:scale(1.04);
 }
+
+/* مراحل */
+
+.stageInfo{
+    display:none;
+    margin:10px 0;
+    padding:12px;
+    border-radius:14px;
+    color:#b9d9ff;
+    background:rgba(77,163,255,.07);
+    border:1px solid rgba(77,163,255,.18);
+    font-size:10px;
+    line-height:2;
+}
+
+.stageInfo.show{
+    display:block;
+}
+
+/* دکمه ثبت */
 
 .submit{
     width:100%;
@@ -468,8 +519,8 @@ a{
     border-radius:15px;
     padding:14px;
     color:#fff;
-    font-weight:bold;
     font-size:12px;
+    font-weight:bold;
     background:linear-gradient(135deg,#248cff,#756cff);
 }
 
@@ -481,13 +532,15 @@ a{
     width:100%;
     margin-top:8px;
     padding:11px;
-    border-radius:13px;
     border:1px solid var(--border);
+    border-radius:13px;
     color:var(--muted);
     background:rgba(255,255,255,.03);
 }
 
-.progress-box{
+/* پیشرفت */
+
+.progressBox{
     display:none;
     margin-top:15px;
     padding:15px;
@@ -496,34 +549,42 @@ a{
     border:1px solid var(--border);
 }
 
-.progress-box.show{
+.progressBox.show{
     display:block;
 }
 
-.progress-text{
+.progressText{
     display:flex;
     justify-content:space-between;
+    gap:10px;
     color:var(--muted);
     font-size:10px;
-    margin-bottom:8px;
+    margin-bottom:9px;
 }
 
 .progress{
     height:9px;
-    border-radius:20px;
     overflow:hidden;
+    border-radius:20px;
     background:rgba(255,255,255,.07);
 }
 
-.progress-bar{
-    width:0;
+.progressBar{
+    width:0%;
     height:100%;
     border-radius:20px;
-    background:linear-gradient(90deg,#248cff,#756cff,#27d59a);
+    background:linear-gradient(
+        90deg,
+        #248cff,
+        #756cff,
+        #27d59a
+    );
     transition:.3s;
 }
 
-.success{
+/* موفقیت */
+
+.successBox{
     display:none;
     margin-top:14px;
     padding:16px;
@@ -532,33 +593,34 @@ a{
     border:1px solid rgba(39,213,154,.2);
 }
 
-.success.show{
+.successBox.show{
     display:block;
 }
 
-.success-title{
+.successTitle{
     color:#6cebb8;
     font-size:14px;
     font-weight:bold;
     margin-bottom:8px;
 }
 
-.success p{
+.successText{
     color:#a9b8c9;
     font-size:10px;
     line-height:2;
 }
 
-.order-number{
-    display:inline-block;
-    margin-top:8px;
-    padding:7px 10px;
-    border-radius:10px;
-    background:rgba(0,0,0,.2);
+.ids{
+    margin-top:9px;
     color:#fff;
+    font-size:9px;
+    line-height:2;
+    word-break:break-word;
     direction:ltr;
-    font-size:11px;
+    text-align:left;
 }
+
+/* سفارش ها */
 
 .orders{
     display:none;
@@ -569,7 +631,7 @@ a{
     display:block;
 }
 
-.order-item{
+.orderItem{
     padding:14px;
     margin-bottom:9px;
     border-radius:18px;
@@ -577,122 +639,59 @@ a{
     border:1px solid var(--border);
 }
 
-.order-item-top{
+.orderTop{
     display:flex;
+    align-items:flex-start;
     justify-content:space-between;
     gap:10px;
-    margin-bottom:8px;
 }
 
-.order-item strong{
+.orderTop strong{
     font-size:12px;
 }
 
-.order-item small{
+.orderTop small{
     color:var(--muted);
     font-size:9px;
 }
 
-.order-status{
+.orderStatus{
     padding:5px 8px;
     border-radius:9px;
-    font-size:9px;
     color:#6cebb8;
     background:rgba(39,213,154,.08);
+    font-size:9px;
     white-space:nowrap;
 }
 
+.orderDetails{
+    margin-top:9px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:2;
+    word-break:break-word;
+}
+
 .empty{
-    text-align:center;
-    color:var(--muted);
-    font-size:11px;
     padding:25px;
-}
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(100%,520px);
-    z-index:60;
-    padding:10px 14px 13px;
-    background:linear-gradient(
-        to top,
-        rgba(5,9,18,.97),
-        rgba(5,9,18,.72),
-        transparent
-    );
-}
-
-.bottom-inner{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-    padding:7px;
-    border-radius:21px;
-    border:1px solid var(--border);
-    background:rgba(12,21,34,.84);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-}
-
-.nav{
-    border:0;
-    border-radius:15px;
-    background:transparent;
     color:var(--muted);
-    padding:9px 5px;
-    font-size:9px;
-}
-
-.nav span{
-    display:block;
-    font-size:19px;
-    margin-bottom:4px;
-}
-
-.nav.active{
-    color:#fff;
-    background:rgba(77,163,255,.11);
-}
-
-.toast{
-    position:fixed;
-    z-index:100;
-    left:50%;
-    bottom:94px;
-    transform:translate(-50%,20px);
-    width:calc(100% - 30px);
-    max-width:470px;
-    padding:13px 15px;
-    border-radius:15px;
-    background:rgba(15,25,40,.95);
-    border:1px solid var(--border2);
-    color:#fff;
-    font-size:11px;
     text-align:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
+    font-size:11px;
 }
 
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
+/* صفحه درباره */
 
-.about-page{
+#aboutPage{
     display:none;
-    min-height:calc(100vh - 120px);
-    padding:30px 14px 120px;
+    min-height:calc(100vh - 100px);
+    padding:28px 14px 120px;
 }
 
-.about-page.show{
+#aboutPage.show{
     display:block;
 }
 
-.about-card{
+.aboutCard{
     padding:28px 20px;
     border-radius:28px;
     border:1px solid var(--border);
@@ -706,24 +705,24 @@ a{
     text-align:center;
 }
 
-.about-icon{
+.aboutIcon{
     width:75px;
     height:75px;
-    margin:0 auto 18px;
     display:grid;
     place-items:center;
+    margin:0 auto 18px;
     border-radius:23px;
     font-size:34px;
-    background:rgba(77,163,255,.1);
-    border:1px solid rgba(77,163,255,.2);
+    background:rgba(77,163,255,.10);
+    border:1px solid rgba(77,163,255,.20);
 }
 
-.about-card h1{
+.aboutCard h1{
     font-size:21px;
     margin-bottom:12px;
 }
 
-.about-card p{
+.aboutCard p{
     color:var(--muted);
     font-size:11px;
     line-height:2;
@@ -731,13 +730,13 @@ a{
 
 .creator{
     margin-top:22px;
-    padding:17px;
+    padding:18px;
     border-radius:18px;
     background:rgba(255,255,255,.04);
     border:1px solid var(--border);
 }
 
-.creator-title{
+.creatorTitle{
     color:var(--muted);
     font-size:10px;
     margin-bottom:8px;
@@ -749,62 +748,161 @@ a{
     font-weight:bold;
 }
 
-.back-home{
+.backButton{
     width:100%;
     margin-top:14px;
+    padding:12px;
     border:1px solid var(--border);
     border-radius:14px;
-    padding:12px;
     color:#fff;
     background:rgba(255,255,255,.04);
 }
 
+/* پایین */
+
+.bottom{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    z-index:60;
+    width:min(100%,520px);
+    transform:translateX(-50%);
+    padding:10px 14px 13px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(5,9,18,.98),
+            rgba(5,9,18,.72),
+            transparent
+        );
+}
+
+.bottomInner{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    padding:7px;
+    border:1px solid var(--border);
+    border-radius:21px;
+    background:rgba(12,21,34,.84);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+}
+
+.nav{
+    border:0;
+    border-radius:15px;
+    padding:9px 5px;
+    color:var(--muted);
+    background:transparent;
+    font-size:9px;
+}
+
+.nav span{
+    display:block;
+    margin-bottom:4px;
+    font-size:19px;
+}
+
+.nav.active{
+    color:#fff;
+    background:rgba(77,163,255,.11);
+}
+
+/* اعلان */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:94px;
+    z-index:100;
+    width:calc(100% - 30px);
+    max-width:470px;
+    padding:13px 15px;
+    border:1px solid var(--border2);
+    border-radius:15px;
+    color:#fff;
+    background:rgba(15,25,40,.96);
+    text-align:center;
+    font-size:11px;
+    opacity:0;
+    pointer-events:none;
+    transform:translate(-50%,20px);
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* موبایل */
+
 @media(max-width:390px){
-    .emoji-grid{
+
+    .emojiGrid{
         grid-template-columns:repeat(5,1fr);
     }
+
 }
 
 @media(max-width:360px){
+
     .services{
         grid-template-columns:1fr;
     }
 
-    .status{
+    .online{
         display:none;
     }
 
-    .mode{
+    .reactionModes{
         grid-template-columns:1fr;
     }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg one"></div>
-<div class="bg two"></div>
-<div class="bg three"></div>
+<div class="ball ball1"></div>
+<div class="ball ball2"></div>
+<div class="ball ball3"></div>
+
 
 <div class="app">
 
 <header class="header">
-    <div class="header-inner">
 
-        <div class="logo">🛒</div>
+<div class="headerBox">
 
-        <div class="header-title">
-            <strong>پنل خدمات روبیکا</strong>
-            <span>ثبت سفارش خدمات روبیکا</span>
-        </div>
+<div class="logo">
+🛒
+</div>
 
-        <div class="status">
-            <span class="status-dot"></span>
-            آنلاین
-        </div>
+<div class="headerText">
 
-    </div>
+<strong>
+پنل خدمات روبیکا
+</strong>
+
+<span>
+ثبت سفارش خدمات روبیکا
+</span>
+
+</div>
+
+<div class="online">
+
+<span class="onlineDot"></span>
+
+آنلاین
+
+</div>
+
+</div>
+
 </header>
 
 
@@ -814,147 +912,205 @@ a{
 
 <section class="hero">
 
-    <h1>خدمات رایگان روبیکا</h1>
+<h1>
+خدمات رایگان روبیکا
+</h1>
 
-    <p>
-        خدمات موردنظر خودت را انتخاب کن،
-        لینک را وارد کن و سفارش را ثبت کن.
-    </p>
+<p>
+خدمت موردنظر خود را انتخاب کنید،
+لینک را وارد کنید و سفارش را ثبت کنید.
+</p>
 
-    <div class="badges">
-        <span class="badge">🆓 رایگان</span>
-        <span class="badge">⚡ سریع</span>
-        <span class="badge">📱 موبایل‌پسند</span>
-        <span class="badge">🔐 امن</span>
-    </div>
+<div class="badges">
+
+<span class="badge">
+🆓 رایگان
+</span>
+
+<span class="badge">
+⚡ سریع
+</span>
+
+<span class="badge">
+📱 موبایل‌پسند
+</span>
+
+<span class="badge">
+🔐 امن
+</span>
+
+</div>
 
 </section>
 
 
-<section class="section">
+<section class="content">
 
 <div class="tabs">
 
-    <button class="tab active" data-tab="rubika">
-        💬 خدمات روبیکا
-    </button>
+<button class="tab active" data-tab="rubika">
+💬 خدمات روبیکا
+</button>
 
-    <button class="tab" data-tab="rubino">
-        📸 خدمات روبینو
-    </button>
+<button class="tab" data-tab="rubino">
+📸 خدمات روبینو
+</button>
 
 </div>
 
+
+<!-- روبیکا -->
 
 <section id="rubikaTab">
 
-<div class="section-head">
-    <h2>خدمات روبیکا</h2>
-    <span>رایگان</span>
+<div class="sectionTitle">
+
+<h2>
+خدمات روبیکا
+</h2>
+
+<span>
+رایگان
+</span>
+
 </div>
+
 
 <div class="services">
 
+
 <article class="service">
 
-    <div class="service-icon">❤️</div>
+<div class="serviceIcon">
+❤️
+</div>
 
-    <h3>ری‌اکشن پیام</h3>
+<h3>
+ری‌اکشن پیام
+</h3>
 
-    <p>
-        ثبت ریکشن روی پیام روبیکا
-    </p>
+<p>
+ثبت ریکشن روی پیام روبیکا
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="ری‌اکشن پیام"
-            data-type="reaction">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="ری‌اکشن پیام"
+data-type="reaction">
 
-    </div>
+سفارش
+
+</button>
+
+</div>
 
 </article>
 
 
 <article class="service">
 
-    <div class="service-icon">👁️</div>
+<div class="serviceIcon">
+👁️
+</div>
 
-    <h3>سین / بازدید پیام</h3>
+<h3>
+سین / بازدید پیام
+</h3>
 
-    <p>
-        ثبت درخواست بازدید پیام
-    </p>
+<p>
+ثبت درخواست بازدید پیام
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="سین / بازدید پیام"
-            data-type="views">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="سین / بازدید پیام"
+data-type="views">
 
-    </div>
+سفارش
 
-</article>
+</button>
 
-
-<article class="service">
-
-    <div class="service-icon">👥</div>
-
-    <h3>عضو کانال</h3>
-
-    <p>
-        ثبت درخواست عضو کانال
-    </p>
-
-    <div class="service-bottom">
-
-        <span class="free">رایگان</span>
-
-        <button
-            class="order-btn"
-            data-service="عضو کانال"
-            data-type="members">
-            سفارش
-        </button>
-
-    </div>
+</div>
 
 </article>
 
 
 <article class="service">
 
-    <div class="service-icon">📊</div>
+<div class="serviceIcon">
+👥
+</div>
 
-    <h3>نظرسنجی</h3>
+<h3>
+عضو کانال
+</h3>
 
-    <p>
-        ثبت خدمات نظرسنجی
-    </p>
+<p>
+ثبت درخواست عضو کانال
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="نظرسنجی"
-            data-type="poll">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="عضو کانال"
+data-type="members">
 
-    </div>
+سفارش
+
+</button>
+
+</div>
+
+</article>
+
+
+<article class="service">
+
+<div class="serviceIcon">
+📊
+</div>
+
+<h3>
+نظرسنجی
+</h3>
+
+<p>
+ثبت خدمات نظرسنجی
+</p>
+
+<div class="serviceBottom">
+
+<span class="free">
+رایگان
+</span>
+
+<button
+class="orderButton"
+data-service="نظرسنجی"
+data-type="poll">
+
+سفارش
+
+</button>
+
+</div>
 
 </article>
 
@@ -963,115 +1119,160 @@ a{
 </section>
 
 
-<section id="rubinoTab" style="display:none">
+<!-- روبینو -->
 
-<div class="section-head">
-    <h2>خدمات روبینو</h2>
-    <span>رایگان</span>
+<section
+id="rubinoTab"
+style="display:none">
+
+<div class="sectionTitle">
+
+<h2>
+خدمات روبینو
+</h2>
+
+<span>
+رایگان
+</span>
+
 </div>
+
 
 <div class="services">
 
+
 <article class="service">
 
-    <div class="service-icon">👍</div>
+<div class="serviceIcon">
+👍
+</div>
 
-    <h3>لایک پست</h3>
+<h3>
+لایک پست
+</h3>
 
-    <p>
-        ثبت لایک برای پست روبینو
-    </p>
+<p>
+ثبت لایک برای پست روبینو
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="لایک پست روبینو"
-            data-type="like">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="لایک پست روبینو"
+data-type="like">
 
-    </div>
+سفارش
+
+</button>
+
+</div>
 
 </article>
 
 
 <article class="service">
 
-    <div class="service-icon">👁️</div>
+<div class="serviceIcon">
+👁️
+</div>
 
-    <h3>بازدید پست</h3>
+<h3>
+بازدید پست
+</h3>
 
-    <p>
-        ثبت بازدید پست روبینو
-    </p>
+<p>
+ثبت بازدید پست روبینو
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="بازدید پست روبینو"
-            data-type="views">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="بازدید پست روبینو"
+data-type="views">
 
-    </div>
+سفارش
 
-</article>
+</button>
 
-
-<article class="service">
-
-    <div class="service-icon">👤</div>
-
-    <h3>فالوور</h3>
-
-    <p>
-        ثبت درخواست فالوور
-    </p>
-
-    <div class="service-bottom">
-
-        <span class="free">رایگان</span>
-
-        <button
-            class="order-btn"
-            data-service="فالوور روبینو"
-            data-type="followers">
-            سفارش
-        </button>
-
-    </div>
+</div>
 
 </article>
 
 
 <article class="service">
 
-    <div class="service-icon">💬</div>
+<div class="serviceIcon">
+👤
+</div>
 
-    <h3>کامنت</h3>
+<h3>
+فالوور
+</h3>
 
-    <p>
-        ثبت درخواست کامنت
-    </p>
+<p>
+ثبت درخواست فالوور
+</p>
 
-    <div class="service-bottom">
+<div class="serviceBottom">
 
-        <span class="free">رایگان</span>
+<span class="free">
+رایگان
+</span>
 
-        <button
-            class="order-btn"
-            data-service="کامنت روبینو"
-            data-type="comment">
-            سفارش
-        </button>
+<button
+class="orderButton"
+data-service="فالوور روبینو"
+data-type="followers">
 
-    </div>
+سفارش
+
+</button>
+
+</div>
+
+</article>
+
+
+<article class="service">
+
+<div class="serviceIcon">
+💬
+</div>
+
+<h3>
+کامنت
+</h3>
+
+<p>
+ثبت درخواست کامنت
+</p>
+
+<div class="serviceBottom">
+
+<span class="free">
+رایگان
+</span>
+
+<button
+class="orderButton"
+data-service="کامنت روبینو"
+data-type="comment">
+
+سفارش
+
+</button>
+
+</div>
 
 </article>
 
@@ -1080,18 +1281,24 @@ a{
 </section>
 
 
-<!-- سفارش -->
+<!-- فرم سفارش -->
 
-<section class="order-box" id="orderBox">
+<section
+class="orderBox"
+id="orderBox">
 
-<div class="order-head">
+<div class="orderHeader">
 
 <strong id="orderTitle">
-    ثبت سفارش
+ثبت سفارش
 </strong>
 
-<button class="close" id="closeOrder">
-    ✕
+<button
+class="closeButton"
+id="closeOrder">
+
+✕
+
 </button>
 
 </div>
@@ -1100,15 +1307,16 @@ a{
 <div class="field">
 
 <label>
-    لینک پیام / پست / کانال
+لینک پیام / پست / کانال
 </label>
 
 <input
-    id="targetInput"
-    type="url"
-    inputmode="url"
-    placeholder="https://rubika.ir/..."
-    autocomplete="off">
+class="input"
+id="targetInput"
+type="url"
+inputmode="url"
+placeholder="https://rubika.ir/..."
+autocomplete="off">
 
 </div>
 
@@ -1116,61 +1324,86 @@ a{
 <div class="field">
 
 <label>
-    تعداد
-    <span class="limit">
-        حداکثر هر مرحله ۵۰۰
-    </span>
+
+تعداد
+
+<span class="limitText">
+هر مرحله حداکثر ۵۰۰
+</span>
+
 </label>
 
 <input
-    id="amountInput"
-    type="number"
-    min="1"
-    max="5000"
-    value="10"
-    inputmode="numeric">
+class="input"
+id="amountInput"
+type="number"
+min="1"
+max="10000"
+value="10"
+inputmode="numeric">
+
+</div>
+
+
+<div
+class="stageInfo"
+id="stageInfo">
 
 </div>
 
 
 <!-- ریکشن -->
 
-<div id="reactionArea" style="display:none">
+<div
+id="reactionArea"
+style="display:none">
 
 <div class="field">
 
 <label>
-    نوع ریکشن
+نوع انتخاب ریکشن
 </label>
 
-<div class="mode">
+<div class="reactionModes">
 
 <button
-    type="button"
-    class="mode-btn active"
-    data-mode="single">
-    ✨ تک انتخابی
+class="modeButton active"
+data-mode="single"
+type="button">
+
+✨ تک انتخابی
+
 </button>
 
 <button
-    type="button"
-    class="mode-btn"
-    data-mode="random">
-    🎲 رندم
+class="modeButton"
+data-mode="random"
+type="button">
+
+🎲 رندم
+
 </button>
 
 <button
-    type="button"
-    class="mode-btn"
-    data-mode="all">
-    🌈 همه ریکشن‌ها
+class="modeButton"
+data-mode="all"
+type="button">
+
+🌈 همه ریکشن‌ها
+
 </button>
 
 </div>
 
-<div class="all-info" id="allInfo">
-    🌈 همه ریکشن‌ها انتخاب شده است.
-    سفارش در مراحل حداکثر ۵۰۰تایی ارسال می‌شود.
+
+<div
+class="allInfo"
+id="allInfo">
+
+🌈 همه ریکشن‌ها انتخاب شده است.
+در حالت همه، پنل ریکشن‌های موجود را به صورت
+گروهی برای Worker ارسال می‌کند.
+
 </div>
 
 </div>
@@ -1179,10 +1412,13 @@ a{
 <div class="field">
 
 <label>
-    ریکشن موردنظر
+انتخاب ریکشن
 </label>
 
-<div class="emoji-grid" id="emojiGrid">
+<div
+class="emojiGrid"
+id="emojiGrid">
+
 
 <button class="emoji active" data-emoji="❤️">❤️</button>
 <button class="emoji" data-emoji="🧡">🧡</button>
@@ -1193,15 +1429,21 @@ a{
 <button class="emoji" data-emoji="🖤">🖤</button>
 <button class="emoji" data-emoji="🤍">🤍</button>
 <button class="emoji" data-emoji="🤎">🤎</button>
-<button class="emoji" data-emoji="❤️‍🔥">❤️‍🔥</button>
+<button class="emoji" data-emoji="🩷">🩷</button>
+<button class="emoji" data-emoji="🩵">🩵</button>
+<button class="emoji" data-emoji="🩶">🩶</button>
+
 <button class="emoji" data-emoji="💕">💕</button>
-<button class="emoji" data-emoji="💖">💖</button>
-<button class="emoji" data-emoji="💗">💗</button>
-<button class="emoji" data-emoji="💓">💓</button>
 <button class="emoji" data-emoji="💞">💞</button>
+<button class="emoji" data-emoji="💓">💓</button>
+<button class="emoji" data-emoji="💗">💗</button>
+<button class="emoji" data-emoji="💖">💖</button>
 <button class="emoji" data-emoji="💘">💘</button>
 <button class="emoji" data-emoji="💝">💝</button>
 <button class="emoji" data-emoji="💟">💟</button>
+<button class="emoji" data-emoji="❤️‍🔥">❤️‍🔥</button>
+<button class="emoji" data-emoji="❤️‍🩹">❤️‍🩹</button>
+
 <button class="emoji" data-emoji="👍">👍</button>
 <button class="emoji" data-emoji="👎">👎</button>
 <button class="emoji" data-emoji="👏">👏</button>
@@ -1217,7 +1459,10 @@ a{
 <button class="emoji" data-emoji="👊">👊</button>
 <button class="emoji" data-emoji="✊">✊</button>
 <button class="emoji" data-emoji="🙏">🙏</button>
-<button class="emoji" data-emoji="❤️">❤️</button>
+<button class="emoji" data-emoji="💪">💪</button>
+<button class="emoji" data-emoji="🫶">🫶</button>
+<button class="emoji" data-emoji="🫡">🫡</button>
+
 <button class="emoji" data-emoji="😂">😂</button>
 <button class="emoji" data-emoji="🤣">🤣</button>
 <button class="emoji" data-emoji="😊">😊</button>
@@ -1248,6 +1493,7 @@ a{
 <button class="emoji" data-emoji="🤩">🤩</button>
 <button class="emoji" data-emoji="🥳">🥳</button>
 <button class="emoji" data-emoji="😏">😏</button>
+
 <button class="emoji" data-emoji="😒">😒</button>
 <button class="emoji" data-emoji="😞">😞</button>
 <button class="emoji" data-emoji="😔">😔</button>
@@ -1267,6 +1513,7 @@ a{
 <button class="emoji" data-emoji="😡">😡</button>
 <button class="emoji" data-emoji="🤬">🤬</button>
 <button class="emoji" data-emoji="🤯">🤯</button>
+
 <button class="emoji" data-emoji="😳">😳</button>
 <button class="emoji" data-emoji="🥵">🥵</button>
 <button class="emoji" data-emoji="🥶">🥶</button>
@@ -1286,6 +1533,7 @@ a{
 <button class="emoji" data-emoji="😑">😑</button>
 <button class="emoji" data-emoji="😬">😬</button>
 <button class="emoji" data-emoji="🙄">🙄</button>
+
 <button class="emoji" data-emoji="😮">😮</button>
 <button class="emoji" data-emoji="😯">😯</button>
 <button class="emoji" data-emoji="😲">😲</button>
@@ -1299,34 +1547,36 @@ a{
 <button class="emoji" data-emoji="😷">😷</button>
 <button class="emoji" data-emoji="🤒">🤒</button>
 <button class="emoji" data-emoji="🤕">🤕</button>
+
 <button class="emoji" data-emoji="💩">💩</button>
 <button class="emoji" data-emoji="👻">👻</button>
 <button class="emoji" data-emoji="💀">💀</button>
 <button class="emoji" data-emoji="☠️">☠️</button>
 <button class="emoji" data-emoji="👽">👽</button>
 <button class="emoji" data-emoji="🤖">🤖</button>
+<button class="emoji" data-emoji="😈">😈</button>
+<button class="emoji" data-emoji="👿">👿</button>
+
 <button class="emoji" data-emoji="🎉">🎉</button>
+<button class="emoji" data-emoji="🎊">🎊</button>
 <button class="emoji" data-emoji="🔥">🔥</button>
 <button class="emoji" data-emoji="✨">✨</button>
 <button class="emoji" data-emoji="⭐">⭐</button>
+<button class="emoji" data-emoji="🌟">🌟</button>
 <button class="emoji" data-emoji="💯">💯</button>
 <button class="emoji" data-emoji="💥">💥</button>
 <button class="emoji" data-emoji="🎯">🎯</button>
 <button class="emoji" data-emoji="🚀">🚀</button>
-<button class="emoji" data-emoji="❤️‍🩹">❤️‍🩹</button>
+<button class="emoji" data-emoji="🏆">🏆</button>
+<button class="emoji" data-emoji="💎">💎</button>
+
 <button class="emoji" data-emoji="🥹">🥹</button>
-<button class="emoji" data-emoji="🫶">🫶</button>
-<button class="emoji" data-emoji="🫡">🫡</button>
 <button class="emoji" data-emoji="🫠">🫠</button>
 <button class="emoji" data-emoji="🫣">🫣</button>
 <button class="emoji" data-emoji="🫢">🫢</button>
 <button class="emoji" data-emoji="🫤">🫤</button>
 <button class="emoji" data-emoji="🫥">🫥</button>
 <button class="emoji" data-emoji="🫨">🫨</button>
-<button class="emoji" data-emoji="🩷">🩷</button>
-<button class="emoji" data-emoji="🩵">🩵</button>
-<button class="emoji" data-emoji="🩶">🩶</button>
-<button class="emoji" data-emoji="❤️‍🔥">❤️‍🔥</button>
 
 </div>
 
@@ -1335,65 +1585,95 @@ a{
 </div>
 
 
-<button class="submit" id="submitOrder">
-    🚀 ثبت سفارش
+<div
+class="stageInfo"
+id="stageInfo">
+</div>
+
+
+<button
+class="submit"
+id="submitOrder">
+
+🚀 ثبت سفارش
+
 </button>
 
-<button class="cancel" id="cancelOrder">
-    انصراف
+
+<button
+class="cancel"
+id="cancelOrder">
+
+انصراف
+
 </button>
 
 
-<div class="progress-box" id="progressBox">
+<div
+class="progressBox"
+id="progressBox">
 
-<div class="progress-text">
+<div class="progressText">
 
 <span id="progressText">
-    آماده‌سازی سفارش...
+آماده‌سازی...
 </span>
 
 <span id="progressPercent">
-    0%
+0%
 </span>
 
 </div>
 
 <div class="progress">
-<div class="progress-bar" id="progressBar"></div>
+
+<div
+class="progressBar"
+id="progressBar">
 </div>
 
 </div>
 
-
-<div class="success" id="successBox">
-
-<div class="success-title">
-    ✅ سفارش ثبت شد
 </div>
 
-<p id="successMessage">
-    سفارش شما به سرور ارسال شد.
-</p>
 
-<span class="order-number" id="successOrderNumber">
-    -
-</span>
+<div
+class="successBox"
+id="successBox">
+
+<div class="successTitle">
+✅ سفارش با موفقیت ثبت شد
+</div>
+
+<div
+class="successText"
+id="successText">
+</div>
+
+<div
+class="ids"
+id="orderIds">
+</div>
 
 </div>
 
 </section>
 
 
-<section class="orders" id="ordersSection">
+<!-- سفارش‌ها -->
 
-<div class="section-head">
+<section
+class="orders"
+id="ordersSection">
+
+<div class="sectionTitle">
 
 <h2>
-    سفارش‌های من
+سفارش‌های من
 </h2>
 
 <span>
-    تاریخچه
+تاریخچه
 </span>
 
 </div>
@@ -1407,47 +1687,48 @@ a{
 </main>
 
 
-<!-- صفحه درباره -->
+<!-- درباره -->
 
-<section class="about-page" id="aboutPage">
+<section
+id="aboutPage">
 
-<div class="about-card">
+<div class="aboutCard">
 
-<div class="about-icon">
-    🛒
+<div class="aboutIcon">
+🛒
 </div>
 
 <h1>
-    درباره پنل
+درباره پنل
 </h1>
 
 <p>
-    پنل خدمات روبیکا برای ثبت و مدیریت
-    سفارش‌های خدمات روبیکا ساخته شده است.
+پنل خدمات روبیکا برای ثبت و مدیریت
+سفارش‌های خدمات روبیکا ساخته شده است.
 </p>
 
 <div class="creator">
 
-<div class="creator-title">
-    سازنده
+<div class="creatorTitle">
+سازنده
 </div>
 
 <a
-    href="https://rubika.ir/Abolfazl_Kazemi_SFG"
-    target="_blank"
-    rel="noopener noreferrer">
+href="https://rubika.ir/Abolfazl_Kazemi_SFG"
+target="_blank"
+rel="noopener noreferrer">
 
-    ابوالفضل کاظمی
+ابوالفضل کاظمی
 
 </a>
 
 </div>
 
 <button
-    class="back-home"
-    id="backHome">
+class="backButton"
+id="backButton">
 
-    ← بازگشت به پنل
+← بازگشت به پنل
 
 </button>
 
@@ -1458,27 +1739,40 @@ a{
 </div>
 
 
+<!-- منوی پایین -->
+
 <nav class="bottom">
 
-<div class="bottom-inner">
+<div class="bottomInner">
 
-<button class="nav active" data-nav="home">
+<button
+class="nav active"
+data-nav="home">
 
 <span>⌂</span>
+
 خانه
 
 </button>
 
-<button class="nav" data-nav="orders">
+
+<button
+class="nav"
+data-nav="orders">
 
 <span>📋</span>
+
 سفارش‌ها
 
 </button>
 
-<button class="nav" data-nav="about">
+
+<button
+class="nav"
+data-nav="about">
 
 <span>ⓘ</span>
+
 درباره
 
 </button>
@@ -1488,25 +1782,48 @@ a{
 </nav>
 
 
-<div class="toast" id="toast"></div>
+<div
+class="toast"
+id="toast">
+</div>
 
 
 <script>
 
+/* =========================
+   API
+========================= */
+
 const API_URL =
 "https://rubika-panel-api.kantermodmeno.workers.dev";
 
-const MAX_STAGE = 500;
+const STAGE_LIMIT = 500;
+
+const TOTAL_LIMIT = 10000;
+
+
+/* =========================
+   وضعیت
+========================= */
 
 let selectedService = "";
 let selectedType = "";
+
 let selectedEmoji = "❤️";
+
 let reactionMode = "single";
 
-let localOrders =
+let orders =
 JSON.parse(
-localStorage.getItem("counterModOrders") || "[]"
+localStorage.getItem(
+"counterModOrders"
+) || "[]"
 );
+
+
+/* =========================
+   عناصر
+========================= */
 
 const homePage =
 document.getElementById("homePage");
@@ -1529,6 +1846,9 @@ document.getElementById("amountInput");
 const reactionArea =
 document.getElementById("reactionArea");
 
+const stageInfo =
+document.getElementById("stageInfo");
+
 const submitOrder =
 document.getElementById("submitOrder");
 
@@ -1547,866 +1867,1250 @@ document.getElementById("progressPercent");
 const successBox =
 document.getElementById("successBox");
 
-const successOrderNumber =
-document.getElementById("successOrderNumber");
+const successText =
+document.getElementById("successText");
 
-const successMessage =
-document.getElementById("successMessage");
+const orderIds =
+document.getElementById("orderIds");
 
 const allInfo =
 document.getElementById("allInfo");
 
+
+/* =========================
+   Toast
+========================= */
+
 let toastTimer;
 
-function toast(message){
+function showToast(message){
 
-const box =
-document.getElementById("toast");
+    const box =
+        document.getElementById("toast");
 
-box.textContent = message;
+    box.textContent =
+        message;
 
-box.classList.add("show");
+    box.classList.add("show");
 
-clearTimeout(toastTimer);
+    clearTimeout(toastTimer);
 
-toastTimer =
-setTimeout(
-()=>{
-box.classList.remove("show");
-},
-3000
-);
-
+    toastTimer =
+        setTimeout(
+            ()=>{
+                box.classList.remove("show");
+            },
+            3000
+        );
 }
 
 
-/* تب‌ها */
+/* =========================
+   تب‌ها
+========================= */
 
-document.querySelectorAll(".tab")
+document
+.querySelectorAll(".tab")
 .forEach(tab=>{
 
-tab.addEventListener("click",()=>{
+    tab.addEventListener(
+        "click",
+        ()=>{
 
-document.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
+            document
+            .querySelectorAll(".tab")
+            .forEach(x=>{
+                x.classList.remove(
+                    "active"
+                );
+            });
 
-tab.classList.add("active");
+            tab.classList.add(
+                "active"
+            );
 
-const type =
-tab.dataset.tab;
+            const name =
+                tab.dataset.tab;
 
-document.getElementById("rubikaTab")
-.style.display =
-type==="rubika" ? "block" : "none";
+            document
+            .getElementById(
+                "rubikaTab"
+            )
+            .style.display =
+                name === "rubika"
+                ? "block"
+                : "none";
 
-document.getElementById("rubinoTab")
-.style.display =
-type==="rubino" ? "block" : "none";
+            document
+            .getElementById(
+                "rubinoTab"
+            )
+            .style.display =
+                name === "rubino"
+                ? "block"
+                : "none";
 
-});
-
-});
-
-
-/* باز کردن سفارش */
-
-document.querySelectorAll(".order-btn")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-selectedService =
-btn.dataset.service;
-
-selectedType =
-btn.dataset.type;
-
-document.getElementById("orderTitle")
-.textContent =
-"ثبت سفارش " + selectedService;
-
-targetInput.value = "";
-
-amountInput.value = "10";
-
-reactionMode = "single";
-
-selectedEmoji = "❤️";
-
-successBox.classList.remove("show");
-
-progressBox.classList.remove("show");
-
-reactionArea.style.display =
-selectedType==="reaction"
-? "block"
-: "none";
-
-document.querySelectorAll(".mode-btn")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-x.dataset.mode==="single"
-);
-});
-
-document.querySelectorAll(".emoji")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-x.dataset.emoji==="❤️"
-);
-});
-
-allInfo.classList.remove("show");
-
-orderBox.classList.add("show");
-
-aboutPage.classList.remove("show");
-
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:"smooth"
-});
-
-});
+        }
+    );
 
 });
 
 
-/* بستن */
+/* =========================
+   باز کردن فرم
+========================= */
 
-document.getElementById("closeOrder")
-.onclick = closeOrder;
+document
+.querySelectorAll(".orderButton")
+.forEach(button=>{
 
-document.getElementById("cancelOrder")
-.onclick = closeOrder;
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            selectedService =
+                button.dataset.service;
+
+            selectedType =
+                button.dataset.type;
+
+            document
+            .getElementById(
+                "orderTitle"
+            )
+            .textContent =
+                "ثبت سفارش " +
+                selectedService;
+
+            targetInput.value =
+                "";
+
+            amountInput.value =
+                "10";
+
+            selectedEmoji =
+                "❤️";
+
+            reactionMode =
+                "single";
+
+            reactionArea.style.display =
+                selectedType === "reaction"
+                ? "block"
+                : "none";
+
+            allInfo.classList.remove(
+                "show"
+            );
+
+            stageInfo.classList.remove(
+                "show"
+            );
+
+            successBox.classList.remove(
+                "show"
+            );
+
+            progressBox.classList.remove(
+                "show"
+            );
+
+            document
+            .querySelectorAll(
+                ".modeButton"
+            )
+            .forEach(x=>{
+                x.classList.toggle(
+                    "active",
+                    x.dataset.mode ===
+                    "single"
+                );
+            });
+
+            document
+            .querySelectorAll(
+                ".emoji"
+            )
+            .forEach(x=>{
+                x.classList.toggle(
+                    "active",
+                    x.dataset.emoji ===
+                    "❤️"
+                );
+            });
+
+            orderBox.classList.add(
+                "show"
+            );
+
+            window.scrollTo({
+                top:
+                    document.body
+                    .scrollHeight,
+                behavior:"smooth"
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================
+   بستن
+========================= */
 
 function closeOrder(){
 
-orderBox.classList.remove("show");
+    orderBox.classList.remove(
+        "show"
+    );
 
-successBox.classList.remove("show");
+    successBox.classList.remove(
+        "show"
+    );
 
-progressBox.classList.remove("show");
+    progressBox.classList.remove(
+        "show"
+    );
+
+}
+
+document
+.getElementById("closeOrder")
+.onclick =
+    closeOrder;
+
+document
+.getElementById("cancelOrder")
+.onclick =
+    closeOrder;
+
+
+/* =========================
+   حالت ریکشن
+========================= */
+
+document
+.querySelectorAll(".modeButton")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            reactionMode =
+                button.dataset.mode;
+
+            document
+            .querySelectorAll(
+                ".modeButton"
+            )
+            .forEach(x=>{
+                x.classList.toggle(
+                    "active",
+                    x === button
+                );
+            });
+
+            if(
+                reactionMode ===
+                "all"
+            ){
+
+                allInfo.classList.add(
+                    "show"
+                );
+
+                document
+                .querySelectorAll(
+                    ".emoji"
+                )
+                .forEach(x=>{
+                    x.classList.add(
+                        "active"
+                    );
+                });
+
+            }else{
+
+                allInfo.classList.remove(
+                    "show"
+                );
+
+                document
+                .querySelectorAll(
+                    ".emoji"
+                )
+                .forEach(x=>{
+
+                    x.classList.toggle(
+                        "active",
+                        reactionMode ===
+                        "single" &&
+                        x.dataset.emoji ===
+                        selectedEmoji
+                    );
+
+                });
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================
+   انتخاب ایموجی
+========================= */
+
+document
+.querySelectorAll(".emoji")
+.forEach(button=>{
+
+    button.addEventListener(
+        "click",
+        ()=>{
+
+            selectedEmoji =
+                button.dataset.emoji;
+
+            reactionMode =
+                "single";
+
+            document
+            .querySelectorAll(
+                ".modeButton"
+            )
+            .forEach(x=>{
+                x.classList.toggle(
+                    "active",
+                    x.dataset.mode ===
+                    "single"
+                );
+            });
+
+            allInfo.classList.remove(
+                "show"
+            );
+
+            document
+            .querySelectorAll(
+                ".emoji"
+            )
+            .forEach(x=>{
+                x.classList.toggle(
+                    "active",
+                    x === button
+                );
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================
+   محاسبه مراحل
+========================= */
+
+function makeStages(total){
+
+    const stages = [];
+
+    let remaining =
+        total;
+
+    while(
+        remaining > 0
+    ){
+
+        const current =
+            Math.min(
+                STAGE_LIMIT,
+                remaining
+            );
+
+        stages.push(
+            current
+        );
+
+        remaining -=
+            current;
+    }
+
+    return stages;
+}
+
+
+/* =========================
+   نمایش مراحل
+========================= */
+
+function updateStageInfo(){
+
+    const total =
+        parseInt(
+            amountInput.value ||
+            "0"
+        );
+
+    if(
+        !total ||
+        total < 1
+    ){
+
+        stageInfo.classList.remove(
+            "show"
+        );
+
+        return;
+    }
+
+    const stages =
+        makeStages(total);
+
+    if(
+        stages.length <= 1
+    ){
+
+        stageInfo.classList.remove(
+            "show"
+        );
+
+        return;
+    }
+
+    stageInfo.classList.add(
+        "show"
+    );
+
+    stageInfo.innerHTML =
+        `
+        <b>تقسیم سفارش:</b><br>
+        تعداد کل: ${total}<br>
+        تعداد مراحل: ${stages.length}<br>
+        مراحل:
+        ${stages.join(" + ")}
+        `;
 
 }
 
 
-/* حالت ریکشن */
+/* =========================
+   تعداد
+========================= */
 
-document.querySelectorAll(".mode-btn")
-.forEach(btn=>{
+amountInput.addEventListener(
+    "input",
+    ()=>{
 
-btn.addEventListener("click",()=>{
+        let value =
+            parseInt(
+                amountInput.value ||
+                "0"
+            );
 
-reactionMode =
-btn.dataset.mode;
+        if(
+            value >
+            TOTAL_LIMIT
+        ){
 
-document.querySelectorAll(".mode-btn")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-x===btn
-);
-});
+            amountInput.value =
+                TOTAL_LIMIT;
 
-if(reactionMode==="all"){
+            value =
+                TOTAL_LIMIT;
 
-allInfo.classList.add("show");
+            showToast(
+                "حداکثر تعداد کل ۱۰۰۰۰ است."
+            );
+        }
 
-document.querySelectorAll(".emoji")
-.forEach(x=>{
-x.classList.add("active");
-});
+        updateStageInfo();
 
-}else{
-
-allInfo.classList.remove("show");
-
-document.querySelectorAll(".emoji")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-reactionMode==="single" &&
-x.dataset.emoji===selectedEmoji
-);
-});
-
-}
-
-});
-
-});
-
-
-/* انتخاب ایموجی */
-
-document.querySelectorAll(".emoji")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-selectedEmoji =
-btn.dataset.emoji;
-
-reactionMode =
-"single";
-
-document.querySelectorAll(".mode-btn")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-x.dataset.mode==="single"
-);
-});
-
-allInfo.classList.remove("show");
-
-document.querySelectorAll(".emoji")
-.forEach(x=>{
-x.classList.toggle(
-"active",
-x===btn
-);
-});
-
-});
-
-});
-
-
-/* محدودیت ظاهری */
-
-amountInput.addEventListener("input",()=>{
-
-let value =
-parseInt(amountInput.value || "0");
-
-if(value < 1){
-return;
-}
-
-if(value > 5000){
-
-amountInput.value = 5000;
-
-toast(
-"حداکثر تعداد قابل ثبت ۵۰۰۰ است؛ اجرا در چند مرحله انجام می‌شود."
+    }
 );
 
-}
 
-});
-
-
-/* تقسیم به مراحل ۵۰۰تایی */
-
-function splitStages(total){
-
-const result = [];
-
-let remain = total;
-
-while(remain > 0){
-
-const stage =
-Math.min(
-MAX_STAGE,
-remain
-);
-
-result.push(stage);
-
-remain -= stage;
-
-}
-
-return result;
-
-}
-
-
-/* ساخت ریکشن */
+/* =========================
+   ریکشن
+========================= */
 
 function getReaction(){
 
-if(selectedType !== "reaction"){
-return "";
+    if(
+        selectedType !==
+        "reaction"
+    ){
+
+        return "";
+    }
+
+    if(
+        reactionMode ===
+        "all"
+    ){
+
+        return "all";
+    }
+
+    if(
+        reactionMode ===
+        "random"
+    ){
+
+        return "random";
+    }
+
+    return selectedEmoji;
+
 }
 
-if(reactionMode === "all"){
-return "all";
-}
 
-if(reactionMode === "random"){
-return "random";
-}
-
-return selectedEmoji;
-
-}
-
-
-/* ارسال هر مرحله */
+/* =========================
+   ارسال مرحله
+========================= */
 
 async function sendStage(
-stageCount,
-stageNumber,
-totalStages
+    count,
+    stageNumber,
+    totalStages
 ){
 
-const payload = {
+    const payload = {
 
-service:
-selectedService,
+        service:
+            selectedService,
 
-link:
-targetInput.value.trim(),
+        link:
+            targetInput.value.trim(),
 
-count:
-stageCount,
+        count:
+            count,
 
-comment:
-"",
+        comment:
+            "",
 
-reaction:
-getReaction()
+        reaction:
+            getReaction(),
 
-};
+        stage:
+            stageNumber,
+
+        totalStages:
+            totalStages
+
+    };
 
 
-const response =
-await fetch(
-API_URL + "/api/orders",
-{
-method:"POST",
-headers:{
-"Content-Type":
-"application/json"
-},
-body:
-JSON.stringify(payload)
+    const response =
+        await fetch(
+            API_URL +
+            "/api/orders",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+            }
+        );
+
+
+    let data;
+
+    try{
+
+        data =
+            await response.json();
+
+    }catch(error){
+
+        throw new Error(
+            "پاسخ سرور قابل خواندن نیست."
+        );
+
+    }
+
+
+    if(
+        !response.ok ||
+        !data.ok
+    ){
+
+        throw new Error(
+            data.error ||
+            data.message ||
+            "ثبت مرحله ناموفق بود."
+        );
+
+    }
+
+
+    return data;
+
 }
-);
 
 
-let data;
-
-try{
-
-data =
-await response.json();
-
-}catch(e){
-
-throw new Error(
-"پاسخ سرور نامعتبر است."
-);
-
-}
-
-
-if(!response.ok || !data.ok){
-
-throw new Error(
-data.error ||
-data.message ||
-"ثبت مرحله ناموفق بود."
-);
-
-}
-
-
-return data;
-
-}
-
-
-/* ثبت سفارش */
+/* =========================
+   ثبت سفارش
+========================= */
 
 submitOrder.addEventListener(
-"click",
-async()=>{
+    "click",
+    async()=>{
 
-const target =
-targetInput.value.trim();
+        const link =
+            targetInput.value.trim();
 
-const total =
-parseInt(
-amountInput.value || "0"
+        const total =
+            parseInt(
+                amountInput.value ||
+                "0"
+            );
+
+
+        if(!link){
+
+            showToast(
+                "لطفاً لینک پیام را وارد کنید."
+            );
+
+            targetInput.focus();
+
+            return;
+        }
+
+
+        if(
+            !total ||
+            total < 1
+        ){
+
+            showToast(
+                "تعداد صحیح وارد کنید."
+            );
+
+            return;
+        }
+
+
+        if(
+            total >
+            TOTAL_LIMIT
+        ){
+
+            showToast(
+                "حداکثر تعداد کل ۱۰۰۰۰ است."
+            );
+
+            return;
+        }
+
+
+        const stages =
+            makeStages(total);
+
+
+        submitOrder.disabled =
+            true;
+
+        progressBox.classList.add(
+            "show"
+        );
+
+        successBox.classList.remove(
+            "show"
+        );
+
+
+        let ids = [];
+
+        let completed = 0;
+
+
+        try{
+
+            for(
+                let i = 0;
+                i < stages.length;
+                i++
+            ){
+
+                const current =
+                    stages[i];
+
+
+                progressText.textContent =
+                    "مرحله " +
+                    (i+1) +
+                    " از " +
+                    stages.length +
+                    " — تعداد " +
+                    current;
+
+
+                const result =
+                    await sendStage(
+                        current,
+                        i+1,
+                        stages.length
+                    );
+
+
+                if(
+                    result &&
+                    result.order &&
+                    result.order.id
+                ){
+
+                    ids.push(
+                        result.order.id
+                    );
+
+                }
+
+
+                completed++;
+
+
+                const percent =
+                    Math.round(
+                        completed /
+                        stages.length *
+                        100
+                    );
+
+
+                progressBar.style.width =
+                    percent + "%";
+
+                progressPercent.textContent =
+                    percent + "%";
+
+            }
+
+
+            const localOrder = {
+
+                id:
+                    ids[0] ||
+                    "CM-" +
+                    Date.now(),
+
+                service:
+                    selectedService,
+
+                type:
+                    selectedType,
+
+                target:
+                    link,
+
+                amount:
+                    total,
+
+                stages:
+                    stages,
+
+                stageIds:
+                    ids,
+
+                reaction:
+                    getReaction(),
+
+                status:
+                    "pending",
+
+                date:
+                    new Date()
+                    .toLocaleString(
+                        "fa-IR"
+                    )
+
+            };
+
+
+            orders.unshift(
+                localOrder
+            );
+
+
+            if(
+                orders.length >
+                50
+            ){
+
+                orders =
+                    orders.slice(
+                        0,
+                        50
+                    );
+
+            }
+
+
+            localStorage.setItem(
+                "counterModOrders",
+                JSON.stringify(
+                    orders
+                )
+            );
+
+
+            renderOrders();
+
+
+            successBox.classList.add(
+                "show"
+            );
+
+
+            if(
+                stages.length > 1
+            ){
+
+                successText.textContent =
+                    "سفارش " +
+                    total +
+                    " عددی در " +
+                    stages.length +
+                    " مرحله ثبت شد: " +
+                    stages.join(
+                        " + "
+                    );
+
+            }else{
+
+                successText.textContent =
+                    "سفارش با موفقیت ثبت شد.";
+
+            }
+
+
+            orderIds.textContent =
+                ids.length
+                ? "شناسه مراحل: " +
+                  ids.join(" | ")
+                : "سفارش ثبت شد.";
+
+
+            progressText.textContent =
+                "تمام مراحل ثبت شد";
+
+
+            showToast(
+                "تمام مراحل سفارش ثبت شد."
+            );
+
+
+        }catch(error){
+
+            showToast(
+                error.message ||
+                "خطا در ثبت سفارش."
+            );
+
+
+            progressText.textContent =
+                "ثبت سفارش متوقف شد.";
+
+        }finally{
+
+            submitOrder.disabled =
+                false;
+
+        }
+
+    }
 );
 
 
-if(!target){
-
-toast(
-"لطفاً لینک پیام را وارد کنید."
-);
-
-targetInput.focus();
-
-return;
-
-}
-
-
-if(!total || total < 1){
-
-toast(
-"تعداد را وارد کنید."
-);
-
-return;
-
-}
-
-
-if(total > 5000){
-
-toast(
-"حداکثر تعداد فعلی ۵۰۰۰ است."
-);
-
-return;
-
-}
-
-
-const stages =
-splitStages(total);
-
-
-submitOrder.disabled = true;
-
-progressBox.classList.add("show");
-
-successBox.classList.remove("show");
-
-
-let completed = 0;
-
-let ids = [];
-
-
-try{
-
-for(
-let i=0;
-i<stages.length;
-i++
-){
-
-const stage =
-stages[i];
-
-progressText.textContent =
-"در حال ثبت مرحله " +
-(i+1) +
-" از " +
-stages.length +
-" — تعداد " +
-stage;
-
-
-const result =
-await sendStage(
-stage,
-i+1,
-stages.length
-);
-
-
-if(
-result &&
-result.order &&
-result.order.id
-){
-
-ids.push(
-result.order.id
-);
-
-}
-
-
-completed++;
-
-const percent =
-Math.round(
-(completed /
-stages.length) * 100
-);
-
-progressBar.style.width =
-percent + "%";
-
-progressPercent.textContent =
-percent + "%";
-
-
-await new Promise(
-resolve =>
-setTimeout(resolve,250)
-);
-
-}
-
-
-/* ذخیره تاریخچه */
-
-const localOrder = {
-
-id:
-ids[0] ||
-"CM-" + Date.now(),
-
-service:
-selectedService,
-
-target:
-target,
-
-amount:
-total,
-
-stages:
-stages,
-
-stageIds:
-ids,
-
-reaction:
-getReaction(),
-
-status:
-"pending",
-
-date:
-new Date().toLocaleString("fa-IR")
-
-};
-
-
-localOrders.unshift(
-localOrder
-);
-
-if(localOrders.length > 50){
-
-localOrders =
-localOrders.slice(0,50);
-
-}
-
-localStorage.setItem(
-"counterModOrders",
-JSON.stringify(localOrders)
-);
-
-renderOrders();
-
-
-successOrderNumber.textContent =
-ids.length
-? ids.join(" / ")
-: localOrder.id;
-
-
-if(stages.length > 1){
-
-successMessage.textContent =
-"سفارش " +
-total +
-" عددی در " +
-stages.length +
-" مرحله ثبت شد: " +
-stages.join(" + ") +
-".";
-
-}else{
-
-successMessage.textContent =
-"سفارش شما با موفقیت ثبت شد.";
-
-}
-
-
-successBox.classList.add("show");
-
-progressText.textContent =
-"تمام مراحل ثبت شد";
-
-toast(
-"سفارش با موفقیت ثبت شد."
-);
-
-
-}catch(error){
-
-toast(
-error.message ||
-"خطا در ثبت سفارش"
-);
-
-progressText.textContent =
-"ثبت سفارش متوقف شد";
-
-}finally{
-
-submitOrder.disabled = false;
-
-}
-
-});
-
-
-/* تاریخچه */
+/* =========================
+   تاریخچه
+========================= */
 
 function renderOrders(){
 
-const list =
-document.getElementById("ordersList");
+    const list =
+        document.getElementById(
+            "ordersList"
+        );
 
-if(!localOrders.length){
 
-list.innerHTML =
-`
-<div class="empty">
-هنوز سفارشی ثبت نشده است.
-</div>
-`;
+    if(
+        !orders.length
+    ){
 
-return;
+        list.innerHTML =
+            `
+            <div class="empty">
+                هنوز سفارشی ثبت نکرده‌اید.
+            </div>
+            `;
+
+        return;
+    }
+
+
+    list.innerHTML =
+        orders.map(
+            order=>{
+
+                let reaction =
+                    "";
+
+                if(
+                    order.reaction ===
+                    "all"
+                ){
+
+                    reaction =
+                        "🌈 همه ریکشن‌ها";
+
+                }else if(
+                    order.reaction ===
+                    "random"
+                ){
+
+                    reaction =
+                        "🎲 رندم";
+
+                }else if(
+                    order.reaction
+                ){
+
+                    reaction =
+                        order.reaction;
+                }
+
+
+                return `
+                <div class="orderItem">
+
+                    <div class="orderTop">
+
+                        <div>
+
+                            <strong>
+                                ${escapeHTML(
+                                    order.service
+                                )}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                ${escapeHTML(
+                                    order.date || ""
+                                )}
+                            </small>
+
+                        </div>
+
+                        <span class="orderStatus">
+                            ${escapeHTML(
+                                orderStatus(
+                                    order.status
+                                )
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="orderDetails">
+
+                        تعداد کل:
+                        ${escapeHTML(
+                            String(
+                                order.amount
+                            )
+                        )}
+
+                        <br>
+
+                        مراحل:
+                        ${escapeHTML(
+                            String(
+                                order.stages
+                                ?.join(" + ")
+                                ||
+                                order.amount
+                            )
+                        )}
+
+                        ${
+                            reaction
+                            ? "<br>ری‌اکشن: " +
+                              escapeHTML(
+                                  reaction
+                              )
+                            : ""
+                        }
+
+                    </div>
+
+                </div>
+                `;
+
+            }
+        ).join("");
 
 }
 
 
-list.innerHTML =
-localOrders.map(order=>{
+/* =========================
+   وضعیت
+========================= */
 
-let reaction = "";
+function orderStatus(status){
 
-if(order.reaction==="all"){
-reaction="🌈 همه ریکشن‌ها";
-}else if(order.reaction==="random"){
-reaction="🎲 رندم";
-}else if(order.reaction){
-reaction=order.reaction;
-}
+    if(
+        status ===
+        "completed"
+    ){
+        return "تکمیل شده";
+    }
 
-return `
-<div class="order-item">
+    if(
+        status ===
+        "processing"
+    ){
+        return "در حال انجام";
+    }
 
-<div class="order-item-top">
+    if(
+        status ===
+        "failed"
+    ){
+        return "ناموفق";
+    }
 
-<div>
-
-<strong>
-${escapeHTML(order.service)}
-</strong>
-
-<br>
-
-<small>
-${escapeHTML(order.date || "")}
-</small>
-
-</div>
-
-<span class="order-status">
-${escapeHTML(status(order.status))}
-</span>
-
-</div>
-
-<div
-style="
-color:#91a0b5;
-font-size:10px;
-line-height:2;
-word-break:break-word;
-">
-
-تعداد کل:
-${escapeHTML(String(order.amount))}
-
-${reaction
-? " | ریکشن: "+escapeHTML(reaction)
-: ""
-}
-
-<br>
-
-مراحل:
-${escapeHTML(
-String(order.stages?.join(" + ") || order.amount)
-)}
-
-</div>
-
-</div>
-`;
-
-}).join("");
+    return "در انتظار";
 
 }
 
 
-function status(value){
-
-if(value==="completed"){
-return "تکمیل شده";
-}
-
-if(value==="processing"){
-return "در حال انجام";
-}
-
-if(value==="failed"){
-return "ناموفق";
-}
-
-return "در انتظار";
-
-}
-
+/* =========================
+   امنیت متن
+========================= */
 
 function escapeHTML(value){
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-/* ناوبری */
+/* =========================
+   منوی پایین
+========================= */
 
-document.querySelectorAll(".nav")
-.forEach(btn=>{
+document
+.querySelectorAll(".nav")
+.forEach(button=>{
 
-btn.addEventListener("click",()=>{
+    button.addEventListener(
+        "click",
+        ()=>{
 
-const nav =
-btn.dataset.nav;
+            const nav =
+                button.dataset.nav;
 
-document.querySelectorAll(".nav")
-.forEach(x=>{
-x.classList.remove("active");
+
+            document
+            .querySelectorAll(".nav")
+            .forEach(x=>{
+                x.classList.remove(
+                    "active"
+                );
+            });
+
+            button.classList.add(
+                "active"
+            );
+
+
+            if(
+                nav === "home"
+            ){
+
+                aboutPage.classList.remove(
+                    "show"
+                );
+
+                homePage.style.display =
+                    "block";
+
+                ordersSection.classList.remove(
+                    "show"
+                );
+
+                window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+                });
+
+            }
+
+
+            if(
+                nav === "orders"
+            ){
+
+                aboutPage.classList.remove(
+                    "show"
+                );
+
+                homePage.style.display =
+                    "block";
+
+                ordersSection.classList.add(
+                    "show"
+                );
+
+                renderOrders();
+
+                setTimeout(
+                    ()=>{
+                        ordersSection
+                        .scrollIntoView({
+                            behavior:"smooth"
+                        });
+                    },
+                    50
+                );
+
+            }
+
+
+            if(
+                nav === "about"
+            ){
+
+                homePage.style.display =
+                    "none";
+
+                aboutPage.classList.add(
+                    "show"
+                );
+
+                window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+                });
+
+            }
+
+        }
+    );
+
 });
 
-btn.classList.add("active");
+
+/* =========================
+   بازگشت
+========================= */
+
+document
+.getElementById("backButton")
+.addEventListener(
+    "click",
+    ()=>{
+        document
+        .querySelector(
+            '[data-nav="home"]'
+        )
+        .click();
+    }
+);
 
 
-if(nav==="home"){
-
-aboutPage.classList.remove("show");
-
-homePage.style.display =
-"block";
-
-ordersSection.classList.remove("show");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-if(nav==="orders"){
-
-aboutPage.classList.remove("show");
-
-homePage.style.display =
-"block";
-
-ordersSection.classList.add("show");
-
-renderOrders();
-
-setTimeout(()=>{
-ordersSection.scrollIntoView({
-behavior:"smooth"
-});
-},50);
-
-}
-
-
-if(nav==="about"){
-
-homePage.style.display =
-"none";
-
-aboutPage.classList.add("show");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-});
-
-});
-
-
-/* بازگشت */
-
-document.getElementById("backHome")
-.onclick = ()=>{
-
-document.querySelector('[data-nav="home"]')
-.click();
-
-};
-
-
-/* وضعیت API */
+/* =========================
+   بررسی API
+========================= */
 
 async function checkAPI(){
 
-try{
+    try{
 
-const response =
-await fetch(
-API_URL + "/api/test"
-);
+        const response =
+            await fetch(
+                API_URL +
+                "/api/test"
+            );
 
-if(response.ok){
 
-document.querySelector(".status")
-.innerHTML =
-`
-<span class="status-dot"></span>
-آنلاین
-`;
+        if(
+            response.ok
+        ){
+
+            document
+            .querySelector(
+                ".online"
+            )
+            .innerHTML =
+                `
+                <span class="onlineDot"></span>
+                آنلاین
+                `;
+
+        }
+
+    }catch(error){
+
+        document
+        .querySelector(
+            ".online"
+        )
+        .innerHTML =
+            `
+            <span
+                class="onlineDot"
+                style="background:#ffb454">
+            </span>
+            آماده
+            `;
+
+    }
 
 }
 
-}catch(e){
 
-document.querySelector(".status")
-.innerHTML =
-`
-<span
-class="status-dot"
-style="background:#ffb454">
-</span>
-آماده
-`;
-
-}
-
-}
-
+/* =========================
+   شروع
+========================= */
 
 renderOrders();
 

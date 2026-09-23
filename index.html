@@ -43,10 +43,7 @@ body{
         radial-gradient(circle at 90% 20%,rgba(117,108,255,.10),transparent 30%),
         linear-gradient(145deg,#040811,#091321 55%,#050912);
     color:var(--text);
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
+    font-family:Tahoma,Arial,sans-serif;
     overflow-x:hidden;
 }
 
@@ -65,8 +62,6 @@ a{
     color:inherit;
     text-decoration:none;
 }
-
-/* floating lights */
 
 .bg-light{
     position:fixed;
@@ -105,11 +100,13 @@ a{
 }
 
 @keyframes float{
-    0%,100%{transform:translateY(0) translateX(0)}
-    50%{transform:translateY(-25px) translateX(12px)}
+    0%,100%{
+        transform:translateY(0) translateX(0)
+    }
+    50%{
+        transform:translateY(-25px) translateX(12px)
+    }
 }
-
-/* app */
 
 .app{
     width:min(100%,520px);
@@ -119,8 +116,6 @@ a{
     z-index:2;
     padding-bottom:95px;
 }
-
-/* header */
 
 .header{
     position:sticky;
@@ -158,7 +153,11 @@ a{
     flex-shrink:0;
     font-size:24px;
     background:
-        linear-gradient(145deg,rgba(77,163,255,.30),rgba(117,108,255,.22));
+        linear-gradient(
+            145deg,
+            rgba(77,163,255,.30),
+            rgba(117,108,255,.22)
+        );
     border:1px solid rgba(255,255,255,.12);
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,.1),
@@ -202,8 +201,6 @@ a{
     background:var(--green);
     box-shadow:0 0 10px var(--green);
 }
-
-/* hero */
 
 .hero{
     margin:18px 14px;
@@ -263,8 +260,6 @@ a{
     font-size:10px;
 }
 
-/* section */
-
 .section{
     padding:0 14px;
 }
@@ -284,8 +279,6 @@ a{
     color:var(--muted);
     font-size:10px;
 }
-
-/* tabs */
 
 .tabs{
     display:grid;
@@ -315,8 +308,6 @@ a{
     border-color:rgba(77,163,255,.28);
     box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
-
-/* services */
 
 .services{
     display:grid;
@@ -393,8 +384,6 @@ a{
     background:linear-gradient(135deg,var(--primary),var(--primary2));
     box-shadow:0 7px 18px rgba(77,163,255,.18);
 }
-
-/* order box */
 
 .order-box{
     display:none;
@@ -559,8 +548,6 @@ a{
     background:rgba(255,255,255,.03);
 }
 
-/* progress */
-
 .progress-box{
     display:none;
     margin-top:16px;
@@ -596,8 +583,6 @@ a{
     background:linear-gradient(90deg,#248cff,#756cff,#27d59a);
     transition:width .35s ease;
 }
-
-/* success */
 
 .success{
     display:none;
@@ -635,8 +620,6 @@ a{
     direction:ltr;
     font-size:11px;
 }
-
-/* orders */
 
 .orders{
     display:none;
@@ -687,8 +670,6 @@ a{
     padding:25px;
 }
 
-/* bottom */
-
 .bottom{
     position:fixed;
     bottom:0;
@@ -738,8 +719,6 @@ a{
     background:rgba(77,163,255,.11);
 }
 
-/* toast */
-
 .toast{
     position:fixed;
     z-index:100;
@@ -766,8 +745,6 @@ a{
     transform:translate(-50%,0);
 }
 
-/* responsive */
-
 @media(max-width:360px){
     .services{
         grid-template-columns:1fr;
@@ -792,424 +769,409 @@ a{
 
 <div class="app">
 
-    <header class="header">
-        <div class="header-inner">
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">🛒</div>
 
-            <div class="logo">🛒</div>
-
-            <div class="header-title">
-                <strong>پنل خدمات روبیکا</strong>
-                <span>سفارش خدمات به‌صورت کاملاً رایگان</span>
-            </div>
-
-            <div class="status">
-                <span class="status-dot"></span>
-                آنلاین
-            </div>
-
-        </div>
-    </header>
-
-    <section class="hero">
-
-        <h1>خدمات رایگان روبیکا</h1>
-
-        <p>
-            خدمات موردنظر خودت را انتخاب کن،
-            اطلاعات سفارش را وارد کن و درخواستت را ثبت کن.
-        </p>
-
-        <div class="hero-badges">
-            <span class="badge">🆓 بدون هزینه</span>
-            <span class="badge">⚡ ثبت سریع</span>
-            <span class="badge">🔐 امن</span>
-            <span class="badge">📱 موبایل‌پسند</span>
+        <div class="header-title">
+            <strong>پنل خدمات روبیکا</strong>
+            <span>سفارش خدمات به‌صورت کاملاً رایگان</span>
         </div>
 
-    </section>
-
-    <main class="section">
-
-        <div class="tabs">
-            <button class="tab active" data-tab="rubika">
-                💬 خدمات روبیکا
-            </button>
-
-            <button class="tab" data-tab="rubino">
-                📸 خدمات روبینو
-            </button>
+        <div class="status">
+            <span class="status-dot"></span>
+            آنلاین
         </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>خدمات رایگان روبیکا</h1>
+
+    <p>
+        خدمات موردنظر خودت را انتخاب کن،
+        اطلاعات سفارش را وارد کن و درخواستت را ثبت کن.
+    </p>
+
+    <div class="hero-badges">
+        <span class="badge">🆓 بدون هزینه</span>
+        <span class="badge">⚡ ثبت سریع</span>
+        <span class="badge">🔐 امن</span>
+        <span class="badge">📱 موبایل‌پسند</span>
+    </div>
+</section>
+
+<main class="section">
+
+<div class="tabs">
+
+<button class="tab active" data-tab="rubika">
+    💬 خدمات روبیکا
+</button>
+
+<button class="tab" data-tab="rubino">
+    📸 خدمات روبینو
+</button>
+
+</div>
+
+<section id="rubikaTab">
+
+<div class="section-head">
+    <h2>خدمات روبیکا</h2>
+    <span>همه رایگان</span>
+</div>
+
+<div class="services">
+
+<article class="service">
+    <div class="service-icon">❤️</div>
+    <h3>ری‌اکشن پیام</h3>
+    <p>ثبت سفارش ریکشن روی پیام روبیکا</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="ری‌اکشن پیام"
+                data-type="reaction">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">👁️</div>
+    <h3>سین / بازدید پیام</h3>
+    <p>ثبت سفارش بازدید برای پیام یا پست</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="سین / بازدید پیام"
+                data-type="views">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">👥</div>
+    <h3>عضو کانال</h3>
+    <p>ثبت درخواست افزایش عضو کانال</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="عضو کانال"
+                data-type="members">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">📊</div>
+    <h3>نظرسنجی</h3>
+    <p>ثبت درخواست برای خدمات نظرسنجی</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="نظرسنجی"
+                data-type="poll">
+            سفارش
+        </button>
+    </div>
+</article>
+
+</div>
+</section>
+
+<section id="rubinoTab" style="display:none">
+
+<div class="section-head">
+    <h2>خدمات روبینو</h2>
+    <span>همه رایگان</span>
+</div>
+
+<div class="services">
+
+<article class="service">
+    <div class="service-icon">👍</div>
+    <h3>لایک پست</h3>
+    <p>ثبت سفارش لایک برای پست روبینو</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="لایک پست روبینو"
+                data-type="like">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">👁️</div>
+    <h3>بازدید پست</h3>
+    <p>ثبت سفارش بازدید برای پست روبینو</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="بازدید پست روبینو"
+                data-type="rubino_views">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">👤</div>
+    <h3>فالوور</h3>
+    <p>ثبت درخواست دنبال‌کننده برای پروفایل</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="فالوور روبینو"
+                data-type="followers">
+            سفارش
+        </button>
+    </div>
+</article>
+
+<article class="service">
+    <div class="service-icon">💬</div>
+    <h3>کامنت</h3>
+    <p>ثبت درخواست کامنت برای پست</p>
+
+    <div class="service-bottom">
+        <span class="free">رایگان</span>
+
+        <button class="order-btn"
+                data-service="کامنت روبینو"
+                data-type="comment">
+            سفارش
+        </button>
+    </div>
+</article>
+
+</div>
+</section>
+
+<section id="orderBox" class="order-box">
+
+<div class="order-head">
+    <strong id="orderTitle">ثبت سفارش</strong>
+    <button class="close-order" id="closeOrder">×</button>
+</div>
+
+<form id="orderForm">
+
+<div class="field">
+    <label>لینک پیام / پست / کانال / پروفایل</label>
+
+    <input
+        id="target"
+        type="url"
+        dir="ltr"
+        placeholder="https://rubika.ir/..."
+        autocomplete="off"
+        required>
+</div>
+
+<div class="field">
+    <label>تعداد موردنظر</label>
+
+    <input
+        id="amount"
+        type="number"
+        min="1"
+        max="10000"
+        value="10"
+        required>
+</div>
+
+<div id="reactionArea" style="display:none">
+
+<div class="field">
+    <label>نوع انتخاب ریکشن</label>
+
+    <div class="mode">
+
+        <button
+            type="button"
+            class="mode-btn active"
+            data-mode="single">
+            ✨ تک انتخابی
+        </button>
 
-        <section id="rubikaTab">
-
-            <div class="section-head">
-                <h2>خدمات روبیکا</h2>
-                <span>همه رایگان</span>
-            </div>
-
-            <div class="services">
-
-                <article class="service">
-                    <div class="service-icon">❤️</div>
-                    <h3>ری‌اکشن پیام</h3>
-                    <p>ثبت سفارش ریکشن روی پیام روبیکا</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="ری‌اکشن پیام"
-                            data-type="reaction">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">👁️</div>
-                    <h3>سین / بازدید پیام</h3>
-                    <p>ثبت سفارش بازدید برای پیام یا پست</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="سین / بازدید پیام"
-                            data-type="views">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">👥</div>
-                    <h3>عضو کانال</h3>
-                    <p>ثبت درخواست افزایش عضو کانال</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="عضو کانال"
-                            data-type="members">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">📊</div>
-                    <h3>نظرسنجی</h3>
-                    <p>ثبت درخواست برای خدمات نظرسنجی</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="نظرسنجی"
-                            data-type="poll">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-
-        </section>
-
-        <section id="rubinoTab" style="display:none">
-
-            <div class="section-head">
-                <h2>خدمات روبینو</h2>
-                <span>همه رایگان</span>
-            </div>
-
-            <div class="services">
-
-                <article class="service">
-                    <div class="service-icon">👍</div>
-                    <h3>لایک پست</h3>
-                    <p>ثبت سفارش لایک برای پست روبینو</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="لایک پست روبینو"
-                            data-type="like">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">👁️</div>
-                    <h3>بازدید پست</h3>
-                    <p>ثبت سفارش بازدید برای پست روبینو</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="بازدید پست روبینو"
-                            data-type="rubino_views">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">👤</div>
-                    <h3>فالوور</h3>
-                    <p>ثبت درخواست دنبال‌کننده برای پروفایل</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="فالوور روبینو"
-                            data-type="followers">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-                <article class="service">
-                    <div class="service-icon">💬</div>
-                    <h3>کامنت</h3>
-                    <p>ثبت درخواست کامنت برای پست</p>
-                    <div class="service-bottom">
-                        <span class="free">رایگان</span>
-                        <button class="order-btn"
-                            data-service="کامنت روبینو"
-                            data-type="comment">
-                            سفارش
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- order -->
-
-        <section id="orderBox" class="order-box">
-
-            <div class="order-head">
-                <strong id="orderTitle">ثبت سفارش</strong>
-                <button class="close-order" id="closeOrder">×</button>
-            </div>
-
-            <form id="orderForm">
-
-                <div class="field">
-                    <label>لینک پیام / پست / کانال / پروفایل</label>
-                    <input
-                        id="target"
-                        type="url"
-                        dir="ltr"
-                        placeholder="https://rubika.ir/..."
-                        autocomplete="off"
-                        required>
-                </div>
-
-                <div class="field">
-                    <label>تعداد موردنظر</label>
-                    <input
-                        id="amount"
-                        type="number"
-                        min="1"
-                        max="10000"
-                        value="10"
-                        required>
-                </div>
-
-                <div id="reactionArea" style="display:none">
-
-                    <div class="field">
-                        <label>نوع انتخاب ریکشن</label>
-
-                        <div class="mode">
-
-                            <button
-                                type="button"
-                                class="mode-btn active"
-                                data-mode="single">
-                                ✨ تک انتخابی
-                            </button>
-
-                            <button
-                                type="button"
-                                class="mode-btn"
-                                data-mode="random">
-                                🎲 رندم
-                            </button>
-
-                        </div>
-                    </div>
+        <button
+            type="button"
+            class="mode-btn"
+            data-mode="random">
+            🎲 رندم
+        </button>
 
-                    <div class="field">
+    </div>
+</div>
 
-                        <label>انتخاب ریکشن</label>
+<div class="field">
 
-                        <div class="emoji-grid">
+<label>انتخاب ریکشن</label>
 
-                            <button type="button" class="emoji" data-emoji="❤️">❤️</button>
-                            <button type="button" class="emoji" data-emoji="👍">👍</button>
-                            <button type="button" class="emoji" data-emoji="😂">😂</button>
-                            <button type="button" class="emoji" data-emoji="😱">😱</button>
-                            <button type="button" class="emoji" data-emoji="😍">😍</button>
-                            <button type="button" class="emoji" data-emoji="😢">😢</button>
-                            <button type="button" class="emoji" data-emoji="😎">😎</button>
-                            <button type="button" class="emoji" data-emoji="🤔">🤔</button>
-                            <button type="button" class="emoji" data-emoji="🙏">🙏</button>
-                            <button type="button" class="emoji" data-emoji="🔥">🔥</button>
+<div class="emoji-grid">
 
-                        </div>
+<button type="button" class="emoji" data-emoji="❤️">❤️</button>
+<button type="button" class="emoji" data-emoji="👍">👍</button>
+<button type="button" class="emoji" data-emoji="😂">😂</button>
+<button type="button" class="emoji" data-emoji="😱">😱</button>
+<button type="button" class="emoji" data-emoji="😍">😍</button>
+<button type="button" class="emoji" data-emoji="😢">😢</button>
+<button type="button" class="emoji" data-emoji="😎">😎</button>
+<button type="button" class="emoji" data-emoji="🤔">🤔</button>
+<button type="button" class="emoji" data-emoji="🙏">🙏</button>
+<button type="button" class="emoji" data-emoji="🔥">🔥</button>
 
-                    </div>
+</div>
+</div>
+</div>
 
-                </div>
+<div id="commentArea" class="field" style="display:none">
 
-                <div id="commentArea" class="field" style="display:none">
+<label>متن کامنت</label>
 
-                    <label>متن کامنت</label>
+<textarea
+    id="comment"
+    placeholder="متن کامنت را وارد کنید..."></textarea>
 
-                    <textarea
-                        id="comment"
-                        placeholder="متن کامنت را وارد کنید..."></textarea>
+</div>
 
-                </div>
+<div class="field">
 
-                <div class="field">
+<label>توضیحات اضافی</label>
 
-                    <label>توضیحات اضافی</label>
+<textarea
+    id="description"
+    placeholder="در صورت نیاز توضیحات خود را بنویسید..."></textarea>
 
-                    <textarea
-                        id="description"
-                        placeholder="در صورت نیاز توضیحات خود را بنویسید..."></textarea>
+</div>
 
-                </div>
+<button
+    class="submit"
+    id="submitBtn"
+    type="submit">
+    ثبت سفارش رایگان
+</button>
 
-                <button
-                    class="submit"
-                    id="submitBtn"
-                    type="submit">
-                    ثبت سفارش رایگان
-                </button>
+<button
+    class="cancel"
+    type="button"
+    id="cancelBtn">
+    انصراف
+</button>
 
-                <button
-                    class="cancel"
-                    type="button"
-                    id="cancelBtn">
-                    انصراف
-                </button>
+</form>
 
-            </form>
+<div class="progress-box" id="progressBox">
 
-            <div class="progress-box" id="progressBox">
+<div class="progress-text">
+    <span id="progressText">در حال ثبت سفارش...</span>
+    <span id="progressPercent">0%</span>
+</div>
 
-                <div class="progress-text">
-                    <span id="progressText">در حال ثبت سفارش...</span>
-                    <span id="progressPercent">0%</span>
-                </div>
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
 
-                <div class="progress">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
+</div>
 
-            </div>
+<div class="success" id="successBox">
 
-            <div class="success" id="successBox">
+<div class="success-title">
+    ✅ سفارش با موفقیت ثبت شد
+</div>
 
-                <div class="success-title">
-                    ✅ سفارش با موفقیت ثبت شد
-                </div>
+<p>
+    درخواست شما ثبت شده و شماره سفارش برای پیگیری ایجاد شد.
+</p>
 
-                <p>
-                    درخواست شما ثبت شده و شماره سفارش برای پیگیری ایجاد شد.
-                </p>
+<span class="order-number" id="orderNumber"></span>
 
-                <span class="order-number" id="orderNumber"></span>
+</div>
 
-            </div>
+</section>
 
-        </section>
+<section class="orders" id="ordersSection">
 
-        <!-- orders -->
+<div class="section-head">
+    <h2>📋 سفارش‌های من</h2>
+    <span id="ordersCount">0 سفارش</span>
+</div>
 
-        <section class="orders" id="ordersSection">
+<div id="ordersList"></div>
 
-            <div class="section-head">
-                <h2>📋 سفارش‌های من</h2>
-                <span id="ordersCount">0 سفارش</span>
-            </div>
+</section>
 
-            <div id="ordersList"></div>
-
-        </section>
-
-    </main>
-
+</main>
 </div>
 
 <nav class="bottom">
 
-    <div class="bottom-inner">
+<div class="bottom-inner">
 
-        <button class="nav-btn active" data-nav="home">
-            <span>🏠</span>
-            خانه
-        </button>
+<button class="nav-btn active" data-nav="home">
+    <span>🏠</span>
+    خانه
+</button>
 
-        <button class="nav-btn" data-nav="orders">
-            <span>📋</span>
-            سفارش‌ها
-        </button>
+<button class="nav-btn" data-nav="orders">
+    <span>📋</span>
+    سفارش‌ها
+</button>
 
-        <button class="nav-btn" data-nav="info">
-            <span>ℹ️</span>
-            درباره
-        </button>
+<button class="nav-btn" data-nav="info">
+    <span>ℹ️</span>
+    درباره
+</button>
 
-    </div>
-
+</div>
 </nav>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/*
-====================================================
- BACKEND CONFIGURATION
-====================================================
 
-بعداً آدرس Backend رایگان را اینجا قرار می‌دهیم.
+/* ==================================================
+   اتصال مستقیم به Cloudflare Worker
+   ================================================== */
 
-مثال:
-const API_URL = "https://your-worker.workers.dev";
-
-فعلاً خالی است تا HTML بدون Backend هم اجرا شود.
-====================================================
-*/
-
-const API_URL = "";
+const API_URL =
+    "https://rubika-panel-api.kantermodmeno.workers.dev";
 
 
-/* ===============================
+/* ==================================================
    DATA
-================================ */
+   ================================================== */
 
 const services = {
-    reaction: "ری‌اکشن پیام",
-    views: "سین / بازدید پیام",
-    members: "عضو کانال",
-    poll: "نظرسنجی",
-    like: "لایک پست روبینو",
-    rubino_views: "بازدید پست روبینو",
-    followers: "فالوور روبینو",
-    comment: "کامنت روبینو"
+    reaction:"ری‌اکشن پیام",
+    views:"سین / بازدید پیام",
+    members:"عضو کانال",
+    poll:"نظرسنجی",
+    like:"لایک پست روبینو",
+    rubino_views:"بازدید پست روبینو",
+    followers:"فالوور روبینو",
+    comment:"کامنت روبینو"
 };
-
-const emojis = [
-    "❤️",
-    "👍",
-    "😂",
-    "😱",
-    "😍",
-    "😢",
-    "😎",
-    "🤔",
-    "🙏",
-    "🔥"
-];
 
 let selectedService = null;
 let selectedType = null;
@@ -1217,80 +1179,124 @@ let selectedEmoji = "❤️";
 let reactionMode = "single";
 
 
-/* ===============================
+/* ==================================================
    ELEMENTS
-================================ */
+   ================================================== */
 
-const orderBox = document.getElementById("orderBox");
-const orderTitle = document.getElementById("orderTitle");
-const orderForm = document.getElementById("orderForm");
-const target = document.getElementById("target");
-const amount = document.getElementById("amount");
-const description = document.getElementById("description");
-const comment = document.getElementById("comment");
+const orderBox =
+    document.getElementById("orderBox");
 
-const reactionArea = document.getElementById("reactionArea");
-const commentArea = document.getElementById("commentArea");
+const orderTitle =
+    document.getElementById("orderTitle");
 
-const progressBox = document.getElementById("progressBox");
-const progressBar = document.getElementById("progressBar");
-const progressPercent = document.getElementById("progressPercent");
-const progressText = document.getElementById("progressText");
+const orderForm =
+    document.getElementById("orderForm");
 
-const successBox = document.getElementById("successBox");
-const orderNumber = document.getElementById("orderNumber");
+const target =
+    document.getElementById("target");
 
-const submitBtn = document.getElementById("submitBtn");
-const toast = document.getElementById("toast");
+const amount =
+    document.getElementById("amount");
+
+const description =
+    document.getElementById("description");
+
+const comment =
+    document.getElementById("comment");
+
+const reactionArea =
+    document.getElementById("reactionArea");
+
+const commentArea =
+    document.getElementById("commentArea");
+
+const progressBox =
+    document.getElementById("progressBox");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const progressPercent =
+    document.getElementById("progressPercent");
+
+const progressText =
+    document.getElementById("progressText");
+
+const successBox =
+    document.getElementById("successBox");
+
+const orderNumber =
+    document.getElementById("orderNumber");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const toast =
+    document.getElementById("toast");
 
 
-/* ===============================
+/* ==================================================
    TOAST
-================================ */
+   ================================================== */
 
 function showToast(message){
 
     toast.textContent = message;
+
     toast.classList.add("show");
 
     clearTimeout(showToast.timer);
 
-    showToast.timer = setTimeout(()=>{
-        toast.classList.remove("show");
-    },2600);
+    showToast.timer =
+        setTimeout(()=>{
+            toast.classList.remove("show");
+        },2600);
 }
 
 
-/* ===============================
-   ORDER NUMBER
-================================ */
+/* ==================================================
+   LOCAL ORDER ID
+   ================================================== */
 
 function generateOrderId(){
 
-    const now = Date.now().toString(36).toUpperCase();
+    const now =
+        Date.now()
+        .toString(36)
+        .toUpperCase();
 
-    const random = Math.random()
+    const random =
+        Math.random()
         .toString(36)
         .substring(2,7)
         .toUpperCase();
 
-    return "RB-" + now.slice(-6) + "-" + random;
+    return "RB-" +
+        now.slice(-6) +
+        "-" +
+        random;
 }
 
 
-/* ===============================
+/* ==================================================
    OPEN ORDER
-================================ */
+   ================================================== */
 
-document.querySelectorAll(".order-btn").forEach(button => {
+document
+.querySelectorAll(".order-btn")
+.forEach(button => {
 
     button.addEventListener("click",()=>{
 
-        selectedService = button.dataset.service;
-        selectedType = button.dataset.type;
+        selectedService =
+            button.dataset.service;
+
+        selectedType =
+            button.dataset.type;
 
         orderTitle.textContent =
-            "ثبت سفارش: " + selectedService;
+            "ثبت سفارش: " +
+            selectedService;
 
         reactionArea.style.display =
             selectedType === "reaction"
@@ -1305,13 +1311,17 @@ document.querySelectorAll(".order-btn").forEach(button => {
         orderBox.classList.add("show");
 
         progressBox.classList.remove("show");
+
         successBox.classList.remove("show");
 
         orderForm.style.display = "block";
 
         target.value = "";
+
         amount.value = "10";
+
         description.value = "";
+
         comment.value = "";
 
         orderBox.scrollIntoView({
@@ -1324,9 +1334,9 @@ document.querySelectorAll(".order-btn").forEach(button => {
 });
 
 
-/* ===============================
+/* ==================================================
    CLOSE
-================================ */
+   ================================================== */
 
 function closeOrder(){
 
@@ -1335,68 +1345,100 @@ function closeOrder(){
     orderForm.reset();
 
     progressBox.classList.remove("show");
+
     successBox.classList.remove("show");
 
     selectedService = null;
+
     selectedType = null;
+
+    selectedEmoji = "❤️";
+
+    reactionMode = "single";
 }
 
 document
-    .getElementById("closeOrder")
-    .addEventListener("click",closeOrder);
+.getElementById("closeOrder")
+.addEventListener("click",closeOrder);
 
 document
-    .getElementById("cancelBtn")
-    .addEventListener("click",closeOrder);
+.getElementById("cancelBtn")
+.addEventListener("click",closeOrder);
 
 
-/* ===============================
+/* ==================================================
    TABS
-================================ */
+   ================================================== */
 
-document.querySelectorAll(".tab").forEach(tab => {
+document
+.querySelectorAll(".tab")
+.forEach(tab => {
 
     tab.addEventListener("click",()=>{
 
         document
-            .querySelectorAll(".tab")
-            .forEach(x=>x.classList.remove("active"));
+        .querySelectorAll(".tab")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
 
         tab.classList.add("active");
 
-        const type = tab.dataset.tab;
+        const type =
+            tab.dataset.tab;
 
-        document.getElementById("rubikaTab").style.display =
-            type === "rubika" ? "block" : "none";
+        document
+        .getElementById("rubikaTab")
+        .style.display =
+            type === "rubika"
+            ? "block"
+            : "none";
 
-        document.getElementById("rubinoTab").style.display =
-            type === "rubino" ? "block" : "none";
+        document
+        .getElementById("rubinoTab")
+        .style.display =
+            type === "rubino"
+            ? "block"
+            : "none";
 
     });
 
 });
 
 
-/* ===============================
+/* ==================================================
    REACTION MODE
-================================ */
+   ================================================== */
 
-document.querySelectorAll(".mode-btn").forEach(button => {
+document
+.querySelectorAll(".mode-btn")
+.forEach(button => {
 
     button.addEventListener("click",()=>{
 
         document
-            .querySelectorAll(".mode-btn")
-            .forEach(x=>x.classList.remove("active"));
+        .querySelectorAll(".mode-btn")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
 
         button.classList.add("active");
 
-        reactionMode = button.dataset.mode;
+        reactionMode =
+            button.dataset.mode;
 
         if(reactionMode === "random"){
-            showToast("حالت رندم فعال شد");
+
+            showToast(
+                "حالت رندم فعال شد"
+            );
+
         }else{
-            showToast("حالت انتخابی فعال شد");
+
+            showToast(
+                "حالت انتخابی فعال شد"
+            );
+
         }
 
     });
@@ -1404,70 +1446,103 @@ document.querySelectorAll(".mode-btn").forEach(button => {
 });
 
 
-/* ===============================
+/* ==================================================
    EMOJI
-================================ */
+   ================================================== */
 
-document.querySelectorAll(".emoji").forEach(button => {
+document
+.querySelectorAll(".emoji")
+.forEach(button => {
 
     button.addEventListener("click",()=>{
 
         document
-            .querySelectorAll(".emoji")
-            .forEach(x=>x.classList.remove("active"));
+        .querySelectorAll(".emoji")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
 
         button.classList.add("active");
 
-        selectedEmoji = button.dataset.emoji;
+        selectedEmoji =
+            button.dataset.emoji;
 
     });
 
 });
 
 document
-    .querySelector('.emoji[data-emoji="❤️"]')
-    .classList.add("active");
+.querySelector('.emoji[data-emoji="❤️"]')
+.classList.add("active");
 
 
-/* ===============================
+/* ==================================================
    VALIDATE
-================================ */
+   ================================================== */
 
 function validateOrder(){
 
-    const link = target.value.trim();
+    const link =
+        target.value.trim();
 
     if(!link){
-        showToast("لطفاً لینک موردنظر را وارد کنید");
+
+        showToast(
+            "لطفاً لینک موردنظر را وارد کنید"
+        );
+
         target.focus();
+
         return false;
     }
 
     if(!/^https?:\/\//i.test(link)){
-        showToast("لینک باید با http یا https شروع شود");
+
+        showToast(
+            "لینک باید با http یا https شروع شود"
+        );
+
         target.focus();
+
         return false;
     }
 
-    const count = Number(amount.value);
+    const count =
+        Number(amount.value);
 
     if(!count || count < 1){
-        showToast("تعداد سفارش معتبر نیست");
+
+        showToast(
+            "تعداد سفارش معتبر نیست"
+        );
+
         amount.focus();
+
         return false;
     }
 
     if(count > 10000){
-        showToast("حداکثر تعداد فعلی 10000 است");
+
+        showToast(
+            "حداکثر تعداد فعلی 10000 است"
+        );
+
         amount.focus();
+
         return false;
     }
 
-    if(selectedType === "comment" &&
-       !comment.value.trim()){
+    if(
+        selectedType === "comment" &&
+        !comment.value.trim()
+    ){
 
-        showToast("متن کامنت را وارد کنید");
+        showToast(
+            "متن کامنت را وارد کنید"
+        );
+
         comment.focus();
+
         return false;
     }
 
@@ -1475,16 +1550,18 @@ function validateOrder(){
 }
 
 
-/* ===============================
+/* ==================================================
    LOCAL STORAGE
-================================ */
+   ================================================== */
 
 function getOrders(){
 
     try{
 
         return JSON.parse(
-            localStorage.getItem("rubika_orders") || "[]"
+            localStorage.getItem(
+                "rubika_orders"
+            ) || "[]"
         );
 
     }catch{
@@ -1497,75 +1574,23 @@ function getOrders(){
 
 function saveOrder(order){
 
-    const orders = getOrders();
+    const orders =
+        getOrders();
 
     orders.unshift(order);
 
     localStorage.setItem(
         "rubika_orders",
-        JSON.stringify(orders.slice(0,100))
+        JSON.stringify(
+            orders.slice(0,100)
+        )
     );
 }
 
 
-/* ===============================
-   RENDER ORDERS
-================================ */
-
-function renderOrders(){
-
-    const list = document.getElementById("ordersList");
-    const count = document.getElementById("ordersCount");
-
-    const orders = getOrders();
-
-    count.textContent =
-        orders.length + " سفارش";
-
-    if(!orders.length){
-
-        list.innerHTML =
-            '<div class="empty">هنوز سفارشی ثبت نشده است.</div>';
-
-        return;
-    }
-
-    list.innerHTML = orders.map(order => {
-
-        return `
-            <div class="order-item">
-
-                <div class="order-item-top">
-
-                    <div>
-                        <strong>${escapeHtml(order.service)}</strong>
-                        <br>
-                        <small>${escapeHtml(order.id)}</small>
-                    </div>
-
-                    <span class="order-status">
-                        ${escapeHtml(order.status)}
-                    </span>
-
-                </div>
-
-                <small>
-                    تعداد: ${escapeHtml(String(order.amount))}
-                </small>
-
-                <br>
-
-                <small>
-                    ${escapeHtml(order.date)}
-                </small>
-
-            </div>
-        `;
-
-    }).join("");
-
-}
-
+/* ==================================================
+   ESCAPE HTML
+   ================================================== */
 
 function escapeHtml(value){
 
@@ -1575,66 +1600,184 @@ function escapeHtml(value){
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
-
 }
 
 
-/* ===============================
-   REAL BACKEND REQUEST
-================================ */
+/* ==================================================
+   RENDER ORDERS
+   ================================================== */
+
+function renderOrders(){
+
+    const list =
+        document.getElementById(
+            "ordersList"
+        );
+
+    const count =
+        document.getElementById(
+            "ordersCount"
+        );
+
+    const orders =
+        getOrders();
+
+    count.textContent =
+        orders.length +
+        " سفارش";
+
+    if(!orders.length){
+
+        list.innerHTML =
+            '<div class="empty">هنوز سفارشی ثبت نشده است.</div>';
+
+        return;
+    }
+
+    list.innerHTML =
+        orders.map(order => {
+
+            return `
+                <div class="order-item">
+
+                    <div class="order-item-top">
+
+                        <div>
+
+                            <strong>
+                                ${escapeHtml(order.service)}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                ${escapeHtml(order.id)}
+                            </small>
+
+                        </div>
+
+                        <span class="order-status">
+                            ${escapeHtml(order.status)}
+                        </span>
+
+                    </div>
+
+                    <small>
+                        تعداد:
+                        ${escapeHtml(String(order.amount))}
+                    </small>
+
+                    <br>
+
+                    <small>
+                        ${escapeHtml(order.date)}
+                    </small>
+
+                </div>
+            `;
+
+        }).join("");
+}
+
+
+/* ==================================================
+   ارسال سفارش به Worker
+   ================================================== */
 
 async function sendToBackend(order){
 
     /*
-      اگر API_URL خالی باشد،
-      فعلاً سفارش محلی ثبت می‌شود.
+      Worker فعلی:
+      POST /api/orders
 
-      وقتی Backend ساخته شد:
-      API_URL = "https://....workers.dev"
-
-      سپس همین تابع سفارش را به سرور می‌فرستد.
+      فیلدهای موردنیاز Worker:
+      service
+      link
+      count
+      comment
+      reaction
     */
 
-    if(!API_URL){
+    const payload = {
 
-        await new Promise(resolve =>
-            setTimeout(resolve,500)
-        );
+        service:
+            order.service,
 
-        return {
-            success:true,
-            local:true
-        };
-    }
+        link:
+            order.target,
 
-    const response = await fetch(
-        API_URL + "/api/order",
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(order)
-        }
-    );
+        count:
+            order.amount,
 
-    if(!response.ok){
+        comment:
+            order.comment || "",
+
+        reaction:
+            order.reaction || ""
+
+    };
+
+    let response;
+
+    try{
+
+        response =
+            await fetch(
+                API_URL +
+                "/api/orders",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(payload)
+                }
+            );
+
+    }catch(error){
 
         throw new Error(
-            "خطا در ارتباط با سرور"
+            "ارتباط با سرور برقرار نشد"
         );
-
     }
 
-    return await response.json();
+    let data = null;
+
+    try{
+
+        data =
+            await response.json();
+
+    }catch{
+
+        throw new Error(
+            "پاسخ سرور معتبر نیست"
+        );
+    }
+
+    if(!response.ok || !data.ok){
+
+        throw new Error(
+            data.error ||
+            "ثبت سفارش در سرور انجام نشد"
+        );
+    }
+
+    return data;
 }
 
 
-/* ===============================
+/* ==================================================
    SUBMIT
-================================ */
+   ================================================== */
 
-orderForm.addEventListener("submit",async event => {
+orderForm.addEventListener(
+"submit",
+async event => {
 
     event.preventDefault();
 
@@ -1644,25 +1787,32 @@ orderForm.addEventListener("submit",async event => {
 
     submitBtn.disabled = true;
 
-    orderForm.style.display = "none";
+    orderForm.style.display =
+        "none";
 
     progressBox.classList.add("show");
 
     successBox.classList.remove("show");
 
-    const id = generateOrderId();
+    const localId =
+        generateOrderId();
 
     const order = {
 
-        id:id,
+        id:
+            localId,
 
-        service:selectedService,
+        service:
+            selectedService,
 
-        type:selectedType,
+        type:
+            selectedType,
 
-        target:target.value.trim(),
+        target:
+            target.value.trim(),
 
-        amount:Number(amount.value),
+        amount:
+            Number(amount.value),
 
         reaction:
             selectedType === "reaction"
@@ -1686,14 +1836,16 @@ orderForm.addEventListener("submit",async event => {
         description:
             description.value.trim(),
 
-        status:"در حال بررسی",
+        status:
+            "در حال ارسال",
 
-        date:new Date().toLocaleString(
-            "fa-IR"
-        )
+        date:
+            new Date()
+            .toLocaleString("fa-IR")
 
     };
 
+    let timer = null;
 
     try{
 
@@ -1702,58 +1854,94 @@ orderForm.addEventListener("submit",async event => {
         progressText.textContent =
             "در حال ارسال سفارش...";
 
-        const timer = setInterval(()=>{
+        progressBar.style.width =
+            "0%";
 
-            percent += Math.floor(
-                Math.random() * 12
-            ) + 5;
+        progressPercent.textContent =
+            "0%";
 
-            if(percent > 90){
-                percent = 90;
-            }
+        timer =
+            setInterval(()=>{
 
-            progressBar.style.width =
-                percent + "%";
+                percent +=
+                    Math.floor(
+                        Math.random() * 10
+                    ) + 4;
 
-            progressPercent.textContent =
-                percent + "%";
+                if(percent > 90){
+                    percent = 90;
+                }
 
-        },180);
+                progressBar.style.width =
+                    percent + "%";
+
+                progressPercent.textContent =
+                    percent + "%";
+
+            },180);
 
 
         const result =
             await sendToBackend(order);
 
 
-        clearInterval(timer);
+        if(timer){
+            clearInterval(timer);
+        }
 
-        progressBar.style.width = "100%";
-        progressPercent.textContent = "100%";
+        progressBar.style.width =
+            "100%";
+
+        progressPercent.textContent =
+            "100%";
 
         progressText.textContent =
-            "سفارش ثبت شد";
+            "سفارش در سرور ثبت شد";
 
 
-        if(result && result.order_id){
+        /*
+          Worker پاسخ را به شکل:
+          result.order.id
+          برمی‌گرداند.
+        */
 
-            order.id = result.order_id;
+        if(
+            result &&
+            result.order &&
+            result.order.id
+        ){
 
+            order.id =
+                result.order.id;
         }
 
 
-        order.status =
-            result && result.status
-            ? result.status
-            : "ثبت شده";
+        if(
+            result &&
+            result.order &&
+            result.order.status
+        ){
+
+            order.status =
+                result.order.status;
+
+        }else{
+
+            order.status =
+                "pending";
+        }
 
 
         saveOrder(order);
 
         renderOrders();
 
+
         setTimeout(()=>{
 
-            successBox.classList.add("show");
+            successBox.classList.add(
+                "show"
+            );
 
             orderNumber.textContent =
                 order.id;
@@ -1762,18 +1950,27 @@ orderForm.addEventListener("submit",async event => {
                 "سفارش با موفقیت ثبت شد"
             );
 
-            submitBtn.disabled = false;
+            submitBtn.disabled =
+                false;
 
         },400);
 
 
     }catch(error){
 
-        progressBox.classList.remove("show");
+        if(timer){
+            clearInterval(timer);
+        }
 
-        orderForm.style.display = "block";
+        progressBox.classList.remove(
+            "show"
+        );
 
-        submitBtn.disabled = false;
+        orderForm.style.display =
+            "block";
+
+        submitBtn.disabled =
+            false;
 
         showToast(
             error.message ||
@@ -1785,69 +1982,84 @@ orderForm.addEventListener("submit",async event => {
 });
 
 
-/* ===============================
+/* ==================================================
    BOTTOM NAVIGATION
-================================ */
+   ================================================== */
 
-document.querySelectorAll(".nav-btn").forEach(button => {
+document
+.querySelectorAll(".nav-btn")
+.forEach(button => {
 
-    button.addEventListener("click",()=>{
+    button.addEventListener(
+        "click",
+        ()=>{
 
-        document
+            document
             .querySelectorAll(".nav-btn")
-            .forEach(x=>x.classList.remove("active"));
-
-        button.classList.add("active");
-
-        const nav = button.dataset.nav;
-
-        if(nav === "home"){
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-        }
-
-        if(nav === "orders"){
-
-            const section =
-                document.getElementById(
-                    "ordersSection"
-                );
-
-            section.classList.add("show");
-
-            renderOrders();
-
-            section.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
-
-        }
-
-        if(nav === "info"){
-
-            showToast(
-                "پنل خدمات روبیکا — تمام خدمات رایگان"
+            .forEach(x =>
+                x.classList.remove("active")
             );
 
-        }
+            button.classList.add(
+                "active"
+            );
 
-    });
+            const nav =
+                button.dataset.nav;
+
+
+            if(nav === "home"){
+
+                window.scrollTo({
+                    top:0,
+                    behavior:"smooth"
+                });
+
+            }
+
+
+            if(nav === "orders"){
+
+                const section =
+                    document.getElementById(
+                        "ordersSection"
+                    );
+
+                section.classList.add(
+                    "show"
+                );
+
+                renderOrders();
+
+                section.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+            }
+
+
+            if(nav === "info"){
+
+                showToast(
+                    "پنل خدمات روبیکا — تمام خدمات رایگان"
+                );
+
+            }
+
+        }
+    );
 
 });
 
 
-/* ===============================
+/* ==================================================
    INITIAL
-================================ */
+   ================================================== */
 
 renderOrders();
 
 </script>
 
 </body>
-  </html>
+    </html>

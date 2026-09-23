@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050a12">
-<meta name="description" content="پنل خدمات رایگان روبیکا">
+<meta name="theme-color" content="#050912">
 <title>پنل خدمات روبیکا</title>
 
 <style>
@@ -18,18 +17,15 @@
 :root{
     --bg:#050912;
     --bg2:#091321;
-    --glass:rgba(17,27,42,.72);
-    --glass2:rgba(24,37,57,.58);
+    --glass:rgba(17,27,42,.76);
     --border:rgba(255,255,255,.09);
-    --border2:rgba(255,255,255,.14);
+    --border2:rgba(255,255,255,.15);
     --text:#f4f7fb;
     --muted:#91a0b5;
-    --primary:#4da3ff;
-    --primary2:#756cff;
+    --blue:#4da3ff;
+    --blue2:#756cff;
     --green:#27d59a;
     --red:#ff5e78;
-    --orange:#ffb454;
-    --shadow:0 20px 55px rgba(0,0,0,.38);
 }
 
 html{
@@ -38,13 +34,13 @@ html{
 
 body{
     min-height:100vh;
+    overflow-x:hidden;
     background:
         radial-gradient(circle at 10% 5%,rgba(77,163,255,.12),transparent 30%),
         radial-gradient(circle at 90% 20%,rgba(117,108,255,.10),transparent 30%),
         linear-gradient(145deg,#040811,#091321 55%,#050912);
     color:var(--text);
     font-family:Tahoma,Arial,sans-serif;
-    overflow-x:hidden;
 }
 
 button,
@@ -63,49 +59,45 @@ a{
     text-decoration:none;
 }
 
-.bg-light{
+.bg{
     position:fixed;
     border-radius:50%;
     pointer-events:none;
-    filter:blur(1px);
-    opacity:.22;
+    opacity:.18;
     z-index:0;
+    filter:blur(2px);
     animation:float 9s ease-in-out infinite;
 }
 
-.bg-light.one{
+.bg.one{
     width:170px;
     height:170px;
-    background:#1877ff;
+    right:-80px;
     top:8%;
-    right:-90px;
+    background:#1877ff;
 }
 
-.bg-light.two{
+.bg.two{
     width:120px;
     height:120px;
-    background:#735cff;
+    left:-55px;
     bottom:20%;
-    left:-60px;
+    background:#735cff;
     animation-delay:2s;
 }
 
-.bg-light.three{
-    width:80px;
-    height:80px;
-    background:#16d6b2;
+.bg.three{
+    width:75px;
+    height:75px;
+    right:7%;
     top:48%;
-    right:5%;
+    background:#16d6b2;
     animation-delay:4s;
 }
 
 @keyframes float{
-    0%,100%{
-        transform:translateY(0) translateX(0)
-    }
-    50%{
-        transform:translateY(-25px) translateX(12px)
-    }
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-25px)}
 }
 
 .app{
@@ -114,7 +106,7 @@ a{
     margin:auto;
     position:relative;
     z-index:2;
-    padding-bottom:95px;
+    padding-bottom:100px;
 }
 
 .header{
@@ -136,12 +128,13 @@ a{
     gap:11px;
     border:1px solid var(--border);
     border-radius:23px;
-    background:linear-gradient(
-        135deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.025)
-    );
-    box-shadow:var(--shadow);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
+    box-shadow:0 20px 55px rgba(0,0,0,.38);
 }
 
 .logo{
@@ -152,16 +145,8 @@ a{
     place-items:center;
     flex-shrink:0;
     font-size:24px;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(77,163,255,.30),
-            rgba(117,108,255,.22)
-        );
+    background:rgba(77,163,255,.16);
     border:1px solid rgba(255,255,255,.12);
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.1),
-        0 10px 25px rgba(20,100,255,.15);
 }
 
 .header-title{
@@ -178,7 +163,7 @@ a{
 .header-title span{
     display:block;
     color:var(--muted);
-    font-size:11px;
+    font-size:10px;
 }
 
 .status{
@@ -191,7 +176,6 @@ a{
     border:1px solid rgba(39,213,154,.15);
     color:#7df2c6;
     font-size:10px;
-    white-space:nowrap;
 }
 
 .status-dot{
@@ -211,50 +195,34 @@ a{
         linear-gradient(
             135deg,
             rgba(77,163,255,.13),
-            rgba(117,108,255,.09) 45%,
+            rgba(117,108,255,.09),
             rgba(255,255,255,.025)
         );
-    box-shadow:var(--shadow);
-    position:relative;
-    overflow:hidden;
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    width:190px;
-    height:190px;
-    border-radius:50%;
-    background:rgba(77,163,255,.09);
-    top:-100px;
-    left:-70px;
+    box-shadow:0 20px 55px rgba(0,0,0,.30);
 }
 
 .hero h1{
-    position:relative;
     font-size:23px;
     margin-bottom:9px;
 }
 
 .hero p{
-    position:relative;
     color:var(--muted);
     font-size:12px;
     line-height:2;
 }
 
-.hero-badges{
-    position:relative;
+.badges{
     display:flex;
-    gap:7px;
     flex-wrap:wrap;
-    margin-top:16px;
+    gap:7px;
+    margin-top:15px;
 }
 
 .badge{
     padding:7px 10px;
     border-radius:12px;
-    background:rgba(255,255,255,.055);
+    background:rgba(255,255,255,.05);
     border:1px solid var(--border);
     color:#cbd7e8;
     font-size:10px;
@@ -262,6 +230,27 @@ a{
 
 .section{
     padding:0 14px;
+}
+
+.tabs{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.tab{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.035);
+    color:var(--muted);
+    border-radius:15px;
+    padding:12px 8px;
+    font-size:11px;
+}
+
+.tab.active{
+    color:#fff;
+    background:rgba(77,163,255,.14);
+    border-color:rgba(77,163,255,.3);
 }
 
 .section-head{
@@ -280,35 +269,6 @@ a{
     font-size:10px;
 }
 
-.tabs{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
-    margin-bottom:14px;
-}
-
-.tab{
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.035);
-    color:var(--muted);
-    border-radius:15px;
-    padding:12px 8px;
-    font-size:11px;
-    transition:.2s;
-}
-
-.tab.active{
-    color:#fff;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(77,163,255,.20),
-            rgba(117,108,255,.16)
-        );
-    border-color:rgba(77,163,255,.28);
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-}
-
 .services{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -316,9 +276,8 @@ a{
 }
 
 .service{
-    position:relative;
     padding:15px;
-    min-height:155px;
+    min-height:150px;
     border-radius:22px;
     border:1px solid var(--border);
     background:
@@ -328,13 +287,6 @@ a{
             rgba(255,255,255,.025)
         );
     box-shadow:0 12px 30px rgba(0,0,0,.20);
-    transition:.2s;
-    overflow:hidden;
-}
-
-.service:hover{
-    transform:translateY(-2px);
-    border-color:rgba(77,163,255,.25);
 }
 
 .service-icon{
@@ -358,31 +310,27 @@ a{
     font-size:10px;
     color:var(--muted);
     line-height:1.8;
-    min-height:36px;
 }
 
 .service-bottom{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-top:11px;
-    gap:7px;
+    justify-content:space-between;
+    margin-top:12px;
 }
 
 .free{
     color:#6cebb8;
     font-size:10px;
-    font-weight:bold;
 }
 
 .order-btn{
     border:0;
-    color:white;
+    color:#fff;
     border-radius:11px;
     padding:8px 12px;
     font-size:10px;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    box-shadow:0 7px 18px rgba(77,163,255,.18);
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
 }
 
 .order-box{
@@ -394,32 +342,20 @@ a{
     background:
         linear-gradient(
             145deg,
-            rgba(20,32,50,.92),
-            rgba(9,17,29,.88)
+            rgba(20,32,50,.94),
+            rgba(9,17,29,.90)
         );
-    box-shadow:var(--shadow);
-    animation:show .25s ease;
+    box-shadow:0 20px 55px rgba(0,0,0,.38);
 }
 
 .order-box.show{
     display:block;
 }
 
-@keyframes show{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
 .order-head{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     margin-bottom:16px;
 }
 
@@ -427,7 +363,7 @@ a{
     font-size:15px;
 }
 
-.close-order{
+.close{
     width:32px;
     height:32px;
     border:1px solid var(--border);
@@ -437,7 +373,7 @@ a{
 }
 
 .field{
-    margin-bottom:12px;
+    margin-bottom:13px;
 }
 
 .field label{
@@ -447,9 +383,7 @@ a{
     font-size:11px;
 }
 
-.field input,
-.field textarea,
-.field select{
+.field input{
     width:100%;
     border:1px solid var(--border2);
     outline:none;
@@ -458,55 +392,26 @@ a{
     color:#fff;
     padding:12px;
     font-size:12px;
-    transition:.2s;
 }
 
-.field textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
+.field input:focus{
     border-color:rgba(77,163,255,.55);
     box-shadow:0 0 0 3px rgba(77,163,255,.08);
 }
 
-.field select option{
-    background:#101a29;
-    color:#fff;
-}
-
-.emoji-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:7px;
-}
-
-.emoji{
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.04);
-    border-radius:12px;
-    padding:9px 4px;
-    font-size:19px;
-}
-
-.emoji.active{
-    border-color:var(--primary);
-    background:rgba(77,163,255,.15);
-    transform:scale(1.04);
+.limit{
+    color:#6cebb8;
+    font-size:10px;
 }
 
 .mode{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(3,1fr);
     gap:7px;
-    margin-bottom:10px;
 }
 
 .mode button{
-    padding:10px;
+    padding:10px 5px;
     border:1px solid var(--border);
     border-radius:12px;
     color:var(--muted);
@@ -515,14 +420,50 @@ a{
 }
 
 .mode button.active{
-    color:white;
+    color:#fff;
     border-color:rgba(77,163,255,.4);
     background:rgba(77,163,255,.12);
 }
 
+.all-info{
+    display:none;
+    margin-top:8px;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid rgba(77,163,255,.2);
+    background:rgba(77,163,255,.07);
+    color:#b9d9ff;
+    font-size:10px;
+    line-height:1.9;
+}
+
+.all-info.show{
+    display:block;
+}
+
+.emoji-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:7px;
+}
+
+.emoji{
+    min-height:43px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    border-radius:12px;
+    font-size:20px;
+    transition:.15s;
+}
+
+.emoji.active{
+    border-color:var(--blue);
+    background:rgba(77,163,255,.15);
+    transform:scale(1.04);
+}
+
 .submit{
     width:100%;
-    margin-top:7px;
     border:0;
     border-radius:15px;
     padding:14px;
@@ -530,12 +471,10 @@ a{
     font-weight:bold;
     font-size:12px;
     background:linear-gradient(135deg,#248cff,#756cff);
-    box-shadow:0 12px 30px rgba(50,120,255,.18);
 }
 
 .submit:disabled{
     opacity:.55;
-    cursor:not-allowed;
 }
 
 .cancel{
@@ -550,8 +489,8 @@ a{
 
 .progress-box{
     display:none;
-    margin-top:16px;
-    padding:16px;
+    margin-top:15px;
+    padding:15px;
     border-radius:18px;
     background:rgba(255,255,255,.035);
     border:1px solid var(--border);
@@ -564,9 +503,9 @@ a{
 .progress-text{
     display:flex;
     justify-content:space-between;
-    font-size:10px;
     color:var(--muted);
-    margin-bottom:9px;
+    font-size:10px;
+    margin-bottom:8px;
 }
 
 .progress{
@@ -577,20 +516,20 @@ a{
 }
 
 .progress-bar{
-    width:0%;
+    width:0;
     height:100%;
     border-radius:20px;
     background:linear-gradient(90deg,#248cff,#756cff,#27d59a);
-    transition:width .35s ease;
+    transition:.3s;
 }
 
 .success{
     display:none;
     margin-top:14px;
-    padding:17px;
+    padding:16px;
     border-radius:18px;
     background:rgba(39,213,154,.07);
-    border:1px solid rgba(39,213,154,.20);
+    border:1px solid rgba(39,213,154,.2);
 }
 
 .success.show{
@@ -601,7 +540,7 @@ a{
     color:#6cebb8;
     font-size:14px;
     font-weight:bold;
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 .success p{
@@ -615,7 +554,7 @@ a{
     margin-top:8px;
     padding:7px 10px;
     border-radius:10px;
-    background:rgba(0,0,0,.20);
+    background:rgba(0,0,0,.2);
     color:#fff;
     direction:ltr;
     font-size:11px;
@@ -642,7 +581,7 @@ a{
     display:flex;
     justify-content:space-between;
     gap:10px;
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 .order-item strong{
@@ -655,12 +594,12 @@ a{
 }
 
 .order-status{
-    display:inline-block;
     padding:5px 8px;
     border-radius:9px;
     font-size:9px;
     color:#6cebb8;
     background:rgba(39,213,154,.08);
+    white-space:nowrap;
 }
 
 .empty{
@@ -696,10 +635,9 @@ a{
     background:rgba(12,21,34,.84);
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
-    box-shadow:var(--shadow);
 }
 
-.nav-btn{
+.nav{
     border:0;
     border-radius:15px;
     background:transparent;
@@ -708,13 +646,13 @@ a{
     font-size:9px;
 }
 
-.nav-btn span{
+.nav span{
     display:block;
     font-size:19px;
     margin-bottom:4px;
 }
 
-.nav-btn.active{
+.nav.active{
     color:#fff;
     background:rgba(77,163,255,.11);
 }
@@ -729,7 +667,7 @@ a{
     max-width:470px;
     padding:13px 15px;
     border-radius:15px;
-    background:rgba(15,25,40,.94);
+    background:rgba(15,25,40,.95);
     border:1px solid var(--border2);
     color:#fff;
     font-size:11px;
@@ -737,12 +675,94 @@ a{
     opacity:0;
     pointer-events:none;
     transition:.25s;
-    backdrop-filter:blur(15px);
 }
 
 .toast.show{
     opacity:1;
     transform:translate(-50%,0);
+}
+
+.about-page{
+    display:none;
+    min-height:calc(100vh - 120px);
+    padding:30px 14px 120px;
+}
+
+.about-page.show{
+    display:block;
+}
+
+.about-card{
+    padding:28px 20px;
+    border-radius:28px;
+    border:1px solid var(--border);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+    box-shadow:0 20px 55px rgba(0,0,0,.35);
+    text-align:center;
+}
+
+.about-icon{
+    width:75px;
+    height:75px;
+    margin:0 auto 18px;
+    display:grid;
+    place-items:center;
+    border-radius:23px;
+    font-size:34px;
+    background:rgba(77,163,255,.1);
+    border:1px solid rgba(77,163,255,.2);
+}
+
+.about-card h1{
+    font-size:21px;
+    margin-bottom:12px;
+}
+
+.about-card p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:2;
+}
+
+.creator{
+    margin-top:22px;
+    padding:17px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+}
+
+.creator-title{
+    color:var(--muted);
+    font-size:10px;
+    margin-bottom:8px;
+}
+
+.creator a{
+    color:#71b9ff;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.back-home{
+    width:100%;
+    margin-top:14px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    color:#fff;
+    background:rgba(255,255,255,.04);
+}
+
+@media(max-width:390px){
+    .emoji-grid{
+        grid-template-columns:repeat(5,1fr);
+    }
 }
 
 @media(max-width:360px){
@@ -754,8 +774,8 @@ a{
         display:none;
     }
 
-    .hero h1{
-        font-size:20px;
+    .mode{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -763,1301 +783,1634 @@ a{
 
 <body>
 
-<div class="bg-light one"></div>
-<div class="bg-light two"></div>
-<div class="bg-light three"></div>
+<div class="bg one"></div>
+<div class="bg two"></div>
+<div class="bg three"></div>
 
 <div class="app">
 
 <header class="header">
     <div class="header-inner">
+
         <div class="logo">🛒</div>
 
         <div class="header-title">
             <strong>پنل خدمات روبیکا</strong>
-            <span>سفارش خدمات به‌صورت کاملاً رایگان</span>
+            <span>ثبت سفارش خدمات روبیکا</span>
         </div>
 
         <div class="status">
             <span class="status-dot"></span>
             آنلاین
         </div>
+
     </div>
 </header>
 
+
+<!-- صفحه اصلی -->
+
+<main id="homePage">
+
 <section class="hero">
+
     <h1>خدمات رایگان روبیکا</h1>
 
     <p>
         خدمات موردنظر خودت را انتخاب کن،
-        اطلاعات سفارش را وارد کن و درخواستت را ثبت کن.
+        لینک را وارد کن و سفارش را ثبت کن.
     </p>
 
-    <div class="hero-badges">
-        <span class="badge">🆓 بدون هزینه</span>
-        <span class="badge">⚡ ثبت سریع</span>
-        <span class="badge">🔐 امن</span>
+    <div class="badges">
+        <span class="badge">🆓 رایگان</span>
+        <span class="badge">⚡ سریع</span>
         <span class="badge">📱 موبایل‌پسند</span>
+        <span class="badge">🔐 امن</span>
     </div>
+
 </section>
 
-<main class="section">
+
+<section class="section">
 
 <div class="tabs">
 
-<button class="tab active" data-tab="rubika">
-    💬 خدمات روبیکا
-</button>
+    <button class="tab active" data-tab="rubika">
+        💬 خدمات روبیکا
+    </button>
 
-<button class="tab" data-tab="rubino">
-    📸 خدمات روبینو
-</button>
+    <button class="tab" data-tab="rubino">
+        📸 خدمات روبینو
+    </button>
 
 </div>
+
 
 <section id="rubikaTab">
 
 <div class="section-head">
     <h2>خدمات روبیکا</h2>
-    <span>همه رایگان</span>
+    <span>رایگان</span>
 </div>
 
 <div class="services">
 
 <article class="service">
+
     <div class="service-icon">❤️</div>
+
     <h3>ری‌اکشن پیام</h3>
-    <p>ثبت سفارش ریکشن روی پیام روبیکا</p>
+
+    <p>
+        ثبت ریکشن روی پیام روبیکا
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="ری‌اکشن پیام"
-                data-type="reaction">
+        <button
+            class="order-btn"
+            data-service="ری‌اکشن پیام"
+            data-type="reaction">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">👁️</div>
+
     <h3>سین / بازدید پیام</h3>
-    <p>ثبت سفارش بازدید برای پیام یا پست</p>
+
+    <p>
+        ثبت درخواست بازدید پیام
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="سین / بازدید پیام"
-                data-type="views">
+        <button
+            class="order-btn"
+            data-service="سین / بازدید پیام"
+            data-type="views">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">👥</div>
+
     <h3>عضو کانال</h3>
-    <p>ثبت درخواست افزایش عضو کانال</p>
+
+    <p>
+        ثبت درخواست عضو کانال
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="عضو کانال"
-                data-type="members">
+        <button
+            class="order-btn"
+            data-service="عضو کانال"
+            data-type="members">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">📊</div>
+
     <h3>نظرسنجی</h3>
-    <p>ثبت درخواست برای خدمات نظرسنجی</p>
+
+    <p>
+        ثبت خدمات نظرسنجی
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="نظرسنجی"
-                data-type="poll">
+        <button
+            class="order-btn"
+            data-service="نظرسنجی"
+            data-type="poll">
             سفارش
         </button>
+
     </div>
+
 </article>
 
 </div>
+
 </section>
+
 
 <section id="rubinoTab" style="display:none">
 
 <div class="section-head">
     <h2>خدمات روبینو</h2>
-    <span>همه رایگان</span>
+    <span>رایگان</span>
 </div>
 
 <div class="services">
 
 <article class="service">
+
     <div class="service-icon">👍</div>
+
     <h3>لایک پست</h3>
-    <p>ثبت سفارش لایک برای پست روبینو</p>
+
+    <p>
+        ثبت لایک برای پست روبینو
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="لایک پست روبینو"
-                data-type="like">
+        <button
+            class="order-btn"
+            data-service="لایک پست روبینو"
+            data-type="like">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">👁️</div>
+
     <h3>بازدید پست</h3>
-    <p>ثبت سفارش بازدید برای پست روبینو</p>
+
+    <p>
+        ثبت بازدید پست روبینو
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="بازدید پست روبینو"
-                data-type="rubino_views">
+        <button
+            class="order-btn"
+            data-service="بازدید پست روبینو"
+            data-type="views">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">👤</div>
+
     <h3>فالوور</h3>
-    <p>ثبت درخواست دنبال‌کننده برای پروفایل</p>
+
+    <p>
+        ثبت درخواست فالوور
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="فالوور روبینو"
-                data-type="followers">
+        <button
+            class="order-btn"
+            data-service="فالوور روبینو"
+            data-type="followers">
             سفارش
         </button>
+
     </div>
+
 </article>
 
+
 <article class="service">
+
     <div class="service-icon">💬</div>
+
     <h3>کامنت</h3>
-    <p>ثبت درخواست کامنت برای پست</p>
+
+    <p>
+        ثبت درخواست کامنت
+    </p>
 
     <div class="service-bottom">
+
         <span class="free">رایگان</span>
 
-        <button class="order-btn"
-                data-service="کامنت روبینو"
-                data-type="comment">
+        <button
+            class="order-btn"
+            data-service="کامنت روبینو"
+            data-type="comment">
             سفارش
         </button>
+
     </div>
+
 </article>
 
 </div>
+
 </section>
 
-<section id="orderBox" class="order-box">
+
+<!-- سفارش -->
+
+<section class="order-box" id="orderBox">
 
 <div class="order-head">
-    <strong id="orderTitle">ثبت سفارش</strong>
-    <button class="close-order" id="closeOrder">×</button>
+
+<strong id="orderTitle">
+    ثبت سفارش
+</strong>
+
+<button class="close" id="closeOrder">
+    ✕
+</button>
+
 </div>
 
-<form id="orderForm">
 
 <div class="field">
-    <label>لینک پیام / پست / کانال / پروفایل</label>
 
-    <input
-        id="target"
-        type="url"
-        dir="ltr"
-        placeholder="https://rubika.ir/..."
-        autocomplete="off"
-        required>
+<label>
+    لینک پیام / پست / کانال
+</label>
+
+<input
+    id="targetInput"
+    type="url"
+    inputmode="url"
+    placeholder="https://rubika.ir/..."
+    autocomplete="off">
+
 </div>
+
 
 <div class="field">
-    <label>تعداد موردنظر</label>
 
-    <input
-        id="amount"
-        type="number"
-        min="1"
-        max="10000"
-        value="10"
-        required>
+<label>
+    تعداد
+    <span class="limit">
+        حداکثر هر مرحله ۵۰۰
+    </span>
+</label>
+
+<input
+    id="amountInput"
+    type="number"
+    min="1"
+    max="5000"
+    value="10"
+    inputmode="numeric">
+
 </div>
+
+
+<!-- ریکشن -->
 
 <div id="reactionArea" style="display:none">
 
 <div class="field">
-    <label>نوع انتخاب ریکشن</label>
 
-    <div class="mode">
+<label>
+    نوع ریکشن
+</label>
 
-        <button
-            type="button"
-            class="mode-btn active"
-            data-mode="single">
-            ✨ تک انتخابی
-        </button>
-
-        <button
-            type="button"
-            class="mode-btn"
-            data-mode="random">
-            🎲 رندم
-        </button>
-
-    </div>
-</div>
-
-<div class="field">
-
-<label>انتخاب ریکشن</label>
-
-<div class="emoji-grid">
-
-<button type="button" class="emoji" data-emoji="❤️">❤️</button>
-<button type="button" class="emoji" data-emoji="👍">👍</button>
-<button type="button" class="emoji" data-emoji="😂">😂</button>
-<button type="button" class="emoji" data-emoji="😱">😱</button>
-<button type="button" class="emoji" data-emoji="😍">😍</button>
-<button type="button" class="emoji" data-emoji="😢">😢</button>
-<button type="button" class="emoji" data-emoji="😎">😎</button>
-<button type="button" class="emoji" data-emoji="🤔">🤔</button>
-<button type="button" class="emoji" data-emoji="🙏">🙏</button>
-<button type="button" class="emoji" data-emoji="🔥">🔥</button>
-
-</div>
-</div>
-</div>
-
-<div id="commentArea" class="field" style="display:none">
-
-<label>متن کامنت</label>
-
-<textarea
-    id="comment"
-    placeholder="متن کامنت را وارد کنید..."></textarea>
-
-</div>
-
-<div class="field">
-
-<label>توضیحات اضافی</label>
-
-<textarea
-    id="description"
-    placeholder="در صورت نیاز توضیحات خود را بنویسید..."></textarea>
-
-</div>
+<div class="mode">
 
 <button
-    class="submit"
-    id="submitBtn"
-    type="submit">
-    ثبت سفارش رایگان
+    type="button"
+    class="mode-btn active"
+    data-mode="single">
+    ✨ تک انتخابی
 </button>
 
 <button
-    class="cancel"
     type="button"
-    id="cancelBtn">
+    class="mode-btn"
+    data-mode="random">
+    🎲 رندم
+</button>
+
+<button
+    type="button"
+    class="mode-btn"
+    data-mode="all">
+    🌈 همه ریکشن‌ها
+</button>
+
+</div>
+
+<div class="all-info" id="allInfo">
+    🌈 همه ریکشن‌ها انتخاب شده است.
+    سفارش در مراحل حداکثر ۵۰۰تایی ارسال می‌شود.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    ریکشن موردنظر
+</label>
+
+<div class="emoji-grid" id="emojiGrid">
+
+<button class="emoji active" data-emoji="❤️">❤️</button>
+<button class="emoji" data-emoji="🧡">🧡</button>
+<button class="emoji" data-emoji="💛">💛</button>
+<button class="emoji" data-emoji="💚">💚</button>
+<button class="emoji" data-emoji="💙">💙</button>
+<button class="emoji" data-emoji="💜">💜</button>
+<button class="emoji" data-emoji="🖤">🖤</button>
+<button class="emoji" data-emoji="🤍">🤍</button>
+<button class="emoji" data-emoji="🤎">🤎</button>
+<button class="emoji" data-emoji="❤️‍🔥">❤️‍🔥</button>
+<button class="emoji" data-emoji="💕">💕</button>
+<button class="emoji" data-emoji="💖">💖</button>
+<button class="emoji" data-emoji="💗">💗</button>
+<button class="emoji" data-emoji="💓">💓</button>
+<button class="emoji" data-emoji="💞">💞</button>
+<button class="emoji" data-emoji="💘">💘</button>
+<button class="emoji" data-emoji="💝">💝</button>
+<button class="emoji" data-emoji="💟">💟</button>
+<button class="emoji" data-emoji="👍">👍</button>
+<button class="emoji" data-emoji="👎">👎</button>
+<button class="emoji" data-emoji="👏">👏</button>
+<button class="emoji" data-emoji="🙌">🙌</button>
+<button class="emoji" data-emoji="👌">👌</button>
+<button class="emoji" data-emoji="🤌">🤌</button>
+<button class="emoji" data-emoji="🤏">🤏</button>
+<button class="emoji" data-emoji="✌️">✌️</button>
+<button class="emoji" data-emoji="🤞">🤞</button>
+<button class="emoji" data-emoji="🤟">🤟</button>
+<button class="emoji" data-emoji="🤘">🤘</button>
+<button class="emoji" data-emoji="🤙">🤙</button>
+<button class="emoji" data-emoji="👊">👊</button>
+<button class="emoji" data-emoji="✊">✊</button>
+<button class="emoji" data-emoji="🙏">🙏</button>
+<button class="emoji" data-emoji="❤️">❤️</button>
+<button class="emoji" data-emoji="😂">😂</button>
+<button class="emoji" data-emoji="🤣">🤣</button>
+<button class="emoji" data-emoji="😊">😊</button>
+<button class="emoji" data-emoji="😃">😃</button>
+<button class="emoji" data-emoji="😄">😄</button>
+<button class="emoji" data-emoji="😁">😁</button>
+<button class="emoji" data-emoji="😆">😆</button>
+<button class="emoji" data-emoji="😅">😅</button>
+<button class="emoji" data-emoji="🙂">🙂</button>
+<button class="emoji" data-emoji="🙃">🙃</button>
+<button class="emoji" data-emoji="😉">😉</button>
+<button class="emoji" data-emoji="😌">😌</button>
+<button class="emoji" data-emoji="😍">😍</button>
+<button class="emoji" data-emoji="🥰">🥰</button>
+<button class="emoji" data-emoji="😘">😘</button>
+<button class="emoji" data-emoji="😗">😗</button>
+<button class="emoji" data-emoji="😙">😙</button>
+<button class="emoji" data-emoji="😚">😚</button>
+<button class="emoji" data-emoji="😋">😋</button>
+<button class="emoji" data-emoji="😛">😛</button>
+<button class="emoji" data-emoji="😝">😝</button>
+<button class="emoji" data-emoji="😜">😜</button>
+<button class="emoji" data-emoji="🤪">🤪</button>
+<button class="emoji" data-emoji="🤨">🤨</button>
+<button class="emoji" data-emoji="🧐">🧐</button>
+<button class="emoji" data-emoji="🤓">🤓</button>
+<button class="emoji" data-emoji="😎">😎</button>
+<button class="emoji" data-emoji="🤩">🤩</button>
+<button class="emoji" data-emoji="🥳">🥳</button>
+<button class="emoji" data-emoji="😏">😏</button>
+<button class="emoji" data-emoji="😒">😒</button>
+<button class="emoji" data-emoji="😞">😞</button>
+<button class="emoji" data-emoji="😔">😔</button>
+<button class="emoji" data-emoji="😟">😟</button>
+<button class="emoji" data-emoji="😕">😕</button>
+<button class="emoji" data-emoji="🙁">🙁</button>
+<button class="emoji" data-emoji="☹️">☹️</button>
+<button class="emoji" data-emoji="😣">😣</button>
+<button class="emoji" data-emoji="😖">😖</button>
+<button class="emoji" data-emoji="😫">😫</button>
+<button class="emoji" data-emoji="😩">😩</button>
+<button class="emoji" data-emoji="🥺">🥺</button>
+<button class="emoji" data-emoji="😢">😢</button>
+<button class="emoji" data-emoji="😭">😭</button>
+<button class="emoji" data-emoji="😤">😤</button>
+<button class="emoji" data-emoji="😠">😠</button>
+<button class="emoji" data-emoji="😡">😡</button>
+<button class="emoji" data-emoji="🤬">🤬</button>
+<button class="emoji" data-emoji="🤯">🤯</button>
+<button class="emoji" data-emoji="😳">😳</button>
+<button class="emoji" data-emoji="🥵">🥵</button>
+<button class="emoji" data-emoji="🥶">🥶</button>
+<button class="emoji" data-emoji="😱">😱</button>
+<button class="emoji" data-emoji="😨">😨</button>
+<button class="emoji" data-emoji="😰">😰</button>
+<button class="emoji" data-emoji="😥">😥</button>
+<button class="emoji" data-emoji="😓">😓</button>
+<button class="emoji" data-emoji="🤗">🤗</button>
+<button class="emoji" data-emoji="🤔">🤔</button>
+<button class="emoji" data-emoji="🤭">🤭</button>
+<button class="emoji" data-emoji="🤫">🤫</button>
+<button class="emoji" data-emoji="🤐">🤐</button>
+<button class="emoji" data-emoji="🤥">🤥</button>
+<button class="emoji" data-emoji="😶">😶</button>
+<button class="emoji" data-emoji="😐">😐</button>
+<button class="emoji" data-emoji="😑">😑</button>
+<button class="emoji" data-emoji="😬">😬</button>
+<button class="emoji" data-emoji="🙄">🙄</button>
+<button class="emoji" data-emoji="😮">😮</button>
+<button class="emoji" data-emoji="😯">😯</button>
+<button class="emoji" data-emoji="😲">😲</button>
+<button class="emoji" data-emoji="🥱">🥱</button>
+<button class="emoji" data-emoji="😴">😴</button>
+<button class="emoji" data-emoji="🤤">🤤</button>
+<button class="emoji" data-emoji="😪">😪</button>
+<button class="emoji" data-emoji="🤢">🤢</button>
+<button class="emoji" data-emoji="🤮">🤮</button>
+<button class="emoji" data-emoji="🤧">🤧</button>
+<button class="emoji" data-emoji="😷">😷</button>
+<button class="emoji" data-emoji="🤒">🤒</button>
+<button class="emoji" data-emoji="🤕">🤕</button>
+<button class="emoji" data-emoji="💩">💩</button>
+<button class="emoji" data-emoji="👻">👻</button>
+<button class="emoji" data-emoji="💀">💀</button>
+<button class="emoji" data-emoji="☠️">☠️</button>
+<button class="emoji" data-emoji="👽">👽</button>
+<button class="emoji" data-emoji="🤖">🤖</button>
+<button class="emoji" data-emoji="🎉">🎉</button>
+<button class="emoji" data-emoji="🔥">🔥</button>
+<button class="emoji" data-emoji="✨">✨</button>
+<button class="emoji" data-emoji="⭐">⭐</button>
+<button class="emoji" data-emoji="💯">💯</button>
+<button class="emoji" data-emoji="💥">💥</button>
+<button class="emoji" data-emoji="🎯">🎯</button>
+<button class="emoji" data-emoji="🚀">🚀</button>
+<button class="emoji" data-emoji="❤️‍🩹">❤️‍🩹</button>
+<button class="emoji" data-emoji="🥹">🥹</button>
+<button class="emoji" data-emoji="🫶">🫶</button>
+<button class="emoji" data-emoji="🫡">🫡</button>
+<button class="emoji" data-emoji="🫠">🫠</button>
+<button class="emoji" data-emoji="🫣">🫣</button>
+<button class="emoji" data-emoji="🫢">🫢</button>
+<button class="emoji" data-emoji="🫤">🫤</button>
+<button class="emoji" data-emoji="🫥">🫥</button>
+<button class="emoji" data-emoji="🫨">🫨</button>
+<button class="emoji" data-emoji="🩷">🩷</button>
+<button class="emoji" data-emoji="🩵">🩵</button>
+<button class="emoji" data-emoji="🩶">🩶</button>
+<button class="emoji" data-emoji="❤️‍🔥">❤️‍🔥</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button class="submit" id="submitOrder">
+    🚀 ثبت سفارش
+</button>
+
+<button class="cancel" id="cancelOrder">
     انصراف
 </button>
 
-</form>
 
 <div class="progress-box" id="progressBox">
 
 <div class="progress-text">
-    <span id="progressText">در حال ثبت سفارش...</span>
-    <span id="progressPercent">0%</span>
+
+<span id="progressText">
+    آماده‌سازی سفارش...
+</span>
+
+<span id="progressPercent">
+    0%
+</span>
+
 </div>
 
 <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div>
 </div>
 
 </div>
+
 
 <div class="success" id="successBox">
 
 <div class="success-title">
-    ✅ سفارش با موفقیت ثبت شد
+    ✅ سفارش ثبت شد
 </div>
 
-<p>
-    درخواست شما ثبت شده و شماره سفارش برای پیگیری ایجاد شد.
+<p id="successMessage">
+    سفارش شما به سرور ارسال شد.
 </p>
 
-<span class="order-number" id="orderNumber"></span>
+<span class="order-number" id="successOrderNumber">
+    -
+</span>
 
 </div>
 
 </section>
 
+
 <section class="orders" id="ordersSection">
 
 <div class="section-head">
-    <h2>📋 سفارش‌های من</h2>
-    <span id="ordersCount">0 سفارش</span>
+
+<h2>
+    سفارش‌های من
+</h2>
+
+<span>
+    تاریخچه
+</span>
+
 </div>
 
 <div id="ordersList"></div>
 
 </section>
 
+</section>
+
 </main>
+
+
+<!-- صفحه درباره -->
+
+<section class="about-page" id="aboutPage">
+
+<div class="about-card">
+
+<div class="about-icon">
+    🛒
 </div>
+
+<h1>
+    درباره پنل
+</h1>
+
+<p>
+    پنل خدمات روبیکا برای ثبت و مدیریت
+    سفارش‌های خدمات روبیکا ساخته شده است.
+</p>
+
+<div class="creator">
+
+<div class="creator-title">
+    سازنده
+</div>
+
+<a
+    href="https://rubika.ir/Abolfazl_Kazemi_SFG"
+    target="_blank"
+    rel="noopener noreferrer">
+
+    ابوالفضل کاظمی
+
+</a>
+
+</div>
+
+<button
+    class="back-home"
+    id="backHome">
+
+    ← بازگشت به پنل
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
 
 <nav class="bottom">
 
 <div class="bottom-inner">
 
-<button class="nav-btn active" data-nav="home">
-    <span>🏠</span>
-    خانه
+<button class="nav active" data-nav="home">
+
+<span>⌂</span>
+خانه
+
 </button>
 
-<button class="nav-btn" data-nav="orders">
-    <span>📋</span>
-    سفارش‌ها
+<button class="nav" data-nav="orders">
+
+<span>📋</span>
+سفارش‌ها
+
 </button>
 
-<button class="nav-btn" data-nav="info">
-    <span>ℹ️</span>
-    درباره
+<button class="nav" data-nav="about">
+
+<span>ⓘ</span>
+درباره
+
 </button>
 
 </div>
+
 </nav>
+
 
 <div class="toast" id="toast"></div>
 
+
 <script>
 
-/* ==================================================
-   اتصال مستقیم به Cloudflare Worker
-   ================================================== */
-
 const API_URL =
-    "https://rubika-panel-api.kantermodmeno.workers.dev";
+"https://rubika-panel-api.kantermodmeno.workers.dev";
 
+const MAX_STAGE = 500;
 
-/* ==================================================
-   DATA
-   ================================================== */
-
-const services = {
-    reaction:"ری‌اکشن پیام",
-    views:"سین / بازدید پیام",
-    members:"عضو کانال",
-    poll:"نظرسنجی",
-    like:"لایک پست روبینو",
-    rubino_views:"بازدید پست روبینو",
-    followers:"فالوور روبینو",
-    comment:"کامنت روبینو"
-};
-
-let selectedService = null;
-let selectedType = null;
+let selectedService = "";
+let selectedType = "";
 let selectedEmoji = "❤️";
 let reactionMode = "single";
 
+let localOrders =
+JSON.parse(
+localStorage.getItem("counterModOrders") || "[]"
+);
 
-/* ==================================================
-   ELEMENTS
-   ================================================== */
+const homePage =
+document.getElementById("homePage");
+
+const aboutPage =
+document.getElementById("aboutPage");
 
 const orderBox =
-    document.getElementById("orderBox");
+document.getElementById("orderBox");
 
-const orderTitle =
-    document.getElementById("orderTitle");
+const ordersSection =
+document.getElementById("ordersSection");
 
-const orderForm =
-    document.getElementById("orderForm");
+const targetInput =
+document.getElementById("targetInput");
 
-const target =
-    document.getElementById("target");
-
-const amount =
-    document.getElementById("amount");
-
-const description =
-    document.getElementById("description");
-
-const comment =
-    document.getElementById("comment");
+const amountInput =
+document.getElementById("amountInput");
 
 const reactionArea =
-    document.getElementById("reactionArea");
+document.getElementById("reactionArea");
 
-const commentArea =
-    document.getElementById("commentArea");
+const submitOrder =
+document.getElementById("submitOrder");
 
 const progressBox =
-    document.getElementById("progressBox");
+document.getElementById("progressBox");
 
 const progressBar =
-    document.getElementById("progressBar");
-
-const progressPercent =
-    document.getElementById("progressPercent");
+document.getElementById("progressBar");
 
 const progressText =
-    document.getElementById("progressText");
+document.getElementById("progressText");
+
+const progressPercent =
+document.getElementById("progressPercent");
 
 const successBox =
-    document.getElementById("successBox");
+document.getElementById("successBox");
 
-const orderNumber =
-    document.getElementById("orderNumber");
+const successOrderNumber =
+document.getElementById("successOrderNumber");
 
-const submitBtn =
-    document.getElementById("submitBtn");
+const successMessage =
+document.getElementById("successMessage");
 
-const toast =
-    document.getElementById("toast");
+const allInfo =
+document.getElementById("allInfo");
 
+let toastTimer;
 
-/* ==================================================
-   TOAST
-   ================================================== */
+function toast(message){
 
-function showToast(message){
+const box =
+document.getElementById("toast");
 
-    toast.textContent = message;
+box.textContent = message;
 
-    toast.classList.add("show");
+box.classList.add("show");
 
-    clearTimeout(showToast.timer);
+clearTimeout(toastTimer);
 
-    showToast.timer =
-        setTimeout(()=>{
-            toast.classList.remove("show");
-        },2600);
+toastTimer =
+setTimeout(
+()=>{
+box.classList.remove("show");
+},
+3000
+);
+
 }
 
 
-/* ==================================================
-   LOCAL ORDER ID
-   ================================================== */
+/* تب‌ها */
 
-function generateOrderId(){
+document.querySelectorAll(".tab")
+.forEach(tab=>{
 
-    const now =
-        Date.now()
-        .toString(36)
-        .toUpperCase();
+tab.addEventListener("click",()=>{
 
-    const random =
-        Math.random()
-        .toString(36)
-        .substring(2,7)
-        .toUpperCase();
+document.querySelectorAll(".tab")
+.forEach(x=>x.classList.remove("active"));
 
-    return "RB-" +
-        now.slice(-6) +
-        "-" +
-        random;
-}
+tab.classList.add("active");
 
+const type =
+tab.dataset.tab;
 
-/* ==================================================
-   OPEN ORDER
-   ================================================== */
+document.getElementById("rubikaTab")
+.style.display =
+type==="rubika" ? "block" : "none";
 
-document
-.querySelectorAll(".order-btn")
-.forEach(button => {
+document.getElementById("rubinoTab")
+.style.display =
+type==="rubino" ? "block" : "none";
 
-    button.addEventListener("click",()=>{
-
-        selectedService =
-            button.dataset.service;
-
-        selectedType =
-            button.dataset.type;
-
-        orderTitle.textContent =
-            "ثبت سفارش: " +
-            selectedService;
-
-        reactionArea.style.display =
-            selectedType === "reaction"
-            ? "block"
-            : "none";
-
-        commentArea.style.display =
-            selectedType === "comment"
-            ? "block"
-            : "none";
-
-        orderBox.classList.add("show");
-
-        progressBox.classList.remove("show");
-
-        successBox.classList.remove("show");
-
-        orderForm.style.display = "block";
-
-        target.value = "";
-
-        amount.value = "10";
-
-        description.value = "";
-
-        comment.value = "";
-
-        orderBox.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-    });
+});
 
 });
 
 
-/* ==================================================
-   CLOSE
-   ================================================== */
+/* باز کردن سفارش */
+
+document.querySelectorAll(".order-btn")
+.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+selectedService =
+btn.dataset.service;
+
+selectedType =
+btn.dataset.type;
+
+document.getElementById("orderTitle")
+.textContent =
+"ثبت سفارش " + selectedService;
+
+targetInput.value = "";
+
+amountInput.value = "10";
+
+reactionMode = "single";
+
+selectedEmoji = "❤️";
+
+successBox.classList.remove("show");
+
+progressBox.classList.remove("show");
+
+reactionArea.style.display =
+selectedType==="reaction"
+? "block"
+: "none";
+
+document.querySelectorAll(".mode-btn")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x.dataset.mode==="single"
+);
+});
+
+document.querySelectorAll(".emoji")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x.dataset.emoji==="❤️"
+);
+});
+
+allInfo.classList.remove("show");
+
+orderBox.classList.add("show");
+
+aboutPage.classList.remove("show");
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+});
+
+});
+
+
+/* بستن */
+
+document.getElementById("closeOrder")
+.onclick = closeOrder;
+
+document.getElementById("cancelOrder")
+.onclick = closeOrder;
 
 function closeOrder(){
 
-    orderBox.classList.remove("show");
+orderBox.classList.remove("show");
 
-    orderForm.reset();
+successBox.classList.remove("show");
 
-    progressBox.classList.remove("show");
+progressBox.classList.remove("show");
 
-    successBox.classList.remove("show");
-
-    selectedService = null;
-
-    selectedType = null;
-
-    selectedEmoji = "❤️";
-
-    reactionMode = "single";
 }
 
-document
-.getElementById("closeOrder")
-.addEventListener("click",closeOrder);
 
-document
-.getElementById("cancelBtn")
-.addEventListener("click",closeOrder);
+/* حالت ریکشن */
 
+document.querySelectorAll(".mode-btn")
+.forEach(btn=>{
 
-/* ==================================================
-   TABS
-   ================================================== */
+btn.addEventListener("click",()=>{
 
-document
-.querySelectorAll(".tab")
-.forEach(tab => {
+reactionMode =
+btn.dataset.mode;
 
-    tab.addEventListener("click",()=>{
+document.querySelectorAll(".mode-btn")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x===btn
+);
+});
 
-        document
-        .querySelectorAll(".tab")
-        .forEach(x =>
-            x.classList.remove("active")
-        );
+if(reactionMode==="all"){
 
-        tab.classList.add("active");
+allInfo.classList.add("show");
 
-        const type =
-            tab.dataset.tab;
+document.querySelectorAll(".emoji")
+.forEach(x=>{
+x.classList.add("active");
+});
 
-        document
-        .getElementById("rubikaTab")
-        .style.display =
-            type === "rubika"
-            ? "block"
-            : "none";
+}else{
 
-        document
-        .getElementById("rubinoTab")
-        .style.display =
-            type === "rubino"
-            ? "block"
-            : "none";
+allInfo.classList.remove("show");
 
-    });
+document.querySelectorAll(".emoji")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+reactionMode==="single" &&
+x.dataset.emoji===selectedEmoji
+);
+});
+
+}
+
+});
 
 });
 
 
-/* ==================================================
-   REACTION MODE
-   ================================================== */
+/* انتخاب ایموجی */
 
-document
-.querySelectorAll(".mode-btn")
-.forEach(button => {
+document.querySelectorAll(".emoji")
+.forEach(btn=>{
 
-    button.addEventListener("click",()=>{
+btn.addEventListener("click",()=>{
 
-        document
-        .querySelectorAll(".mode-btn")
-        .forEach(x =>
-            x.classList.remove("active")
-        );
+selectedEmoji =
+btn.dataset.emoji;
 
-        button.classList.add("active");
+reactionMode =
+"single";
 
-        reactionMode =
-            button.dataset.mode;
+document.querySelectorAll(".mode-btn")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x.dataset.mode==="single"
+);
+});
 
-        if(reactionMode === "random"){
+allInfo.classList.remove("show");
 
-            showToast(
-                "حالت رندم فعال شد"
-            );
+document.querySelectorAll(".emoji")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x===btn
+);
+});
 
-        }else{
-
-            showToast(
-                "حالت انتخابی فعال شد"
-            );
-
-        }
-
-    });
+});
 
 });
 
 
-/* ==================================================
-   EMOJI
-   ================================================== */
+/* محدودیت ظاهری */
 
-document
-.querySelectorAll(".emoji")
-.forEach(button => {
+amountInput.addEventListener("input",()=>{
 
-    button.addEventListener("click",()=>{
+let value =
+parseInt(amountInput.value || "0");
 
-        document
-        .querySelectorAll(".emoji")
-        .forEach(x =>
-            x.classList.remove("active")
-        );
+if(value < 1){
+return;
+}
 
-        button.classList.add("active");
+if(value > 5000){
 
-        selectedEmoji =
-            button.dataset.emoji;
+amountInput.value = 5000;
 
-    });
+toast(
+"حداکثر تعداد قابل ثبت ۵۰۰۰ است؛ اجرا در چند مرحله انجام می‌شود."
+);
+
+}
 
 });
 
-document
-.querySelector('.emoji[data-emoji="❤️"]')
-.classList.add("active");
 
+/* تقسیم به مراحل ۵۰۰تایی */
 
-/* ==================================================
-   VALIDATE
-   ================================================== */
+function splitStages(total){
 
-function validateOrder(){
+const result = [];
 
-    const link =
-        target.value.trim();
+let remain = total;
 
-    if(!link){
+while(remain > 0){
 
-        showToast(
-            "لطفاً لینک موردنظر را وارد کنید"
-        );
+const stage =
+Math.min(
+MAX_STAGE,
+remain
+);
 
-        target.focus();
+result.push(stage);
 
-        return false;
-    }
+remain -= stage;
 
-    if(!/^https?:\/\//i.test(link)){
+}
 
-        showToast(
-            "لینک باید با http یا https شروع شود"
-        );
+return result;
 
-        target.focus();
-
-        return false;
-    }
-
-    const count =
-        Number(amount.value);
-
-    if(!count || count < 1){
-
-        showToast(
-            "تعداد سفارش معتبر نیست"
-        );
-
-        amount.focus();
-
-        return false;
-    }
-
-    if(count > 10000){
-
-        showToast(
-            "حداکثر تعداد فعلی 10000 است"
-        );
-
-        amount.focus();
-
-        return false;
-    }
-
-    if(
-        selectedType === "comment" &&
-        !comment.value.trim()
-    ){
-
-        showToast(
-            "متن کامنت را وارد کنید"
-        );
-
-        comment.focus();
-
-        return false;
-    }
-
-    return true;
 }
 
 
-/* ==================================================
-   LOCAL STORAGE
-   ================================================== */
+/* ساخت ریکشن */
 
-function getOrders(){
+function getReaction(){
 
-    try{
+if(selectedType !== "reaction"){
+return "";
+}
 
-        return JSON.parse(
-            localStorage.getItem(
-                "rubika_orders"
-            ) || "[]"
-        );
+if(reactionMode === "all"){
+return "all";
+}
 
-    }catch{
+if(reactionMode === "random"){
+return "random";
+}
 
-        return [];
+return selectedEmoji;
 
-    }
 }
 
 
-function saveOrder(order){
+/* ارسال هر مرحله */
 
-    const orders =
-        getOrders();
+async function sendStage(
+stageCount,
+stageNumber,
+totalStages
+){
 
-    orders.unshift(order);
+const payload = {
 
-    localStorage.setItem(
-        "rubika_orders",
-        JSON.stringify(
-            orders.slice(0,100)
-        )
-    );
+service:
+selectedService,
+
+link:
+targetInput.value.trim(),
+
+count:
+stageCount,
+
+comment:
+"",
+
+reaction:
+getReaction()
+
+};
+
+
+const response =
+await fetch(
+API_URL + "/api/orders",
+{
+method:"POST",
+headers:{
+"Content-Type":
+"application/json"
+},
+body:
+JSON.stringify(payload)
+}
+);
+
+
+let data;
+
+try{
+
+data =
+await response.json();
+
+}catch(e){
+
+throw new Error(
+"پاسخ سرور نامعتبر است."
+);
+
 }
 
 
-/* ==================================================
-   ESCAPE HTML
-   ================================================== */
+if(!response.ok || !data.ok){
 
-function escapeHtml(value){
+throw new Error(
+data.error ||
+data.message ||
+"ثبت مرحله ناموفق بود."
+);
 
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
 }
 
 
-/* ==================================================
-   RENDER ORDERS
-   ================================================== */
+return data;
+
+}
+
+
+/* ثبت سفارش */
+
+submitOrder.addEventListener(
+"click",
+async()=>{
+
+const target =
+targetInput.value.trim();
+
+const total =
+parseInt(
+amountInput.value || "0"
+);
+
+
+if(!target){
+
+toast(
+"لطفاً لینک پیام را وارد کنید."
+);
+
+targetInput.focus();
+
+return;
+
+}
+
+
+if(!total || total < 1){
+
+toast(
+"تعداد را وارد کنید."
+);
+
+return;
+
+}
+
+
+if(total > 5000){
+
+toast(
+"حداکثر تعداد فعلی ۵۰۰۰ است."
+);
+
+return;
+
+}
+
+
+const stages =
+splitStages(total);
+
+
+submitOrder.disabled = true;
+
+progressBox.classList.add("show");
+
+successBox.classList.remove("show");
+
+
+let completed = 0;
+
+let ids = [];
+
+
+try{
+
+for(
+let i=0;
+i<stages.length;
+i++
+){
+
+const stage =
+stages[i];
+
+progressText.textContent =
+"در حال ثبت مرحله " +
+(i+1) +
+" از " +
+stages.length +
+" — تعداد " +
+stage;
+
+
+const result =
+await sendStage(
+stage,
+i+1,
+stages.length
+);
+
+
+if(
+result &&
+result.order &&
+result.order.id
+){
+
+ids.push(
+result.order.id
+);
+
+}
+
+
+completed++;
+
+const percent =
+Math.round(
+(completed /
+stages.length) * 100
+);
+
+progressBar.style.width =
+percent + "%";
+
+progressPercent.textContent =
+percent + "%";
+
+
+await new Promise(
+resolve =>
+setTimeout(resolve,250)
+);
+
+}
+
+
+/* ذخیره تاریخچه */
+
+const localOrder = {
+
+id:
+ids[0] ||
+"CM-" + Date.now(),
+
+service:
+selectedService,
+
+target:
+target,
+
+amount:
+total,
+
+stages:
+stages,
+
+stageIds:
+ids,
+
+reaction:
+getReaction(),
+
+status:
+"pending",
+
+date:
+new Date().toLocaleString("fa-IR")
+
+};
+
+
+localOrders.unshift(
+localOrder
+);
+
+if(localOrders.length > 50){
+
+localOrders =
+localOrders.slice(0,50);
+
+}
+
+localStorage.setItem(
+"counterModOrders",
+JSON.stringify(localOrders)
+);
+
+renderOrders();
+
+
+successOrderNumber.textContent =
+ids.length
+? ids.join(" / ")
+: localOrder.id;
+
+
+if(stages.length > 1){
+
+successMessage.textContent =
+"سفارش " +
+total +
+" عددی در " +
+stages.length +
+" مرحله ثبت شد: " +
+stages.join(" + ") +
+".";
+
+}else{
+
+successMessage.textContent =
+"سفارش شما با موفقیت ثبت شد.";
+
+}
+
+
+successBox.classList.add("show");
+
+progressText.textContent =
+"تمام مراحل ثبت شد";
+
+toast(
+"سفارش با موفقیت ثبت شد."
+);
+
+
+}catch(error){
+
+toast(
+error.message ||
+"خطا در ثبت سفارش"
+);
+
+progressText.textContent =
+"ثبت سفارش متوقف شد";
+
+}finally{
+
+submitOrder.disabled = false;
+
+}
+
+});
+
+
+/* تاریخچه */
 
 function renderOrders(){
 
-    const list =
-        document.getElementById(
-            "ordersList"
-        );
+const list =
+document.getElementById("ordersList");
 
-    const count =
-        document.getElementById(
-            "ordersCount"
-        );
+if(!localOrders.length){
 
-    const orders =
-        getOrders();
+list.innerHTML =
+`
+<div class="empty">
+هنوز سفارشی ثبت نشده است.
+</div>
+`;
 
-    count.textContent =
-        orders.length +
-        " سفارش";
+return;
 
-    if(!orders.length){
-
-        list.innerHTML =
-            '<div class="empty">هنوز سفارشی ثبت نشده است.</div>';
-
-        return;
-    }
-
-    list.innerHTML =
-        orders.map(order => {
-
-            return `
-                <div class="order-item">
-
-                    <div class="order-item-top">
-
-                        <div>
-
-                            <strong>
-                                ${escapeHtml(order.service)}
-                            </strong>
-
-                            <br>
-
-                            <small>
-                                ${escapeHtml(order.id)}
-                            </small>
-
-                        </div>
-
-                        <span class="order-status">
-                            ${escapeHtml(order.status)}
-                        </span>
-
-                    </div>
-
-                    <small>
-                        تعداد:
-                        ${escapeHtml(String(order.amount))}
-                    </small>
-
-                    <br>
-
-                    <small>
-                        ${escapeHtml(order.date)}
-                    </small>
-
-                </div>
-            `;
-
-        }).join("");
 }
 
 
-/* ==================================================
-   ارسال سفارش به Worker
-   ================================================== */
+list.innerHTML =
+localOrders.map(order=>{
 
-async function sendToBackend(order){
+let reaction = "";
 
-    /*
-      Worker فعلی:
-      POST /api/orders
+if(order.reaction==="all"){
+reaction="🌈 همه ریکشن‌ها";
+}else if(order.reaction==="random"){
+reaction="🎲 رندم";
+}else if(order.reaction){
+reaction=order.reaction;
+}
 
-      فیلدهای موردنیاز Worker:
-      service
-      link
-      count
-      comment
-      reaction
-    */
+return `
+<div class="order-item">
 
-    const payload = {
+<div class="order-item-top">
 
-        service:
-            order.service,
+<div>
 
-        link:
-            order.target,
+<strong>
+${escapeHTML(order.service)}
+</strong>
 
-        count:
-            order.amount,
+<br>
 
-        comment:
-            order.comment || "",
+<small>
+${escapeHTML(order.date || "")}
+</small>
 
-        reaction:
-            order.reaction || ""
+</div>
 
-    };
+<span class="order-status">
+${escapeHTML(status(order.status))}
+</span>
 
-    let response;
+</div>
 
-    try{
+<div
+style="
+color:#91a0b5;
+font-size:10px;
+line-height:2;
+word-break:break-word;
+">
 
-        response =
-            await fetch(
-                API_URL +
-                "/api/orders",
-                {
-                    method:"POST",
+تعداد کل:
+${escapeHTML(String(order.amount))}
 
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
+${reaction
+? " | ریکشن: "+escapeHTML(reaction)
+: ""
+}
 
-                    body:
-                        JSON.stringify(payload)
-                }
-            );
+<br>
 
-    }catch(error){
+مراحل:
+${escapeHTML(
+String(order.stages?.join(" + ") || order.amount)
+)}
 
-        throw new Error(
-            "ارتباط با سرور برقرار نشد"
-        );
-    }
+</div>
 
-    let data = null;
+</div>
+`;
 
-    try{
+}).join("");
 
-        data =
-            await response.json();
-
-    }catch{
-
-        throw new Error(
-            "پاسخ سرور معتبر نیست"
-        );
-    }
-
-    if(!response.ok || !data.ok){
-
-        throw new Error(
-            data.error ||
-            "ثبت سفارش در سرور انجام نشد"
-        );
-    }
-
-    return data;
 }
 
 
-/* ==================================================
-   SUBMIT
-   ================================================== */
+function status(value){
 
-orderForm.addEventListener(
-"submit",
-async event => {
+if(value==="completed"){
+return "تکمیل شده";
+}
 
-    event.preventDefault();
+if(value==="processing"){
+return "در حال انجام";
+}
 
-    if(!validateOrder()){
-        return;
-    }
+if(value==="failed"){
+return "ناموفق";
+}
 
-    submitBtn.disabled = true;
+return "در انتظار";
 
-    orderForm.style.display =
-        "none";
+}
 
-    progressBox.classList.add("show");
 
-    successBox.classList.remove("show");
+function escapeHTML(value){
 
-    const localId =
-        generateOrderId();
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-    const order = {
+}
 
-        id:
-            localId,
 
-        service:
-            selectedService,
+/* ناوبری */
 
-        type:
-            selectedType,
+document.querySelectorAll(".nav")
+.forEach(btn=>{
 
-        target:
-            target.value.trim(),
+btn.addEventListener("click",()=>{
 
-        amount:
-            Number(amount.value),
+const nav =
+btn.dataset.nav;
 
-        reaction:
-            selectedType === "reaction"
-            ? (
-                reactionMode === "random"
-                ? "random"
-                : selectedEmoji
-              )
-            : null,
-
-        reactionMode:
-            selectedType === "reaction"
-            ? reactionMode
-            : null,
-
-        comment:
-            selectedType === "comment"
-            ? comment.value.trim()
-            : null,
-
-        description:
-            description.value.trim(),
-
-        status:
-            "در حال ارسال",
-
-        date:
-            new Date()
-            .toLocaleString("fa-IR")
-
-    };
-
-    let timer = null;
-
-    try{
-
-        let percent = 0;
-
-        progressText.textContent =
-            "در حال ارسال سفارش...";
-
-        progressBar.style.width =
-            "0%";
-
-        progressPercent.textContent =
-            "0%";
-
-        timer =
-            setInterval(()=>{
-
-                percent +=
-                    Math.floor(
-                        Math.random() * 10
-                    ) + 4;
-
-                if(percent > 90){
-                    percent = 90;
-                }
-
-                progressBar.style.width =
-                    percent + "%";
-
-                progressPercent.textContent =
-                    percent + "%";
-
-            },180);
-
-
-        const result =
-            await sendToBackend(order);
-
-
-        if(timer){
-            clearInterval(timer);
-        }
-
-        progressBar.style.width =
-            "100%";
-
-        progressPercent.textContent =
-            "100%";
-
-        progressText.textContent =
-            "سفارش در سرور ثبت شد";
-
-
-        /*
-          Worker پاسخ را به شکل:
-          result.order.id
-          برمی‌گرداند.
-        */
-
-        if(
-            result &&
-            result.order &&
-            result.order.id
-        ){
-
-            order.id =
-                result.order.id;
-        }
-
-
-        if(
-            result &&
-            result.order &&
-            result.order.status
-        ){
-
-            order.status =
-                result.order.status;
-
-        }else{
-
-            order.status =
-                "pending";
-        }
-
-
-        saveOrder(order);
-
-        renderOrders();
-
-
-        setTimeout(()=>{
-
-            successBox.classList.add(
-                "show"
-            );
-
-            orderNumber.textContent =
-                order.id;
-
-            showToast(
-                "سفارش با موفقیت ثبت شد"
-            );
-
-            submitBtn.disabled =
-                false;
-
-        },400);
-
-
-    }catch(error){
-
-        if(timer){
-            clearInterval(timer);
-        }
-
-        progressBox.classList.remove(
-            "show"
-        );
-
-        orderForm.style.display =
-            "block";
-
-        submitBtn.disabled =
-            false;
-
-        showToast(
-            error.message ||
-            "ثبت سفارش انجام نشد"
-        );
-
-    }
-
+document.querySelectorAll(".nav")
+.forEach(x=>{
+x.classList.remove("active");
 });
 
-
-/* ==================================================
-   BOTTOM NAVIGATION
-   ================================================== */
-
-document
-.querySelectorAll(".nav-btn")
-.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        ()=>{
-
-            document
-            .querySelectorAll(".nav-btn")
-            .forEach(x =>
-                x.classList.remove("active")
-            );
-
-            button.classList.add(
-                "active"
-            );
-
-            const nav =
-                button.dataset.nav;
+btn.classList.add("active");
 
 
-            if(nav === "home"){
+if(nav==="home"){
 
-                window.scrollTo({
-                    top:0,
-                    behavior:"smooth"
-                });
+aboutPage.classList.remove("show");
 
-            }
+homePage.style.display =
+"block";
 
+ordersSection.classList.remove("show");
 
-            if(nav === "orders"){
-
-                const section =
-                    document.getElementById(
-                        "ordersSection"
-                    );
-
-                section.classList.add(
-                    "show"
-                );
-
-                renderOrders();
-
-                section.scrollIntoView({
-                    behavior:"smooth",
-                    block:"start"
-                });
-
-            }
-
-
-            if(nav === "info"){
-
-                showToast(
-                    "پنل خدمات روبیکا — تمام خدمات رایگان"
-                );
-
-            }
-
-        }
-    );
-
+window.scrollTo({
+top:0,
+behavior:"smooth"
 });
 
+}
 
-/* ==================================================
-   INITIAL
-   ================================================== */
+
+if(nav==="orders"){
+
+aboutPage.classList.remove("show");
+
+homePage.style.display =
+"block";
+
+ordersSection.classList.add("show");
 
 renderOrders();
+
+setTimeout(()=>{
+ordersSection.scrollIntoView({
+behavior:"smooth"
+});
+},50);
+
+}
+
+
+if(nav==="about"){
+
+homePage.style.display =
+"none";
+
+aboutPage.classList.add("show");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+});
+
+});
+
+
+/* بازگشت */
+
+document.getElementById("backHome")
+.onclick = ()=>{
+
+document.querySelector('[data-nav="home"]')
+.click();
+
+};
+
+
+/* وضعیت API */
+
+async function checkAPI(){
+
+try{
+
+const response =
+await fetch(
+API_URL + "/api/test"
+);
+
+if(response.ok){
+
+document.querySelector(".status")
+.innerHTML =
+`
+<span class="status-dot"></span>
+آنلاین
+`;
+
+}
+
+}catch(e){
+
+document.querySelector(".status")
+.innerHTML =
+`
+<span
+class="status-dot"
+style="background:#ffb454">
+</span>
+آماده
+`;
+
+}
+
+}
+
+
+renderOrders();
+
+checkAPI();
 
 </script>
 

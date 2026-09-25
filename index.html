@@ -53,43 +53,77 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 13px;
-background:rgba(3,10,18,.78);
+background:
+linear-gradient(180deg,rgba(5,17,29,.9),rgba(3,10,18,.78));
 border-bottom:1px solid rgba(255,255,255,.08);
 backdrop-filter:blur(25px);
 -webkit-backdrop-filter:blur(25px);
-box-shadow:0 8px 35px rgba(0,0,0,.18);
+box-shadow:
+0 8px 35px rgba(0,0,0,.18),
+inset 0 -1px rgba(255,255,255,.025);
 }
 
-/* دکمه منو سمت راست */
+/* دکمه منوی اصلی */
 .menu-toggle{
 order:0;
-width:46px;
-height:46px;
-border:1px solid rgba(255,255,255,.09);
+position:relative;
+z-index:150;
+width:47px;
+height:47px;
+border:1px solid rgba(91,211,255,.16);
 border-radius:15px;
-background:rgba(255,255,255,.045);
+background:
+linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
 box-shadow:
-inset 0 1px rgba(255,255,255,.07),
-0 8px 25px rgba(0,0,0,.2);
-transition:.25s;
+inset 0 1px rgba(255,255,255,.1),
+0 8px 25px rgba(0,0,0,.22),
+0 0 20px rgba(0,145,255,.06);
+transition:
+transform .25s ease,
+background .25s ease,
+border-color .25s ease,
+box-shadow .25s ease;
 flex:none;
+}
+
+.menu-toggle:hover{
+border-color:rgba(82,211,255,.35);
+background:
+linear-gradient(145deg,rgba(0,155,255,.14),rgba(255,255,255,.035));
+box-shadow:
+inset 0 1px rgba(255,255,255,.12),
+0 10px 30px rgba(0,0,0,.25),
+0 0 25px rgba(0,145,255,.12);
 }
 
 .menu-toggle:active{
 transform:scale(.9);
 }
 
+.menu-toggle.open{
+background:
+linear-gradient(145deg,rgba(0,155,255,.18),rgba(0,75,145,.08));
+border-color:rgba(82,211,255,.35);
+box-shadow:
+inset 0 1px rgba(255,255,255,.13),
+0 8px 30px rgba(0,0,0,.28),
+0 0 28px rgba(0,145,255,.16);
+}
+
 .menu-toggle svg{
 width:24px;
 height:24px;
+overflow:visible;
 }
 
 .menu-toggle .line{
-transition:.28s;
+transition:
+transform .3s cubic-bezier(.2,.8,.2,1),
+opacity .2s ease;
 transform-origin:center;
 }
 
@@ -106,7 +140,7 @@ transform:scaleX(0);
 transform:translateY(-5px) rotate(-45deg);
 }
 
-/* برند سمت چپ */
+/* برند */
 .brand{
 display:flex;
 align-items:center;
@@ -115,7 +149,6 @@ order:1;
 margin-right:auto;
 }
 
-/* قاب تصویر نوار بالا */
 .brand-image{
 width:44px;
 height:44px;
@@ -172,7 +205,7 @@ visibility:visible;
 }
 
 /* =========================
-   منوی کناری از سمت راست
+   منوی کناری
 ========================= */
 
 .side{
@@ -201,10 +234,11 @@ transition:right .32s cubic-bezier(.2,.8,.2,1);
 right:0;
 }
 
+/* عنوان منو */
 .side-head{
 display:flex;
 align-items:center;
-justify-content:space-between;
+justify-content:flex-start;
 padding:2px 2px 20px;
 }
 
@@ -213,14 +247,9 @@ font-size:14px;
 font-weight:950;
 }
 
+/* ضربدر قدیمی داخل منو حذف شده */
 .side-close{
-width:40px;
-height:40px;
-border:1px solid rgba(255,255,255,.08);
-border-radius:13px;
-background:rgba(255,255,255,.05);
-color:#fff;
-font-size:22px;
+display:none!important;
 }
 
 /* تصویر داخل منو */
@@ -498,7 +527,6 @@ inset 0 1px rgba(255,255,255,.04),
 0 25px 60px rgba(0,0,0,.25);
 }
 
-/* تصویر صفحه درباره */
 .about-photo{
 display:block;
 width:min(100%,330px);
@@ -863,6 +891,11 @@ font-size:21px;
 transition:.2s;
 }
 
+.react:hover{
+background:rgba(0,155,255,.08);
+border-color:rgba(52,204,255,.3);
+}
+
 .react.selected{
 border-color:rgba(52,204,255,.65);
 background:rgba(0,158,255,.14);
@@ -1017,6 +1050,21 @@ width:105px;
 height:105px;
 }
 
+.menu-toggle{
+width:44px;
+height:44px;
+}
+
+.reactions{
+grid-template-columns:repeat(4,1fr);
+gap:6px;
+}
+
+.react{
+height:46px;
+font-size:20px;
+}
+
 }
 
 @media(max-width:350px){
@@ -1053,7 +1101,7 @@ const MAIN_IMAGE =
 
 <header class="topbar">
 
-<button class="menu-toggle" id="menuToggle" aria-label="منو">
+<button class="menu-toggle" id="menuToggle" aria-label="منو" aria-expanded="false">
 <svg viewBox="0 0 24 24" fill="none">
 <path class="line l1" d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 <path class="line l2" d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1085,7 +1133,6 @@ alt="پنل روبیکا رایگان"
 
 <div class="side-head">
 <div class="side-title">منوی پنل</div>
-<button class="side-close" id="sideClose">×</button>
 </div>
 
 <img
@@ -1633,13 +1680,14 @@ const API="https://rubika-panel-api.kantermodmeno.workers.dev";
 const toggle=document.getElementById("menuToggle");
 const side=document.getElementById("side");
 const shade=document.getElementById("shade");
-const sideClose=document.getElementById("sideClose");
 
 function openMenu(){
 
 side.classList.add("show");
 shade.classList.add("show");
 toggle.classList.add("open");
+toggle.setAttribute("aria-expanded","true");
+toggle.setAttribute("aria-label","بستن منو");
 
 }
 
@@ -1648,6 +1696,8 @@ function closeMenu(){
 side.classList.remove("show");
 shade.classList.remove("show");
 toggle.classList.remove("open");
+toggle.setAttribute("aria-expanded","false");
+toggle.setAttribute("aria-label","باز کردن منو");
 
 }
 
@@ -1659,7 +1709,6 @@ side.classList.contains("show")
 
 };
 
-sideClose.onclick=closeMenu;
 shade.onclick=closeMenu;
 
 const homePage=document.getElementById("homePage");
@@ -1853,7 +1902,9 @@ return box;
 
 }
 
+/* ریکشن‌های بیشتر */
 const reactionList=[
+
 ["❤️","قلب"],
 ["👍","لایک"],
 ["😂","خنده"],
@@ -1861,7 +1912,26 @@ const reactionList=[
 ["🔥","آتش"],
 ["👏","تشویق"],
 ["😢","ناراحت"],
-["😡","عصبانی"]
+["😡","عصبانی"],
+
+["😮","تعجب"],
+["😎","باحال"],
+["🤩","شگفت‌زده"],
+["😭","گریه"],
+["😱","ترس"],
+["🤔","فکر کردن"],
+["🙏","تشکر"],
+["💯","صد امتیاز"],
+
+["💔","قلب شکسته"],
+["🥰","عاشق"],
+["😁","خوشحال"],
+["😴","خواب"],
+["🤣","خیلی خنده"],
+["😘","بوس"],
+["🤗","بغل"],
+["😇","فرشته"]
+
 ];
 
 function reactionSelector(){
@@ -1893,10 +1963,24 @@ b.type="button";
 b.className="react";
 b.dataset.value=emoji;
 b.title=name;
+b.setAttribute("aria-label",name);
 b.textContent=emoji;
 
 b.onclick=()=>{
 b.classList.toggle("selected");
+
+const buttons=[...grid.querySelectorAll(".react")];
+
+const selectedCount=buttons.filter(
+x=>x.classList.contains("selected")
+).length;
+
+if(selectedCount===buttons.length){
+all.textContent="لغو انتخاب همه";
+}else{
+all.textContent="انتخاب همه";
+}
+
 };
 
 grid.appendChild(b);
@@ -2206,4 +2290,4 @@ closeOrder();
 </script>
 
 </body>
-  </html>
+   </html>

@@ -79,87 +79,129 @@ transform:translate(15px,-25px) scale(1.08)
 }
 
 /* =========================
-   نوار ابزار
+   نوار ابزار جدید
 ========================= */
 
 .topbar{
-height:70px;
+height:72px;
 position:sticky;
 top:0;
 z-index:150;
-display:flex;
+
+display:grid;
+grid-template-columns:56px minmax(0,1fr) 56px;
 align-items:center;
-justify-content:space-between;
-padding:0 14px;
+
+padding:0 10px;
+
 background:
-linear-gradient(180deg,rgba(6,19,33,.96),rgba(3,10,18,.9));
-border-bottom:1px solid rgba(77,205,255,.12);
-backdrop-filter:blur(25px);
--webkit-backdrop-filter:blur(25px);
+linear-gradient(
+180deg,
+rgba(8,23,39,.98),
+rgba(3,10,18,.94)
+);
+
+border-bottom:1px solid rgba(77,205,255,.13);
+
+backdrop-filter:blur(28px);
+-webkit-backdrop-filter:blur(28px);
+
 box-shadow:
-0 8px 35px rgba(0,0,0,.22),
+0 8px 35px rgba(0,0,0,.28),
 inset 0 -1px rgba(255,255,255,.035);
 }
 
-.topbar:after{
+.topbar:before{
 content:"";
 position:absolute;
-left:10%;
-right:10%;
-bottom:-1px;
+left:18%;
+right:18%;
+top:0;
 height:1px;
-background:linear-gradient(
+background:
+linear-gradient(
 90deg,
 transparent,
-rgba(72,204,255,.28),
+rgba(91,218,255,.35),
 transparent
 );
 pointer-events:none;
 }
 
-/* دکمه منوی اصلی */
-
-.menu-toggle{
-order:0;
-position:relative;
-z-index:300;
-width:48px;
-height:48px;
-flex:none;
-border:1px solid rgba(91,211,255,.22);
-border-radius:16px;
+.topbar:after{
+content:"";
+position:absolute;
+left:7%;
+right:7%;
+bottom:-1px;
+height:1px;
 background:
 linear-gradient(
-145deg,
-rgba(255,255,255,.095),
-rgba(0,125,210,.055)
+90deg,
+transparent,
+rgba(72,204,255,.45),
+rgba(72,204,255,.08),
+transparent
 );
-color:#fff;
+pointer-events:none;
+}
+
+/* =========================
+   دکمه منوی جدید
+========================= */
+
+.menu-toggle{
+grid-column:1;
+
+position:relative;
+z-index:500;
+
+width:48px;
+height:48px;
+
 display:flex;
 align-items:center;
 justify-content:center;
-box-shadow:
-inset 0 1px rgba(255,255,255,.12),
-0 8px 25px rgba(0,0,0,.25),
-0 0 22px rgba(0,145,255,.08);
-transition:
-transform .25s ease,
-background .25s ease,
-border-color .25s ease,
-box-shadow .25s ease;
-}
 
-.menu-toggle:hover{
-border-color:rgba(82,211,255,.42);
+padding:0;
+
+border:1px solid rgba(91,211,255,.24);
+border-radius:16px;
+
+color:#eafaff;
+
 background:
 linear-gradient(
 145deg,
-rgba(0,155,255,.17),
-rgba(255,255,255,.04)
+rgba(255,255,255,.09),
+rgba(0,122,210,.07)
 );
+
 box-shadow:
-inset 0 1px rgba(255,255,255,.14),
-0 10px 30px rgba(0,0,0,.3),
+inset 0 1px rgba(255,255,255,.13),
+0 8px 24px rgba(0,0,0,.28),
+0 0 22px rgba(0,145,255,.08);
+
+transition:
+transform .22s cubic-bezier(.2,.8,.2,1),
+background .28s ease,
+border-color .28s ease,
+box-shadow .28s ease;
+}
+
+.menu-toggle:hover{
+border-color:rgba(82,211,255,.5);
+
+background:
+linear-gradient(
+145deg,
+rgba(0,155,255,.18),
+rgba(255,255,255,.045)
+);
+
+box-shadow:
+inset 0 1px rgba(255,255,255,.15),
+0 10px 30px rgba(0,0,0,.32),
 0 0 28px rgba(0,145,255,.16);
 }
 
@@ -168,31 +210,42 @@ transform:scale(.9);
 }
 
 .menu-toggle.open{
+border-color:rgba(87,218,255,.65);
+
 background:
 linear-gradient(
 145deg,
-rgba(0,175,255,.23),
-rgba(0,75,145,.1)
+rgba(0,175,255,.24),
+rgba(0,75,145,.12)
 );
-border-color:rgba(90,218,255,.58);
+
 box-shadow:
-inset 0 1px rgba(255,255,255,.16),
-0 8px 30px rgba(0,0,0,.35),
-0 0 32px rgba(0,160,255,.28);
+inset 0 1px rgba(255,255,255,.18),
+0 10px 30px rgba(0,0,0,.38),
+0 0 32px rgba(0,160,255,.3);
 }
 
 .menu-toggle svg{
-width:25px;
-height:25px;
+width:26px;
+height:26px;
+display:block;
 overflow:visible;
 }
 
 .menu-toggle .line{
-transition:
-transform .3s cubic-bezier(.2,.8,.2,1),
-opacity .2s ease;
+transform-box:fill-box;
 transform-origin:center;
+
+transition:
+transform .34s cubic-bezier(.2,.85,.2,1),
+opacity .18s ease;
 }
+
+/*
+   سه خط دقیقاً به مرکز می‌آیند.
+   به جای جابه‌جایی اشتباه، هر خط
+   روی مختصات واقعی خودش حرکت می‌کند.
+*/
 
 .menu-toggle.open .l1{
 transform:translateY(5px) rotate(45deg);
@@ -207,39 +260,66 @@ transform:scaleX(0);
 transform:translateY(-5px) rotate(-45deg);
 }
 
-/* برند */
+/* =========================
+   برند وسط نوار ابزار
+========================= */
 
 .brand{
+grid-column:2;
+
+justify-self:center;
+
+min-width:0;
+max-width:calc(100vw - 135px);
+
 display:flex;
 align-items:center;
+justify-content:center;
 gap:10px;
-order:1;
-margin-right:auto;
-padding:5px 8px 5px 5px;
-border:1px solid rgba(255,255,255,.055);
+
+padding:5px 10px 5px 6px;
+
+border:1px solid rgba(255,255,255,.065);
 border-radius:18px;
-background:rgba(255,255,255,.025);
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.055),
+rgba(255,255,255,.018)
+);
+
 box-shadow:
-inset 0 1px rgba(255,255,255,.04),
-0 5px 20px rgba(0,0,0,.1);
+inset 0 1px rgba(255,255,255,.055),
+0 6px 24px rgba(0,0,0,.14);
 }
 
 .brand-image{
 width:44px;
 height:44px;
+
 display:block;
+flex:none;
+
 object-fit:contain;
 object-position:center;
+
 overflow:hidden;
-border-radius:13px;
-border:1px solid rgba(255,255,255,.16);
+
+border-radius:14px;
+
+border:1px solid rgba(255,255,255,.17);
+
 background:rgba(255,255,255,.035);
+
 box-shadow:
-0 0 18px rgba(0,157,255,.25),
+0 0 20px rgba(0,157,255,.28),
 inset 0 1px rgba(255,255,255,.2);
 }
 
 .brand-text{
+min-width:0;
+
 display:flex;
 flex-direction:column;
 gap:3px;
@@ -248,7 +328,16 @@ gap:3px;
 .brand-title{
 font-size:15px;
 font-weight:950;
-background:linear-gradient(90deg,#fff,#66d7ff);
+
+white-space:nowrap;
+
+background:
+linear-gradient(
+90deg,
+#fff,
+#66d7ff
+);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -256,6 +345,13 @@ background:linear-gradient(90deg,#fff,#66d7ff);
 .brand-sub{
 font-size:9px;
 color:#7993a8;
+white-space:nowrap;
+}
+
+/* فضای خالی سمت چپ نوار ابزار */
+
+.topbar:global{
+display:none;
 }
 
 /* =========================
@@ -266,12 +362,18 @@ color:#7993a8;
 position:fixed;
 inset:0;
 z-index:120;
+
 background:rgba(0,0,0,.7);
+
 backdrop-filter:blur(7px);
 -webkit-backdrop-filter:blur(7px);
+
 opacity:0;
 visibility:hidden;
-transition:.25s;
+
+transition:
+opacity .25s ease,
+visibility .25s ease;
 }
 
 .shade.show{
@@ -286,23 +388,36 @@ visibility:visible;
 .side{
 position:fixed;
 z-index:130;
+
 right:-340px;
 left:auto;
 top:0;
+
 width:min(320px,88vw);
 height:100vh;
+
 overflow-y:auto;
+
 padding:84px 14px 35px;
 
 background:
-radial-gradient(circle at 50% 0%,rgba(0,159,255,.13),transparent 30%),
-linear-gradient(180deg,#081827,#03080e);
+radial-gradient(
+circle at 50% 0%,
+rgba(0,159,255,.13),
+transparent 30%
+),
+linear-gradient(
+180deg,
+#081827,
+#03080e
+);
 
 border-left:1px solid rgba(255,255,255,.09);
 
 box-shadow:-30px 0 80px rgba(0,0,0,.55);
 
-transition:right .32s cubic-bezier(.2,.8,.2,1);
+transition:
+right .32s cubic-bezier(.2,.8,.2,1);
 }
 
 .side.show{
@@ -323,16 +438,24 @@ font-weight:950;
 
 .menu-photo{
 display:block;
+
 width:115px;
 height:115px;
+
 object-fit:contain;
 object-position:center;
+
 overflow:hidden;
+
 margin:7px auto 25px;
 padding:5px;
+
 border-radius:25px;
+
 border:1px solid rgba(255,255,255,.18);
+
 background:rgba(255,255,255,.035);
+
 box-shadow:
 0 0 35px rgba(0,155,255,.25),
 0 20px 50px rgba(0,0,0,.35);
@@ -346,19 +469,27 @@ gap:9px;
 
 .menu-item{
 min-height:57px;
+
 padding:8px 11px;
+
 display:flex;
 align-items:center;
 gap:12px;
+
 border-radius:17px;
+
 border:1px solid rgba(255,255,255,.065);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.065),
 rgba(255,255,255,.018)
 );
-box-shadow:inset 0 1px rgba(255,255,255,.04);
+
+box-shadow:
+inset 0 1px rgba(255,255,255,.04);
+
 transition:.2s;
 }
 
@@ -369,19 +500,26 @@ transform:scale(.97);
 .menu-icon{
 width:41px;
 height:41px;
+
 flex:none;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 border-radius:13px;
+
 color:#67d7ff;
+
 background:
 linear-gradient(
 145deg,
 rgba(0,165,255,.2),
 rgba(0,75,145,.06)
 );
+
 border:1px solid rgba(0,165,255,.17);
+
 box-shadow:
 0 0 18px rgba(0,145,255,.08),
 inset 0 1px rgba(255,255,255,.1);
@@ -404,8 +542,11 @@ font-weight:900;
 .page{
 width:min(980px,100%);
 margin:auto;
+
 padding:24px 13px 105px;
+
 display:none;
+
 position:relative;
 z-index:1;
 }
@@ -423,7 +564,14 @@ padding:10px 0 5px;
 font-size:25px;
 font-weight:950;
 letter-spacing:-.7px;
-background:linear-gradient(90deg,#fff,#6bdcff);
+
+background:
+linear-gradient(
+90deg,
+#fff,
+#6bdcff
+);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -431,8 +579,10 @@ background:linear-gradient(90deg,#fff,#6bdcff);
 .hero-desc{
 max-width:600px;
 margin:9px auto 0;
+
 font-size:10px;
 line-height:2;
+
 color:#7f98ab;
 }
 
@@ -440,20 +590,30 @@ color:#7f98ab;
 display:inline-flex;
 align-items:center;
 gap:7px;
+
 margin-top:12px;
+
 padding:7px 13px;
+
 border-radius:30px;
+
 font-size:9px;
+
 color:#5ee6ae;
+
 background:rgba(0,215,130,.05);
+
 border:1px solid rgba(0,215,130,.13);
 }
 
 .online-dot{
 width:7px;
 height:7px;
+
 border-radius:50%;
+
 background:#22e198;
+
 box-shadow:0 0 12px #22e198;
 }
 
@@ -471,9 +631,17 @@ margin-bottom:12px;
 .section-line{
 width:4px;
 height:21px;
+
 border-radius:10px;
-background:linear-gradient(#54d6ff,#0860ae);
-box-shadow:0 0 15px rgba(0,160,255,.5);
+
+background:
+linear-gradient(
+#54d6ff,
+#0860ae
+);
+
+box-shadow:
+0 0 15px rgba(0,160,255,.5);
 }
 
 .section-title{
@@ -490,42 +658,59 @@ gap:10px;
 .service{
 position:relative;
 overflow:hidden;
+
 min-height:174px;
 padding:14px;
+
 border-radius:21px;
+
 border:1px solid rgba(255,255,255,.07);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.07),
 rgba(255,255,255,.018)
 );
+
 box-shadow:
 inset 0 1px rgba(255,255,255,.05),
 0 14px 40px rgba(0,0,0,.2);
+
 transition:.25s;
 }
 
 .service:before{
 content:"";
+
 position:absolute;
+
 width:130px;
 height:130px;
+
 left:-70px;
 bottom:-75px;
+
 border-radius:50%;
+
 background:rgba(0,145,255,.08);
+
 filter:blur(8px);
 }
 
 .service:after{
 content:"";
+
 position:absolute;
+
 right:25px;
 top:0;
+
 width:65px;
 height:1px;
-background:linear-gradient(
+
+background:
+linear-gradient(
 90deg,
 transparent,
 #57d8ff,
@@ -545,18 +730,24 @@ z-index:1;
 .icon{
 width:49px;
 height:49px;
+
 border-radius:16px;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 color:#62d6ff;
+
 background:
 linear-gradient(
 145deg,
 rgba(0,174,255,.21),
 rgba(0,75,145,.07)
 );
+
 border:1px solid rgba(0,164,255,.17);
+
 box-shadow:
 inset 0 1px rgba(255,255,255,.12),
 0 9px 25px rgba(0,120,255,.1);
@@ -565,7 +756,9 @@ inset 0 1px rgba(255,255,255,.12),
 .icon svg{
 width:25px;
 height:25px;
-filter:drop-shadow(
+
+filter:
+drop-shadow(
 0 0 6px rgba(75,210,255,.25)
 );
 }
@@ -578,7 +771,9 @@ font-weight:950;
 
 .service-desc{
 margin-top:5px;
+
 color:#728ca0;
+
 font-size:8.5px;
 line-height:1.7;
 }
@@ -586,17 +781,28 @@ line-height:1.7;
 .order-btn{
 width:100%;
 height:38px;
+
 margin-top:12px;
+
 border:0;
 border-radius:12px;
+
 color:#fff;
+
 font-size:10px;
 font-weight:950;
+
 background:
-linear-gradient(135deg,#0a9bff,#0751a0);
+linear-gradient(
+135deg,
+#0a9bff,
+#0751a0
+);
+
 box-shadow:
 0 8px 22px rgba(0,120,255,.2),
 inset 0 1px rgba(255,255,255,.15);
+
 transition:.2s;
 }
 
@@ -620,18 +826,24 @@ padding:8px 0 18px;
 .orders-hero-icon{
 width:70px;
 height:70px;
+
 margin:0 auto 12px;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 border-radius:23px;
+
 border:1px solid rgba(70,210,255,.2);
+
 background:
 linear-gradient(
 145deg,
 rgba(0,165,255,.18),
 rgba(255,255,255,.035)
 );
+
 box-shadow:
 0 0 35px rgba(0,145,255,.15),
 inset 0 1px rgba(255,255,255,.1);
@@ -645,28 +857,41 @@ height:34px;
 .orders-title{
 font-size:23px;
 font-weight:950;
-background:linear-gradient(90deg,#fff,#65d9ff);
+
+background:
+linear-gradient(
+90deg,
+#fff,
+#65d9ff
+);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
 .orders-desc{
 margin-top:8px;
+
 font-size:9px;
 line-height:2;
+
 color:#7993a8;
 }
 
 .order-service-box{
 padding:15px;
+
 border-radius:23px;
+
 border:1px solid rgba(255,255,255,.07);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.065),
 rgba(255,255,255,.018)
 );
+
 box-shadow:
 inset 0 1px rgba(255,255,255,.04),
 0 18px 50px rgba(0,0,0,.2);
@@ -676,18 +901,29 @@ inset 0 1px rgba(255,255,255,.04),
 display:flex;
 align-items:center;
 gap:8px;
+
 font-size:13px;
 font-weight:950;
+
 margin-bottom:12px;
 }
 
 .order-service-title:before{
 content:"";
+
 width:4px;
 height:19px;
+
 border-radius:10px;
-background:linear-gradient(#54d6ff,#0860ae);
-box-shadow:0 0 15px rgba(0,160,255,.5);
+
+background:
+linear-gradient(
+#54d6ff,
+#0860ae
+);
+
+box-shadow:
+0 0 15px rgba(0,160,255,.5);
 }
 
 .service-select-grid{
@@ -698,45 +934,62 @@ gap:8px;
 
 .service-select{
 min-height:58px;
+
 padding:8px;
+
 display:flex;
 align-items:center;
+
 gap:9px;
+
 text-align:right;
+
 border:1px solid rgba(255,255,255,.07);
 border-radius:15px;
+
 color:#fff;
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.05),
 rgba(255,255,255,.018)
 );
+
 transition:.2s;
 }
 
 .service-select:hover,
 .service-select.selected{
 border-color:rgba(66,208,255,.42);
+
 background:
 linear-gradient(
 145deg,
 rgba(0,157,255,.14),
 rgba(0,75,145,.05)
 );
-box-shadow:0 0 20px rgba(0,145,255,.08);
+
+box-shadow:
+0 0 20px rgba(0,145,255,.08);
 }
 
 .service-select-icon{
 width:37px;
 height:37px;
+
 flex:none;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 border-radius:11px;
+
 color:#61d5ff;
+
 background:rgba(0,150,255,.1);
+
 border:1px solid rgba(0,165,255,.15);
 }
 
@@ -754,8 +1007,11 @@ line-height:1.7;
 .order-form-card{
 margin-top:12px;
 padding:17px;
+
 border-radius:23px;
+
 border:1px solid rgba(255,255,255,.07);
+
 background:
 linear-gradient(
 145deg,
@@ -777,8 +1033,10 @@ margin-bottom:12px;
 .order-field label{
 display:block;
 margin-bottom:6px;
+
 font-size:9px;
 font-weight:800;
+
 color:#9db4c5;
 }
 
@@ -786,10 +1044,14 @@ color:#9db4c5;
 .order-field textarea{
 width:100%;
 outline:none;
+
 color:#fff;
+
 border:1px solid rgba(255,255,255,.08);
 border-radius:14px;
+
 background:rgba(255,255,255,.045);
+
 font-size:10px;
 }
 
@@ -807,14 +1069,20 @@ resize:none;
 .order-field input:focus,
 .order-field textarea:focus{
 border-color:rgba(0,164,255,.45);
-box-shadow:0 0 0 3px rgba(0,150,255,.06);
+
+box-shadow:
+0 0 0 3px rgba(0,150,255,.06);
 }
 
 .reaction-box{
 padding:12px;
+
 border-radius:17px;
+
 border:1px solid rgba(255,255,255,.07);
+
 background:rgba(255,255,255,.025);
+
 margin-bottom:12px;
 }
 
@@ -822,6 +1090,7 @@ margin-bottom:12px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 margin-bottom:9px;
 }
 
@@ -832,10 +1101,15 @@ font-weight:900;
 
 .select-all{
 border:1px solid rgba(0,163,255,.2);
+
 border-radius:10px;
+
 background:rgba(0,145,255,.08);
+
 color:#62d6ff;
+
 padding:7px 9px;
+
 font-size:8px;
 font-weight:900;
 }
@@ -848,11 +1122,17 @@ gap:7px;
 
 .react{
 height:48px;
+
 border:1px solid rgba(255,255,255,.07);
+
 border-radius:13px;
+
 background:rgba(255,255,255,.035);
+
 color:#fff;
+
 font-size:21px;
+
 transition:.2s;
 }
 
@@ -863,21 +1143,34 @@ border-color:rgba(52,204,255,.3);
 
 .react.selected{
 border-color:rgba(52,204,255,.65);
+
 background:rgba(0,158,255,.14);
-box-shadow:0 0 18px rgba(0,155,255,.13);
+
+box-shadow:
+0 0 18px rgba(0,155,255,.13);
+
 transform:translateY(-1px);
 }
 
 .submit-order{
 width:100%;
 height:48px;
+
 border:0;
 border-radius:14px;
+
 color:#fff;
+
 font-size:11px;
 font-weight:950;
+
 background:
-linear-gradient(135deg,#0b9cff,#0752a0);
+linear-gradient(
+135deg,
+#0b9cff,
+#0752a0
+);
+
 box-shadow:
 0 10px 28px rgba(0,115,235,.2),
 inset 0 1px rgba(255,255,255,.13);
@@ -885,9 +1178,12 @@ inset 0 1px rgba(255,255,255,.13);
 
 .order-message{
 display:none;
+
 margin-top:11px;
 padding:12px;
+
 border-radius:14px;
+
 font-size:9px;
 line-height:1.9;
 }
@@ -898,13 +1194,17 @@ display:block;
 
 .order-message.success{
 color:#70eabb;
+
 border:1px solid rgba(0,215,135,.15);
+
 background:rgba(0,215,135,.05);
 }
 
 .order-message.error{
 color:#ff8d95;
+
 border:1px solid rgba(255,70,80,.15);
+
 background:rgba(255,70,80,.05);
 }
 
@@ -920,7 +1220,9 @@ margin-top:25px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 gap:10px;
+
 margin-bottom:12px;
 }
 
@@ -931,11 +1233,17 @@ font-weight:950;
 
 .clear-orders{
 height:34px;
+
 padding:0 10px;
+
 border:1px solid rgba(255,80,90,.15);
+
 border-radius:10px;
+
 background:rgba(255,70,80,.05);
+
 color:#ff9ba2;
+
 font-size:8px;
 font-weight:900;
 }
@@ -948,14 +1256,18 @@ gap:10px;
 
 .order-card{
 padding:14px;
+
 border-radius:19px;
+
 border:1px solid rgba(255,255,255,.07);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.06),
 rgba(255,255,255,.018)
 );
+
 box-shadow:
 inset 0 1px rgba(255,255,255,.04),
 0 12px 35px rgba(0,0,0,.16);
@@ -965,6 +1277,7 @@ inset 0 1px rgba(255,255,255,.04),
 display:flex;
 align-items:flex-start;
 justify-content:space-between;
+
 gap:10px;
 }
 
@@ -976,40 +1289,54 @@ line-height:1.7;
 
 .order-status{
 padding:5px 8px;
+
 border-radius:9px;
+
 font-size:7.5px;
 font-weight:950;
+
 white-space:nowrap;
 }
 
 .status-waiting{
 color:#ffd477;
+
 background:rgba(255,184,0,.08);
+
 border:1px solid rgba(255,184,0,.16);
 }
 
 .status-doing{
 color:#66d8ff;
+
 background:rgba(0,157,255,.09);
+
 border:1px solid rgba(0,157,255,.17);
 }
 
 .status-done{
 color:#72edb8;
+
 background:rgba(0,215,130,.07);
+
 border:1px solid rgba(0,215,130,.15);
 }
 
 .status-cancel{
 color:#ff8e98;
+
 background:rgba(255,70,80,.06);
+
 border:1px solid rgba(255,70,80,.15);
 }
 
 .order-card-id{
 margin-top:6px;
+
 font-size:7.5px;
+
 color:#668196;
+
 direction:ltr;
 text-align:right;
 }
@@ -1017,30 +1344,42 @@ text-align:right;
 .order-details{
 display:grid;
 grid-template-columns:repeat(2,1fr);
+
 gap:7px;
+
 margin-top:11px;
 }
 
 .order-detail{
 padding:8px;
+
 border-radius:11px;
+
 background:rgba(255,255,255,.025);
+
 border:1px solid rgba(255,255,255,.045);
+
 min-width:0;
 }
 
 .order-detail-label{
 display:block;
+
 font-size:7px;
+
 color:#688196;
+
 margin-bottom:4px;
 }
 
 .order-detail-value{
 display:block;
+
 font-size:8.5px;
 font-weight:800;
+
 color:#dcefff;
+
 overflow:hidden;
 text-overflow:ellipsis;
 white-space:nowrap;
@@ -1048,15 +1387,21 @@ white-space:nowrap;
 
 .order-date{
 margin-top:9px;
+
 font-size:7.5px;
+
 color:#60798c;
 }
 
 .empty-orders{
 padding:28px 16px;
+
 text-align:center;
+
 border-radius:20px;
+
 border:1px dashed rgba(255,255,255,.09);
+
 background:rgba(255,255,255,.02);
 }
 
@@ -1072,8 +1417,10 @@ font-weight:950;
 
 .empty-orders-text{
 margin-top:6px;
+
 font-size:8px;
 line-height:1.8;
+
 color:#718b9e;
 }
 
@@ -1083,14 +1430,18 @@ color:#718b9e;
 
 .about-card{
 padding:22px;
+
 border-radius:25px;
+
 border:1px solid rgba(255,255,255,.08);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.065),
 rgba(255,255,255,.018)
 );
+
 box-shadow:
 inset 0 1px rgba(255,255,255,.04),
 0 25px 60px rgba(0,0,0,.25);
@@ -1098,16 +1449,25 @@ inset 0 1px rgba(255,255,255,.04),
 
 .about-photo{
 display:block;
+
 width:min(100%,330px);
 height:190px;
+
 object-fit:contain;
 object-position:center;
+
 overflow:hidden;
+
 padding:7px;
+
 margin:0 auto 18px;
+
 border-radius:24px;
+
 border:1px solid rgba(255,255,255,.17);
+
 background:rgba(255,255,255,.035);
+
 box-shadow:
 0 0 35px rgba(0,155,255,.22),
 0 20px 45px rgba(0,0,0,.3);
@@ -1115,30 +1475,41 @@ box-shadow:
 
 .about-title{
 text-align:center;
+
 font-size:23px;
 font-weight:950;
 }
 
 .about-creator{
 text-align:center;
+
 color:#5ccaff;
+
 font-size:11px;
+
 margin-top:7px;
 }
 
 .about-text{
 color:#8aa3b7;
+
 font-size:10.5px;
 line-height:2.1;
+
 margin-top:20px;
 }
 
 .about-row{
 margin-top:9px;
+
 padding:13px;
+
 border-radius:15px;
+
 border:1px solid rgba(255,255,255,.055);
+
 background:rgba(255,255,255,.03);
+
 font-size:10px;
 }
 
@@ -1148,9 +1519,12 @@ color:#5bcaff;
 
 .about-contact-title{
 margin-top:22px;
+
 font-size:13px;
 font-weight:950;
+
 color:#fff;
+
 display:flex;
 align-items:center;
 gap:8px;
@@ -1158,34 +1532,51 @@ gap:8px;
 
 .about-contact-title:before{
 content:"";
+
 width:4px;
 height:18px;
+
 border-radius:8px;
-background:linear-gradient(#54d6ff,#0860ae);
-box-shadow:0 0 15px rgba(0,160,255,.5);
+
+background:
+linear-gradient(
+#54d6ff,
+#0860ae
+);
+
+box-shadow:
+0 0 15px rgba(0,160,255,.5);
 }
 
 .contact-list{
 display:flex;
 flex-direction:column;
 gap:9px;
+
 margin-top:11px;
 }
 
 .contact-item{
 display:flex;
 align-items:center;
+
 gap:10px;
+
 min-height:55px;
+
 padding:8px 10px;
+
 border-radius:16px;
+
 border:1px solid rgba(255,255,255,.055);
+
 background:
 linear-gradient(
 145deg,
 rgba(255,255,255,.055),
 rgba(255,255,255,.018)
 );
+
 transition:.2s;
 }
 
@@ -1196,18 +1587,24 @@ transform:scale(.98);
 .contact-icon{
 width:39px;
 height:39px;
+
 flex:none;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 border-radius:12px;
+
 color:#67d7ff;
+
 background:
 linear-gradient(
 145deg,
 rgba(0,165,255,.2),
 rgba(0,75,145,.06)
 );
+
 border:1px solid rgba(0,165,255,.17);
 }
 
@@ -1220,6 +1617,7 @@ height:20px;
 display:flex;
 flex-direction:column;
 gap:4px;
+
 min-width:0;
 }
 
@@ -1231,9 +1629,12 @@ color:#fff;
 
 .contact-value{
 font-size:8.5px;
+
 color:#7190a5;
+
 direction:ltr;
 text-align:right;
+
 overflow:hidden;
 text-overflow:ellipsis;
 white-space:nowrap;
@@ -1242,11 +1643,17 @@ white-space:nowrap;
 .back{
 width:100%;
 height:44px;
+
 margin-top:17px;
+
 border:1px solid rgba(255,255,255,.08);
+
 border-radius:14px;
+
 background:rgba(255,255,255,.04);
+
 color:#fff;
+
 font-size:10px;
 font-weight:900;
 }
@@ -1258,19 +1665,30 @@ font-weight:900;
 .bottom{
 position:fixed;
 z-index:90;
+
 left:50%;
 bottom:11px;
+
 transform:translateX(-50%);
+
 width:min(470px,calc(100% - 22px));
+
 padding:7px;
+
 display:grid;
 grid-template-columns:repeat(3,1fr);
+
 gap:5px;
+
 border:1px solid rgba(255,255,255,.09);
+
 border-radius:21px;
+
 background:rgba(5,15,25,.86);
+
 backdrop-filter:blur(22px);
 -webkit-backdrop-filter:blur(22px);
+
 box-shadow:
 0 18px 60px rgba(0,0,0,.45),
 inset 0 1px rgba(255,255,255,.06);
@@ -1278,24 +1696,32 @@ inset 0 1px rgba(255,255,255,.06);
 
 .nav{
 height:51px;
+
 border:0;
 border-radius:15px;
+
 color:#6f8ba0;
+
 background:transparent;
+
 font-size:9px;
 font-weight:900;
+
 transition:.2s;
 }
 
 .nav svg{
 width:19px;
 height:19px;
+
 display:block;
+
 margin:0 auto 3px;
 }
 
 .nav.active{
 color:#fff;
+
 background:
 linear-gradient(
 145deg,
@@ -1306,12 +1732,18 @@ rgba(0,75,160,.06)
 
 .nav.active:after{
 content:"";
+
 display:block;
+
 width:20px;
 height:2px;
+
 border-radius:9px;
+
 background:#48cfff;
+
 margin:3px auto 0;
+
 box-shadow:0 0 10px #29bfff;
 }
 
@@ -1323,12 +1755,19 @@ box-shadow:0 0 10px #29bfff;
 
 .topbar{
 height:64px;
-padding:0 10px;
+
+grid-template-columns:51px minmax(0,1fr) 51px;
+
+padding:0 7px;
 }
 
 .brand{
+max-width:calc(100vw - 112px);
+
 padding:4px 7px 4px 4px;
+
 gap:8px;
+
 border-radius:16px;
 }
 
@@ -1348,7 +1787,13 @@ font-size:8px;
 .menu-toggle{
 width:45px;
 height:45px;
+
 border-radius:15px;
+}
+
+.menu-toggle svg{
+width:25px;
+height:25px;
 }
 
 .hero-title{
@@ -1413,6 +1858,20 @@ grid-template-columns:1fr 1fr;
 
 @media(max-width:350px){
 
+.topbar{
+grid-template-columns:48px minmax(0,1fr) 48px;
+padding:0 5px;
+}
+
+.menu-toggle{
+width:43px;
+height:43px;
+}
+
+.brand{
+max-width:calc(100vw - 105px);
+}
+
 .services{
 grid-template-columns:1fr;
 }
@@ -1456,9 +1915,31 @@ aria-label="باز کردن منو"
 aria-expanded="false"
 >
 <svg viewBox="0 0 24 24" fill="none">
-<path class="line l1" d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-<path class="line l2" d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-<path class="line l3" d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+<path
+class="line l1"
+d="M4 7H20"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+/>
+
+<path
+class="line l2"
+d="M4 12H20"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+/>
+
+<path
+class="line l3"
+d="M4 17H20"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+/>
+
 </svg>
 </button>
 
@@ -1472,20 +1953,37 @@ alt="پنل روبیکا رایگان"
 >
 
 <div class="brand-text">
-<div class="brand-title">پنل روبیکا رایگان</div>
-<div class="brand-sub">خدمات حرفه‌ای روبیکا و روبینو</div>
+
+<div class="brand-title">
+پنل روبیکا رایگان
+</div>
+
+<div class="brand-sub">
+خدمات حرفه‌ای روبیکا و روبینو
+</div>
+
 </div>
 
 </div>
 
 </header>
 
-<div class="shade" id="shade"></div>
+<div
+class="shade"
+id="shade"
+></div>
 
-<aside class="side" id="side">
+<aside
+class="side"
+id="side"
+>
 
 <div class="side-head">
-<div class="side-title">منوی پنل</div>
+
+<div class="side-title">
+منوی پنل
+</div>
+
 </div>
 
 <img
@@ -1497,130 +1995,306 @@ alt="پنل روبیکا رایگان"
 
 <div class="menu-items">
 
-<a class="menu-item" href="#home" onclick="goPage('home');return false">
+<a
+class="menu-item"
+href="#home"
+onclick="goPage('home');return false"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-<path d="M5.5 10.5V20h13v-9.5" stroke="currentColor" stroke-width="1.8"/>
-<path d="M9.5 20v-5h5v5" stroke="currentColor" stroke-width="1.8"/>
+
+<path
+d="M3 11.5 12 4l9 7.5"
+stroke="currentColor"
+stroke-width="1.8"
+stroke-linecap="round"
+/>
+
+<path
+d="M5.5 10.5V20h13v-9.5"
+stroke="currentColor"
+stroke-width="1.8"
+/>
+
+<path
+d="M9.5 20v-5h5v5"
+stroke="currentColor"
+stroke-width="1.8"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">صفحه اصلی</span>
+<span class="menu-text">
+صفحه اصلی
+</span>
 
 </a>
 
-<a class="menu-item" href="#orders" onclick="goPage('orders');return false">
+<a
+class="menu-item"
+href="#orders"
+onclick="goPage('orders');return false"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M5 4.5h14v15H5z" stroke="currentColor" stroke-width="1.7" rx="2"/>
-<path d="M8 8h8M8 12h6M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M5 4.5h14v15H5z"
+stroke="currentColor"
+stroke-width="1.7"
+rx="2"
+/>
+
+<path
+d="M8 8h8M8 12h6M8 16h5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">سفارش‌ها</span>
+<span class="menu-text">
+سفارش‌ها
+</span>
 
 </a>
 
-<a class="menu-item" href="#about" onclick="goPage('about');return false">
+<a
+class="menu-item"
+href="#about"
+onclick="goPage('about');return false"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="12" r="8.7" stroke="currentColor" stroke-width="1.8"/>
-<path d="M12 10.5V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-<circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+
+<circle
+cx="12"
+cy="12"
+r="8.7"
+stroke="currentColor"
+stroke-width="1.8"
+/>
+
+<path
+d="M12 10.5V16"
+stroke="currentColor"
+stroke-width="1.8"
+stroke-linecap="round"
+/>
+
+<circle
+cx="12"
+cy="7.5"
+r="1"
+fill="currentColor"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">درباره پنل</span>
+<span class="menu-text">
+درباره پنل
+</span>
 
 </a>
 
-<a class="menu-item" href="https://rubika.ir/Counter2Mod" target="_blank">
+<a
+class="menu-item"
+href="https://rubika.ir/Counter2Mod"
+target="_blank"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v9a1.5 1.5 0 0 1-1.5 1.5H11l-4.3 3v-3H5.5A1.5 1.5 0 0 1 4 15.5v-9Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v9a1.5 1.5 0 0 1-1.5 1.5H11l-4.3 3v-3H5.5A1.5 1.5 0 0 1 4 15.5v-9Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M8 9h8M8 12h5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">کانال روبیکا</span>
+<span class="menu-text">
+کانال روبیکا
+</span>
 
 </a>
 
-<a class="menu-item" href="https://rubika.ir/Abolfazl_Kazemi_SFG" target="_blank">
+<a
+class="menu-item"
+href="https://rubika.ir/Abolfazl_Kazemi_SFG"
+target="_blank"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="8" r="3.1" stroke="currentColor" stroke-width="1.7"/>
-<path d="M5.5 19c.7-3.3 2.8-5 6.5-5s5.8 1.7 6.5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<circle
+cx="12"
+cy="8"
+r="3.1"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M5.5 19c.7-3.3 2.8-5 6.5-5s5.8 1.7 6.5 5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">پشتیبانی</span>
+<span class="menu-text">
+پشتیبانی
+</span>
 
 </a>
 
-<a class="menu-item" href="https://t.me/Counter2Mod" target="_blank">
+<a
+class="menu-item"
+href="https://t.me/Counter2Mod"
+target="_blank"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="m20.5 4.5-2.8 14.4c-.2 1-.8 1.2-1.6.7l-4.3-3.2-2.2 2c-.2.2-.4.4-.8.4l.3-4.4 8.2-7.4c.4-.3-.1-.5-.6-.2L6.5 13 2.2 11.6c-.9-.3-.9-.9.2-1.3l16.8-6.5c.8-.3 1.5.2 1.3.7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+
+<path
+d="m20.5 4.5-2.8 14.4c-.2 1-.8 1.2-1.6.7l-4.3-3.2-2.2 2c-.2.2-.4.4-.8.4l.3-4.4 8.2-7.4c.4-.3-.1-.5-.6-.2L6.5 13 2.2 11.6c-.9-.3-.9-.9.2-1.3l16.8-6.5c.8-.3 1.5.2 1.3.7Z"
+stroke="currentColor"
+stroke-width="1.4"
+stroke-linejoin="round"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">تلگرام</span>
+<span class="menu-text">
+تلگرام
+</span>
 
 </a>
 
-<a class="menu-item" href="https://ble.ir/Countermod" target="_blank">
+<a
+class="menu-item"
+href="https://ble.ir/Countermod"
+target="_blank"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M7 5h10a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2h-4.5L9 19v-3.5H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+
+<path
+d="M7 5h10a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2h-4.5L9 19v-3.5H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">بله</span>
+<span class="menu-text">
+بله
+</span>
 
 </a>
 
-<a class="menu-item" href="https://www.aparat.com/Abolfazl_Hakerr/shorts" target="_blank">
+<a
+class="menu-item"
+href="https://www.aparat.com/Abolfazl_Hakerr/shorts"
+target="_blank"
+>
 
 <span class="menu-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.7"/>
-<path d="m10 9 5 3-5 3V9Z" fill="currentColor"/>
+
+<rect
+x="4"
+y="5"
+width="16"
+height="14"
+rx="3"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="m10 9 5 3-5 3V9Z"
+fill="currentColor"
+/>
+
 </svg>
+
 </span>
 
-<span class="menu-text">آپارات</span>
+<span class="menu-text">
+آپارات
+</span>
 
 </a>
 
 </div>
+
 </aside>
 
 <!-- =========================
      صفحه اصلی
 ========================= -->
 
-<main class="page active" id="homePage">
+<main
+class="page active"
+id="homePage"
+>
 
 <section class="hero">
 
-<h1 class="hero-title">پنل روبیکا رایگان</h1>
+<h1 class="hero-title">
+پنل روبیکا رایگان
+</h1>
 
 <p class="hero-desc">
 ثبت سفارش خدمات روبیکا و روبینو با محیطی سریع، شیشه‌ای و مدرن
 </p>
 
 <div class="online">
+
 <span class="online-dot"></span>
+
 سرویس آنلاین است
+
 </div>
 
 </section>
@@ -1628,8 +2302,13 @@ alt="پنل روبیکا رایگان"
 <section class="section">
 
 <div class="section-head">
+
 <span class="section-line"></span>
-<h2 class="section-title">خدمات پیام‌رسان روبیکا</h2>
+
+<h2 class="section-title">
+خدمات پیام‌رسان روبیکا
+</h2>
+
 </div>
 
 <div class="services">
@@ -1639,18 +2318,40 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M12 20.2S4 15.7 4 9.8C4 6.8 6.1 5 8.5 5c1.5 0 2.8.8 3.5 2 .7-1.2 2-2 3.5-2C17.9 5 20 6.8 20 9.8c0 5.9-8 10.4-8 10.4Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M8 10.5c.8-1 1.8-1.5 3-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+<path
+d="M12 20.2S4 15.7 4 9.8C4 6.8 6.1 5 8.5 5c1.5 0 2.8.8 3.5 2 .7-1.2 2-2 3.5-2C17.9 5 20 6.8 20 9.8c0 5.9-8 10.4-8 10.4Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M8 10.5c.8-1 1.8-1.5 3-1.5"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">ری‌اکشن پیام</div>
-<div class="service-desc">انتخاب یک یا چند ریکشن برای پیام روبیکا</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('reaction')">
+<div class="service-name">
+ری‌اکشن پیام
+</div>
+
+<div class="service-desc">
+انتخاب یک یا چند ریکشن برای پیام روبیکا
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('reaction')"
+>
 ثبت سفارش
 </button>
 
@@ -1661,19 +2362,48 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z" stroke="currentColor" stroke-width="1.7"/>
-<circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7"/>
-<circle cx="12" cy="12" r="1" fill="currentColor"/>
+
+<path
+d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<circle
+cx="12"
+cy="12"
+r="2.7"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<circle
+cx="12"
+cy="12"
+r="1"
+fill="currentColor"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">سین / بازدید</div>
-<div class="service-desc">ثبت سفارش بازدید پیام روبیکا</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('views')">
+<div class="service-name">
+سین / بازدید
+</div>
+
+<div class="service-desc">
+ثبت سفارش بازدید پیام روبیکا
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('views')"
+>
 ثبت سفارش
 </button>
 
@@ -1684,20 +2414,57 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
-<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-<circle cx="17" cy="9" r="2.2" stroke="currentColor" stroke-width="1.5"/>
-<path d="M15.5 14c2.2.4 3.6 2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+<circle
+cx="9"
+cy="8"
+r="3"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
+<circle
+cx="17"
+cy="9"
+r="2.2"
+stroke="currentColor"
+stroke-width="1.5"
+/>
+
+<path
+d="M15.5 14c2.2.4 3.6 2 4 4"
+stroke="currentColor"
+stroke-width="1.5"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">ممبر</div>
-<div class="service-desc">ثبت سفارش ممبر گروه یا کانال</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('members')">
+<div class="service-name">
+ممبر
+</div>
+
+<div class="service-desc">
+ثبت سفارش ممبر گروه یا کانال
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('members')"
+>
 ثبت سفارش
 </button>
 
@@ -1708,19 +2475,48 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
-<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7"/>
-<path d="M17 8v6M14 11h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<circle
+cx="9"
+cy="8"
+r="3"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M17 8v6M14 11h6"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">فالوور</div>
-<div class="service-desc">ثبت سفارش فالوور صفحه روبیکا</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('followers')">
+<div class="service-name">
+فالوور
+</div>
+
+<div class="service-desc">
+ثبت سفارش فالوور صفحه روبیکا
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('followers')"
+>
 ثبت سفارش
 </button>
 
@@ -1731,18 +2527,40 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9h7.2" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+
+<path
+d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9h7.2"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linejoin="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">لایک پیام</div>
-<div class="service-desc">ثبت سفارش لایک پیام روبیکا</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('likes')">
+<div class="service-name">
+لایک پیام
+</div>
+
+<div class="service-desc">
+ثبت سفارش لایک پیام روبیکا
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('likes')"
+>
 ثبت سفارش
 </button>
 
@@ -1753,31 +2571,59 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M7.5 9.5h9M7.5 12.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M7.5 9.5h9M7.5 12.5h6"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">کامنت</div>
-<div class="service-desc">ثبت سفارش کامنت برای پیام</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('comments')">
+<div class="service-name">
+کامنت
+</div>
+
+<div class="service-desc">
+ثبت سفارش کامنت برای پیام
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('comments')"
+>
 ثبت سفارش
 </button>
 
 </article>
 
 </div>
+
 </section>
 
 <section class="section">
 
 <div class="section-head">
+
 <span class="section-line"></span>
-<h2 class="section-title">خدمات روبینو</h2>
+
+<h2 class="section-title">
+خدمات روبینو
+</h2>
+
 </div>
 
 <div class="services">
@@ -1787,18 +2633,41 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z" stroke="currentColor" stroke-width="1.7"/>
-<circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7"/>
+
+<path
+d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<circle
+cx="12"
+cy="12"
+r="2.7"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">بازدید روبینو</div>
-<div class="service-desc">ثبت سفارش بازدید پست روبینو</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('rubinoViews')">
+<div class="service-name">
+بازدید روبینو
+</div>
+
+<div class="service-desc">
+ثبت سفارش بازدید پست روبینو
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('rubinoViews')"
+>
 ثبت سفارش
 </button>
 
@@ -1809,18 +2678,39 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9" stroke="currentColor" stroke-width="1.7"/>
+
+<path
+d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">لایک روبینو</div>
-<div class="service-desc">ثبت سفارش لایک پست روبینو</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('rubinoLikes')">
+<div class="service-name">
+لایک روبینو
+</div>
+
+<div class="service-desc">
+ثبت سفارش لایک پست روبینو
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('rubinoLikes')"
+>
 ثبت سفارش
 </button>
 
@@ -1831,19 +2721,48 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
-<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7"/>
-<path d="M17 8v6M14 11h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<circle
+cx="9"
+cy="8"
+r="3"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M17 8v6M14 11h6"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">فالوور روبینو</div>
-<div class="service-desc">ثبت سفارش فالوور پروفایل روبینو</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('rubinoFollowers')">
+<div class="service-name">
+فالوور روبینو
+</div>
+
+<div class="service-desc">
+ثبت سفارش فالوور پروفایل روبینو
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('rubinoFollowers')"
+>
 ثبت سفارش
 </button>
 
@@ -1854,24 +2773,47 @@ alt="پنل روبیکا رایگان"
 <div class="service-top">
 
 <div class="icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M7.5 9.5h9M7.5 12.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2-2-2Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M7.5 9.5h9M7.5 12.5h6"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
-</div>
-
-<div class="service-name">کامنت روبینو</div>
-<div class="service-desc">ثبت سفارش کامنت برای پست روبینو</div>
 
 </div>
 
-<button class="order-btn" onclick="openOrder('rubinoComments')">
+<div class="service-name">
+کامنت روبینو
+</div>
+
+<div class="service-desc">
+ثبت سفارش کامنت برای پست روبینو
+</div>
+
+</div>
+
+<button
+class="order-btn"
+onclick="openOrder('rubinoComments')"
+>
 ثبت سفارش
 </button>
 
 </article>
 
 </div>
+
 </section>
 
 </main>
@@ -1880,18 +2822,37 @@ alt="پنل روبیکا رایگان"
      صفحه سفارش‌ها
 ========================= -->
 
-<section class="page orders-page" id="ordersPage">
+<section
+class="page orders-page"
+id="ordersPage"
+>
 
 <div class="orders-hero">
 
 <div class="orders-hero-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M5 4.5h14v15H5z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M8 8h8M8 12h6M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M5 4.5h14v15H5z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M8 8h8M8 12h6M8 16h5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </div>
 
-<div class="orders-title">سفارش‌ها</div>
+<div class="orders-title">
+سفارش‌ها
+</div>
 
 <div class="orders-desc">
 در این بخش می‌توانید سفارش جدید ثبت کنید و تمام سفارش‌های ثبت‌شده خود را همراه با جزئیات و وضعیت مشاهده کنید.
@@ -1905,14 +2866,20 @@ alt="پنل روبیکا رایگان"
 انتخاب نوع سفارش
 </div>
 
-<div class="service-select-grid" id="serviceSelectGrid">
+<div
+class="service-select-grid"
+id="serviceSelectGrid"
+>
 </div>
 
 </div>
 
 <div class="order-form-card">
 
-<div class="form-title" id="selectedServiceTitle">
+<div
+class="form-title"
+id="selectedServiceTitle"
+>
 ابتدا نوع سفارش را انتخاب کنید
 </div>
 
@@ -1922,14 +2889,24 @@ alt="پنل روبیکا رایگان"
 
 <div id="reactionContainer"></div>
 
-<button class="submit-order" type="submit">
+<button
+class="submit-order"
+type="submit"
+>
 ثبت سفارش
 </button>
 
 </form>
 
-<div class="order-message success" id="orderSuccess"></div>
-<div class="order-message error" id="orderError"></div>
+<div
+class="order-message success"
+id="orderSuccess"
+></div>
+
+<div
+class="order-message error"
+id="orderError"
+></div>
 
 </div>
 
@@ -1951,7 +2928,10 @@ type="button"
 
 </div>
 
-<div class="orders-list" id="ordersList"></div>
+<div
+class="orders-list"
+id="ordersList"
+></div>
 
 </div>
 
@@ -1961,7 +2941,10 @@ type="button"
      درباره
 ========================= -->
 
-<section class="page" id="aboutPage">
+<section
+class="page"
+id="aboutPage"
+>
 
 <div class="about-card">
 
@@ -1973,30 +2956,46 @@ alt="تصویر اصلی پنل روبیکا رایگان"
 loading="eager"
 >
 
-<div class="about-title">پنل روبیکا رایگان</div>
+<div class="about-title">
+پنل روبیکا رایگان
+</div>
 
 <div class="about-creator">
 ساخته شده توسط ابوالفضل کاظمی
 </div>
 
 <div class="about-text">
+
 این پنل برای ثبت سفارش خدمات پیام‌رسان روبیکا و روبینو طراحی شده است.
+
 <br><br>
+
 تمام ظاهر پنل با طراحی شیشه‌ای، تاریک، مدرن و واکنش‌گرا ساخته شده و لوگوی اصلی نیز داخل خود کد قرار گرفته است.
+
 </div>
 
 <div class="about-row">
 کانال روبیکا:
-<a href="https://rubika.ir/Counter2Mod" target="_blank">
+
+<a
+href="https://rubika.ir/Counter2Mod"
+target="_blank"
+>
 @Counter2Mod
 </a>
+
 </div>
 
 <div class="about-row">
 سازنده:
-<a href="https://rubika.ir/Abolfazl_Kazemi_SFG" target="_blank">
+
+<a
+href="https://rubika.ir/Abolfazl_Kazemi_SFG"
+target="_blank"
+>
 ابوالفضل کاظمی
 </a>
+
 </div>
 
 <div class="about-row">
@@ -2013,87 +3012,208 @@ loading="eager"
 
 <div class="contact-list">
 
-<a class="contact-item" href="https://rubika.ir/Counter2Mod" target="_blank">
+<a
+class="contact-item"
+href="https://rubika.ir/Counter2Mod"
+target="_blank"
+>
 
 <span class="contact-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v9a1.5 1.5 0 0 1-1.5 1.5H11l-4.3 3v-3H5.5A1.5 1.5 0 0 1 4 15.5v-9Z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v9a1.5 1.5 0 0 1-1.5 1.5H11l-4.3 3v-3H5.5A1.5 1.5 0 0 1 4 15.5v-9Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M8 9h8M8 12h5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </span>
 
 <span class="contact-text">
-<span class="contact-name">کانال روبیکا</span>
-<span class="contact-value">@Counter2Mod</span>
+
+<span class="contact-name">
+کانال روبیکا
+</span>
+
+<span class="contact-value">
+@Counter2Mod
+</span>
+
 </span>
 
 </a>
 
-<a class="contact-item" href="https://rubika.ir/Abolfazl_Kazemi_SFG" target="_blank">
+<a
+class="contact-item"
+href="https://rubika.ir/Abolfazl_Kazemi_SFG"
+target="_blank"
+>
 
 <span class="contact-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="8" r="3.1" stroke="currentColor" stroke-width="1.7"/>
-<path d="M5.5 19c.7-3.3 2.8-5 6.5-5s5.8 1.7 6.5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<circle
+cx="12"
+cy="8"
+r="3.1"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M5.5 19c.7-3.3 2.8-5 6.5-5s5.8 1.7 6.5 5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
+
 </span>
 
 <span class="contact-text">
-<span class="contact-name">پشتیبانی</span>
-<span class="contact-value">ابوالفضل کاظمی</span>
+
+<span class="contact-name">
+پشتیبانی
+</span>
+
+<span class="contact-value">
+ابوالفضل کاظمی
+</span>
+
 </span>
 
 </a>
 
-<a class="contact-item" href="https://t.me/Counter2Mod" target="_blank">
+<a
+class="contact-item"
+href="https://t.me/Counter2Mod"
+target="_blank"
+>
 
 <span class="contact-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="m20.5 4.5-2.8 14.4c-.2 1-.8 1.2-1.6.7l-4.3-3.2-2.2 2c-.2.2-.4.4-.8.4l.3-4.4 8.2-7.4c.4-.3-.1-.5-.6-.2L6.5 13 2.2 11.6c-.9-.3-.9-.9.2-1.3l16.8-6.5c.8-.3 1.5.2 1.3.7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+
+<path
+d="m20.5 4.5-2.8 14.4c-.2 1-.8 1.2-1.6.7l-4.3-3.2-2.2 2c-.2.2-.4.4-.8.4l.3-4.4 8.2-7.4c.4-.3-.1-.5-.6-.2L6.5 13 2.2 11.6c-.9-.3-.9-.9.2-1.3l16.8-6.5c.8-.3 1.5.2 1.3.7Z"
+stroke="currentColor"
+stroke-width="1.4"
+stroke-linejoin="round"
+/>
+
 </svg>
+
 </span>
 
 <span class="contact-text">
-<span class="contact-name">تلگرام</span>
-<span class="contact-value">@Counter2Mod</span>
+
+<span class="contact-name">
+تلگرام
+</span>
+
+<span class="contact-value">
+@Counter2Mod
+</span>
+
 </span>
 
 </a>
 
-<a class="contact-item" href="https://ble.ir/Countermod" target="_blank">
+<a
+class="contact-item"
+href="https://ble.ir/Countermod"
+target="_blank"
+>
 
 <span class="contact-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M7 5h10a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2h-4.5L9 19v-3.5H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+
+<path
+d="M7 5h10a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2h-4.5L9 19v-3.5H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
 </svg>
+
 </span>
 
 <span class="contact-text">
-<span class="contact-name">بله</span>
-<span class="contact-value">Countermod</span>
+
+<span class="contact-name">
+بله
+</span>
+
+<span class="contact-value">
+Countermod
+</span>
+
 </span>
 
 </a>
 
-<a class="contact-item" href="https://www.aparat.com/Abolfazl_Hakerr/shorts" target="_blank">
+<a
+class="contact-item"
+href="https://www.aparat.com/Abolfazl_Hakerr/shorts"
+target="_blank"
+>
 
 <span class="contact-icon">
+
 <svg viewBox="0 0 24 24" fill="none">
-<rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.7"/>
-<path d="m10 9 5 3-5 3V9Z" fill="currentColor"/>
+
+<rect
+x="4"
+y="5"
+width="16"
+height="14"
+rx="3"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="m10 9 5 3-5 3V9Z"
+fill="currentColor"
+/>
+
 </svg>
+
 </span>
 
 <span class="contact-text">
-<span class="contact-name">آپارات</span>
-<span class="contact-value">Abolfazl_Hakerr</span>
+
+<span class="contact-name">
+آپارات
+</span>
+
+<span class="contact-value">
+Abolfazl_Hakerr
+</span>
+
 </span>
 
 </a>
 
 </div>
 
-<button class="back" onclick="goPage('home')">
+<button
+class="back"
+onclick="goPage('home')"
+>
 ← بازگشت به صفحه اصلی
 </button>
 
@@ -2114,9 +3234,26 @@ onclick="goPage('home')"
 >
 
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-<path d="M5.5 10.5V20h13v-9.5" stroke="currentColor" stroke-width="1.8"/>
-<path d="M9.5 20v-5h5v5" stroke="currentColor" stroke-width="1.8"/>
+
+<path
+d="M3 11.5 12 4l9 7.5"
+stroke="currentColor"
+stroke-width="1.8"
+stroke-linecap="round"
+/>
+
+<path
+d="M5.5 10.5V20h13v-9.5"
+stroke="currentColor"
+stroke-width="1.8"
+/>
+
+<path
+d="M9.5 20v-5h5v5"
+stroke="currentColor"
+stroke-width="1.8"
+/>
+
 </svg>
 
 خانه
@@ -2130,8 +3267,20 @@ onclick="goPage('orders')"
 >
 
 <svg viewBox="0 0 24 24" fill="none">
-<path d="M5 4.5h14v15H5z" stroke="currentColor" stroke-width="1.7"/>
-<path d="M8 8h8M8 12h6M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+
+<path
+d="M5 4.5h14v15H5z"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M8 8h8M8 12h6M8 16h5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
 </svg>
 
 سفارش‌ها
@@ -2145,9 +3294,29 @@ onclick="goPage('about')"
 >
 
 <svg viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/>
-<path d="M12 10.5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-<circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+
+<circle
+cx="12"
+cy="12"
+r="8.5"
+stroke="currentColor"
+stroke-width="1.7"
+/>
+
+<path
+d="M12 10.5v5"
+stroke="currentColor"
+stroke-width="1.7"
+stroke-linecap="round"
+/>
+
+<circle
+cx="12"
+cy="7.5"
+r="1"
+fill="currentColor"
+/>
+
 </svg>
 
 درباره
@@ -2171,21 +3340,30 @@ document.getElementById("aboutMainImage").src=MAIN_IMAGE;
    API
 ========================= */
 
-const API="https://rubika-panel-api.kantermodmeno.workers.dev";
+const API=
+"https://rubika-panel-api.kantermodmeno.workers.dev";
 
 
 /* =========================
    منوی اصلی
 ========================= */
 
-const toggle=document.getElementById("menuToggle");
-const side=document.getElementById("side");
-const shade=document.getElementById("shade");
+const toggle=
+document.getElementById("menuToggle");
+
+const side=
+document.getElementById("side");
+
+const shade=
+document.getElementById("shade");
+
 
 function openMenu(){
 
 side.classList.add("show");
+
 shade.classList.add("show");
+
 toggle.classList.add("open");
 
 toggle.setAttribute(
@@ -2200,10 +3378,13 @@ toggle.setAttribute(
 
 }
 
+
 function closeMenu(){
 
 side.classList.remove("show");
+
 shade.classList.remove("show");
+
 toggle.classList.remove("open");
 
 toggle.setAttribute(
@@ -2218,30 +3399,66 @@ toggle.setAttribute(
 
 }
 
-toggle.onclick=()=>{
 
-if(side.classList.contains("show")){
+/*
+   کنترل منوی اصلی
+
+   این بخش طوری نوشته شده که
+   با هر بار کلیک دقیقاً بین
+   سه خط و ضربدر جابه‌جا شود.
+*/
+
+toggle.addEventListener(
+"click",
+function(e){
+
+e.preventDefault();
+e.stopPropagation();
+
+if(
+side.classList.contains("show")
+){
+
 closeMenu();
+
 }else{
+
 openMenu();
+
 }
 
-};
+}
+);
 
-shade.onclick=closeMenu;
+
+shade.addEventListener(
+"click",
+closeMenu
+);
 
 
 /* =========================
    صفحات
 ========================= */
 
-const homePage=document.getElementById("homePage");
-const ordersPage=document.getElementById("ordersPage");
-const aboutPage=document.getElementById("aboutPage");
+const homePage=
+document.getElementById("homePage");
 
-const homeNav=document.getElementById("homeNav");
-const ordersNav=document.getElementById("ordersNav");
-const aboutNav=document.getElementById("aboutNav");
+const ordersPage=
+document.getElementById("ordersPage");
+
+const aboutPage=
+document.getElementById("aboutPage");
+
+const homeNav=
+document.getElementById("homeNav");
+
+const ordersNav=
+document.getElementById("ordersNav");
+
+const aboutNav=
+document.getElementById("aboutNav");
+
 
 function goPage(page){
 
@@ -2255,9 +3472,11 @@ homeNav.classList.remove("active");
 ordersNav.classList.remove("active");
 aboutNav.classList.remove("active");
 
+
 if(page==="orders"){
 
 ordersPage.classList.add("active");
+
 ordersNav.classList.add("active");
 
 history.replaceState(
@@ -2271,6 +3490,7 @@ renderOrders();
 }else if(page==="about"){
 
 aboutPage.classList.add("active");
+
 aboutNav.classList.add("active");
 
 history.replaceState(
@@ -2282,6 +3502,7 @@ null,
 }else{
 
 homePage.classList.add("active");
+
 homeNav.classList.add("active");
 
 history.replaceState(
@@ -2291,6 +3512,7 @@ null,
 );
 
 }
+
 
 window.scrollTo({
 top:0,
@@ -2309,8 +3531,18 @@ const orders={
 reaction:{
 title:"ری‌اکشن پیام",
 fields:[
-["link","لینک پیام","url","لینک پیام روبیکا"],
-["count","تعداد","number","مثلاً 100"]
+[
+"link",
+"لینک پیام",
+"url",
+"لینک پیام روبیکا"
+],
+[
+"count",
+"تعداد",
+"number",
+"مثلاً 100"
+]
 ],
 reaction:true
 },
@@ -2318,74 +3550,174 @@ reaction:true
 views:{
 title:"سین / بازدید",
 fields:[
-["link","لینک پیام","url","لینک پیام روبیکا"],
-["count","تعداد بازدید","number","مثلاً 1000"]
+[
+"link",
+"لینک پیام",
+"url",
+"لینک پیام روبیکا"
+],
+[
+"count",
+"تعداد بازدید",
+"number",
+"مثلاً 1000"
+]
 ]
 },
 
 members:{
 title:"ممبر",
 fields:[
-["target","لینک گروه / کانال","url","لینک گروه یا کانال"],
-["count","تعداد ممبر","number","مثلاً 100"]
+[
+"target",
+"لینک گروه / کانال",
+"url",
+"لینک گروه یا کانال"
+],
+[
+"count",
+"تعداد ممبر",
+"number",
+"مثلاً 100"
+]
 ]
 },
 
 followers:{
 title:"فالوور",
 fields:[
-["target","لینک صفحه","url","لینک صفحه روبیکا"],
-["count","تعداد فالوور","number","مثلاً 100"]
+[
+"target",
+"لینک صفحه",
+"url",
+"لینک صفحه روبیکا"
+],
+[
+"count",
+"تعداد فالوور",
+"number",
+"مثلاً 100"
+]
 ]
 },
 
 likes:{
 title:"لایک پیام",
 fields:[
-["link","لینک پیام","url","لینک پیام روبیکا"],
-["count","تعداد لایک","number","مثلاً 100"]
+[
+"link",
+"لینک پیام",
+"url",
+"لینک پیام روبیکا"
+],
+[
+"count",
+"تعداد لایک",
+"number",
+"مثلاً 100"
+]
 ]
 },
 
 comments:{
 title:"کامنت",
 fields:[
-["link","لینک پیام","url","لینک پیام روبیکا"],
-["count","تعداد کامنت","number","مثلاً 20"],
-["comment","متن کامنت","textarea","متن کامنت"]
+[
+"link",
+"لینک پیام",
+"url",
+"لینک پیام روبیکا"
+],
+[
+"count",
+"تعداد کامنت",
+"number",
+"مثلاً 20"
+],
+[
+"comment",
+"متن کامنت",
+"textarea",
+"متن کامنت"
+]
 ]
 },
 
 rubinoViews:{
 title:"بازدید روبینو",
 fields:[
-["link","لینک پست روبینو","url","لینک پست روبینو"],
-["count","تعداد بازدید","number","مثلاً 1000"]
+[
+"link",
+"لینک پست روبینو",
+"url",
+"لینک پست روبینو"
+],
+[
+"count",
+"تعداد بازدید",
+"number",
+"مثلاً 1000"
+]
 ]
 },
 
 rubinoLikes:{
 title:"لایک روبینو",
 fields:[
-["link","لینک پست روبینو","url","لینک پست روبینو"],
-["count","تعداد لایک","number","مثلاً 100"]
+[
+"link",
+"لینک پست روبینو",
+"url",
+"لینک پست روبینو"
+],
+[
+"count",
+"تعداد لایک",
+"number",
+"مثلاً 100"
+]
 ]
 },
 
 rubinoFollowers:{
 title:"فالوور روبینو",
 fields:[
-["target","لینک پروفایل روبینو","url","لینک پروفایل روبینو"],
-["count","تعداد فالوور","number","مثلاً 100"]
+[
+"target",
+"لینک پروفایل روبینو",
+"url",
+"لینک پروفایل روبینو"
+],
+[
+"count",
+"تعداد فالوور",
+"number",
+"مثلاً 100"
+]
 ]
 },
 
 rubinoComments:{
 title:"کامنت روبینو",
 fields:[
-["link","لینک پست روبینو","url","لینک پست روبینو"],
-["count","تعداد کامنت","number","مثلاً 20"],
-["comment","متن کامنت","textarea","متن کامنت"]
+[
+"link",
+"لینک پست روبینو",
+"url",
+"لینک پست روبینو"
+],
+[
+"count",
+"تعداد کامنت",
+"number",
+"مثلاً 20"
+],
+[
+"comment",
+"متن کامنت",
+"textarea",
+"متن کامنت"
+]
 ]
 }
 
@@ -2399,7 +3731,9 @@ let currentType="reaction";
 ========================= */
 
 const serviceSelectGrid=
-document.getElementById("serviceSelectGrid");
+document.getElementById(
+"serviceSelectGrid"
+);
 
 const serviceIcons={
 
@@ -2416,6 +3750,7 @@ rubinoComments:"💬"
 
 };
 
+
 Object.entries(orders).forEach(
 ([key,config])=>{
 
@@ -2423,7 +3758,9 @@ const button=
 document.createElement("button");
 
 button.type="button";
-button.className="service-select";
+
+button.className=
+"service-select";
 
 button.innerHTML=`
 
@@ -2441,9 +3778,13 @@ button.onclick=()=>{
 
 document
 .querySelectorAll(".service-select")
-.forEach(x=>{
-x.classList.remove("selected");
-});
+.forEach(
+x=>{
+x.classList.remove(
+"selected"
+);
+}
+);
 
 button.classList.add("selected");
 
@@ -2453,7 +3794,9 @@ buildOrderForm();
 
 };
 
-serviceSelectGrid.appendChild(button);
+serviceSelectGrid.appendChild(
+button
+);
 
 }
 );
@@ -2464,23 +3807,33 @@ serviceSelectGrid.appendChild(button);
 ========================= */
 
 const selectedServiceTitle=
-document.getElementById("selectedServiceTitle");
+document.getElementById(
+"selectedServiceTitle"
+);
 
 const orderFields=
-document.getElementById("orderFields");
+document.getElementById(
+"orderFields"
+);
 
 const reactionContainer=
-document.getElementById("reactionContainer");
+document.getElementById(
+"reactionContainer"
+);
+
 
 function buildOrderForm(){
 
-const config=orders[currentType];
+const config=
+orders[currentType];
 
 selectedServiceTitle.textContent=
 "ثبت سفارش "+config.title;
 
 orderFields.innerHTML="";
+
 reactionContainer.innerHTML="";
+
 
 config.fields.forEach(
 data=>{
@@ -2493,21 +3846,30 @@ placeholder
 ]=data;
 
 const box=
-document.createElement("div");
+document.createElement(
+"div"
+);
 
-box.className="order-field";
+box.className=
+"order-field";
 
 const lab=
-document.createElement("label");
+document.createElement(
+"label"
+);
 
-lab.textContent=label;
+lab.textContent=
+label;
 
 let input;
+
 
 if(type==="textarea"){
 
 input=
-document.createElement("textarea");
+document.createElement(
+"textarea"
+);
 
 input.placeholder=
 placeholder;
@@ -2515,26 +3877,39 @@ placeholder;
 }else{
 
 input=
-document.createElement("input");
+document.createElement(
+"input"
+);
 
-input.type=type;
-input.placeholder=placeholder;
+input.type=
+type;
+
+input.placeholder=
+placeholder;
 
 if(type==="number"){
+
 input.min="1";
-}
 
 }
 
-input.name=name;
-input.required=true;
+}
+
+input.name=
+name;
+
+input.required=
+true;
 
 box.appendChild(lab);
+
 box.appendChild(input);
 
 orderFields.appendChild(box);
 
-});
+}
+);
+
 
 if(config.reaction){
 
@@ -2634,17 +4009,20 @@ function createReactionSelector(){
 const box=
 document.createElement("div");
 
-box.className="reaction-box";
+box.className=
+"reaction-box";
 
 const head=
 document.createElement("div");
 
-head.className="reaction-head";
+head.className=
+"reaction-head";
 
 const title=
 document.createElement("div");
 
-title.className="reaction-title";
+title.className=
+"reaction-title";
 
 title.textContent=
 "انتخاب ریکشن پیام";
@@ -2653,13 +4031,19 @@ const all=
 document.createElement("button");
 
 all.type="button";
-all.className="select-all";
-all.textContent="انتخاب همه";
+
+all.className=
+"select-all";
+
+all.textContent=
+"انتخاب همه";
 
 const grid=
 document.createElement("div");
 
-grid.className="reactions";
+grid.className=
+"reactions";
+
 
 reactionList.forEach(
 ([emoji,name])=>{
@@ -2668,11 +4052,24 @@ const b=
 document.createElement("button");
 
 b.type="button";
-b.className="react";
-b.dataset.value=emoji;
-b.title=name;
-b.setAttribute("aria-label",name);
-b.textContent=emoji;
+
+b.className=
+"react";
+
+b.dataset.value=
+emoji;
+
+b.title=
+name;
+
+b.setAttribute(
+"aria-label",
+name
+);
+
+b.textContent=
+emoji;
+
 
 b.onclick=()=>{
 
@@ -2680,57 +4077,75 @@ b.classList.toggle(
 "selected"
 );
 
-const buttons=
-[
-...grid.querySelectorAll(".react")
+const buttons=[
+...grid.querySelectorAll(
+".react"
+)
 ];
 
 const selectedCount=
 buttons.filter(
-x=>x.classList.contains("selected")
+x=>x.classList.contains(
+"selected"
+)
 ).length;
 
 all.textContent=
 selectedCount===buttons.length
-?"لغو انتخاب همه"
-:"انتخاب همه";
+?
+"لغو انتخاب همه"
+:
+"انتخاب همه";
 
 };
 
+
 grid.appendChild(b);
 
-});
+}
+);
+
 
 all.onclick=()=>{
 
-const buttons=
-[
-...grid.querySelectorAll(".react")
+const buttons=[
+...grid.querySelectorAll(
+".react"
+)
 ];
 
 const active=
 buttons.every(
-x=>x.classList.contains("selected")
+x=>x.classList.contains(
+"selected"
+)
 );
 
-buttons.forEach(x=>{
+buttons.forEach(
+x=>{
 x.classList.toggle(
 "selected",
 !active
 );
-});
+}
+);
 
 all.textContent=
 active
-?"انتخاب همه"
-:"لغو انتخاب همه";
+?
+"انتخاب همه"
+:
+"لغو انتخاب همه";
 
 };
 
+
 head.appendChild(title);
+
 head.appendChild(all);
 
 box.appendChild(head);
+
 box.appendChild(grid);
 
 return box;
@@ -2743,13 +4158,19 @@ return box;
 ========================= */
 
 const orderForm=
-document.getElementById("orderForm");
+document.getElementById(
+"orderForm"
+);
 
 const orderSuccess=
-document.getElementById("orderSuccess");
+document.getElementById(
+"orderSuccess"
+);
 
 const orderError=
-document.getElementById("orderError");
+document.getElementById(
+"orderError"
+);
 
 
 orderForm.addEventListener(
@@ -2758,24 +4179,36 @@ async e=>{
 
 e.preventDefault();
 
-orderSuccess.classList.remove("show");
-orderError.classList.remove("show");
+orderSuccess.classList.remove(
+"show"
+);
+
+orderError.classList.remove(
+"show"
+);
+
 
 if(!currentType){
 
 orderError.textContent=
 "✕ ابتدا نوع سفارش را انتخاب کنید.";
 
-orderError.classList.add("show");
+orderError.classList.add(
+"show"
+);
 
 return;
 
 }
 
+
 const data=
-new FormData(orderForm);
+new FormData(
+orderForm
+);
 
 const values={};
+
 
 for(
 const [key,value]
@@ -2787,10 +4220,10 @@ String(value).trim();
 
 }
 
+
 if(currentType==="reaction"){
 
-const selected=
-[
+const selected=[
 ...document.querySelectorAll(
 ".react.selected"
 )
@@ -2798,20 +4231,25 @@ const selected=
 x=>x.dataset.value
 );
 
+
 if(!selected.length){
 
 orderError.textContent=
 "✕ حداقل یک ریکشن را انتخاب کنید.";
 
-orderError.classList.add("show");
+orderError.classList.add(
+"show"
+);
 
 return;
 
 }
 
-values.reactions=selected;
+values.reactions=
+selected;
 
 }
+
 
 const config=
 orders[currentType];
@@ -2821,6 +4259,7 @@ const orderId=
 
 const createdAt=
 new Date().toISOString();
+
 
 const localOrder={
 
@@ -2838,6 +4277,7 @@ created_at:createdAt
 
 };
 
+
 let localOrders=
 JSON.parse(
 localStorage.getItem(
@@ -2845,14 +4285,19 @@ localStorage.getItem(
 )||"[]"
 );
 
+
 localOrders.unshift(
 localOrder
 );
 
+
 localStorage.setItem(
 "userOrders",
-JSON.stringify(localOrders)
+JSON.stringify(
+localOrders
+)
 );
+
 
 orderSuccess.innerHTML=
 "✓ سفارش شما با موفقیت در لیست سفارش‌ها ثبت شد."+
@@ -2861,9 +4306,13 @@ escapeHTML(orderId)+
 "</b>"+
 "<br>وضعیت: <b>در انتظار</b>";
 
-orderSuccess.classList.add("show");
+
+orderSuccess.classList.add(
+"show"
+);
 
 renderOrders();
+
 
 try{
 
@@ -2872,43 +4321,61 @@ values.link||
 values.target||
 "";
 
+
 const payload={
 
-service:config.title,
+service:
+config.title,
 
-chat_id:target,
+chat_id:
+target,
 
-text:JSON.stringify({
+text:
+JSON.stringify({
 
-service:config.title,
+service:
+config.title,
 
-data:values,
+data:
+values,
 
-order_id:orderId,
+order_id:
+orderId,
 
-created_at:createdAt
+created_at:
+createdAt
 
 },null,2)
 
 };
+
 
 const response=
 await fetch(
 API+"/api/order",
 {
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
-body:JSON.stringify(payload)
+
+body:
+JSON.stringify(payload)
 }
 );
+
 
 let result=null;
 
 try{
-result=await response.json();
+
+result=
+await response.json();
+
 }catch(_){}
+
 
 if(
 response.ok &&
@@ -2923,10 +4390,12 @@ localStorage.getItem(
 )||"[]"
 );
 
+
 const index=
 saved.findIndex(
 x=>x.id===orderId
 );
+
 
 if(index!==-1){
 
@@ -2939,19 +4408,24 @@ saved[index].status=
 
 localStorage.setItem(
 "userOrders",
-JSON.stringify(saved)
+JSON.stringify(
+saved
+)
 );
 
 }
+
 
 orderSuccess.innerHTML=
 "✓ سفارش با موفقیت به سرور ارسال شد."+
 "<br>کد سفارش: <b>"+
 escapeHTML(
-result.order_id||orderId
+result.order_id||
+orderId
 )+
 "</b>"+
 "<br>وضعیت: <b>در حال انجام</b>";
+
 
 renderOrders();
 
@@ -2965,12 +4439,15 @@ renderOrders();
 
 }
 
+
 orderForm.reset();
+
 
 const selectedButtons=
 document.querySelectorAll(
 ".react.selected"
 );
+
 
 selectedButtons.forEach(
 x=>x.classList.remove(
@@ -2978,7 +4455,8 @@ x=>x.classList.remove(
 )
 );
 
-});
+}
+);
 
 
 /* =========================
@@ -2986,13 +4464,16 @@ x=>x.classList.remove(
 ========================= */
 
 const ordersList=
-document.getElementById("ordersList");
+document.getElementById(
+"ordersList"
+);
+
 
 function statusInfo(status){
 
 if(status==="done"){
 
-return [
+return[
 "انجام شده",
 "status-done"
 ];
@@ -3001,7 +4482,7 @@ return [
 
 if(status==="doing"){
 
-return [
+return[
 "در حال انجام",
 "status-doing"
 ];
@@ -3010,14 +4491,14 @@ return [
 
 if(status==="cancel"){
 
-return [
+return[
 "لغو شده",
 "status-cancel"
 ];
 
 }
 
-return [
+return[
 "در انتظار",
 "status-waiting"
 ];
@@ -3034,7 +4515,9 @@ localStorage.getItem(
 )||"[]"
 );
 
+
 ordersList.innerHTML="";
+
 
 if(!list.length){
 
@@ -3062,7 +4545,9 @@ return;
 
 }
 
-list.forEach(order=>{
+
+list.forEach(
+order=>{
 
 const status=
 statusInfo(
@@ -3070,7 +4555,8 @@ order.status
 );
 
 const data=
-order.data||{};
+order.data||
+{};
 
 const link=
 data.link||
@@ -3081,34 +4567,47 @@ let count=
 data.count||
 "-";
 
+
 if(
 Array.isArray(
 data.reactions
 )
 ){
+
 count=
 data.reactions.length+
 " ریکشن";
+
 }
+
 
 const reactions=
 Array.isArray(
 data.reactions
 )
-?data.reactions.join(" ")
-:"-";
+?
+data.reactions.join(" ")
+:
+"-";
+
 
 const date=
 new Date(
 order.created_at
 );
 
+
 const dateText=
-isNaN(date.getTime())
-?"-"
-:date.toLocaleString(
+isNaN(
+date.getTime()
+)
+?
+"-"
+:
+date.toLocaleString(
 "fa-IR"
 );
+
 
 const card=
 document.createElement(
@@ -3117,6 +4616,7 @@ document.createElement(
 
 card.className=
 "order-card";
+
 
 card.innerHTML=`
 
@@ -3156,7 +4656,10 @@ ${escapeHTML(count)}
 لینک / هدف
 </span>
 
-<span class="order-detail-value" dir="ltr">
+<span
+class="order-detail-value"
+dir="ltr"
+>
 ${escapeHTML(link)}
 </span>
 
@@ -3189,14 +4692,19 @@ ${escapeHTML(reactions)}
 </div>
 
 <div class="order-date">
-ثبت شده در: ${escapeHTML(dateText)}
+ثبت شده در:
+${escapeHTML(dateText)}
 </div>
 
 `;
 
-ordersList.appendChild(card);
 
-});
+ordersList.appendChild(
+card
+);
+
+}
+);
 
 }
 
@@ -3206,7 +4714,9 @@ ordersList.appendChild(card);
 ========================= */
 
 document
-.getElementById("clearOrders")
+.getElementById(
+"clearOrders"
+)
 .onclick=()=>{
 
 const list=
@@ -3216,9 +4726,13 @@ localStorage.getItem(
 )||"[]"
 );
 
+
 if(!list.length){
+
 return;
+
 }
+
 
 if(
 confirm(
@@ -3245,11 +4759,30 @@ function escapeHTML(value){
 
 return String(value)
 
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
@@ -3260,43 +4793,52 @@ return String(value)
 
 buildOrderForm();
 
+
 const firstService=
 document.querySelector(
 ".service-select"
 );
 
 if(firstService){
+
 firstService.classList.add(
 "selected"
 );
+
 }
+
 
 renderOrders();
 
 
 /* =========================
    باز کردن سرویس از صفحه اصلی
-   و رفتن مستقیم به صفحه سفارش‌ها
 ========================= */
 
 function openOrder(type){
 
 if(!orders[type]){
+
 type="reaction";
+
 }
 
-currentType=type;
+
+currentType=
+type;
+
 
 goPage("orders");
 
+
 setTimeout(()=>{
 
-const buttons=
-[
+const buttons=[
 ...document.querySelectorAll(
 ".service-select"
 )
 ];
+
 
 buttons.forEach(
 button=>{
@@ -3306,9 +4848,11 @@ button.classList.remove(
 }
 );
 
+
 const index=
 Object.keys(orders)
 .indexOf(type);
+
 
 if(
 index>=0 &&
@@ -3321,12 +4865,15 @@ buttons[index].classList.add(
 
 }
 
+
 buildOrderForm();
+
 
 const target=
 document.getElementById(
 "selectedServiceTitle"
 );
+
 
 if(target){
 
@@ -3346,11 +4893,15 @@ block:"center"
    پشتیبانی از لینک صفحه
 ========================= */
 
-if(location.hash==="#orders"){
+if(
+location.hash==="#orders"
+){
 
 goPage("orders");
 
-}else if(location.hash==="#about"){
+}else if(
+location.hash==="#about"
+){
 
 goPage("about");
 

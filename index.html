@@ -3,3643 +3,1404 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050912">
-<meta name="description" content="پنل خدمات روبیکا - ساخته شده توسط ابوالفضل کاظمی">
-<title>پنل خدمات روبیکا</title>
+<meta name="theme-color" content="#050a12">
+<title>پنل روبیکا رایگان</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-:root{
-    --bg:#050912;
-    --card:rgba(15,25,40,.78);
-    --card2:rgba(255,255,255,.045);
-    --border:rgba(255,255,255,.09);
-    --border2:rgba(255,255,255,.15);
-    --text:#f5f7fb;
-    --muted:#91a0b5;
-    --blue:#4da3ff;
-    --blue2:#756cff;
-    --green:#27d59a;
-    --red:#ff5e78;
-    --gold:#ffc857;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
 body{
-    min-height:100vh;
-    overflow-x:hidden;
-    background:
-        radial-gradient(circle at 10% 5%,rgba(77,163,255,.13),transparent 30%),
-        radial-gradient(circle at 90% 20%,rgba(117,108,255,.10),transparent 30%),
-        linear-gradient(145deg,#040811,#091321 55%,#050912);
-    color:var(--text);
-    font-family:Tahoma,Arial,sans-serif;
+min-height:100vh;overflow-x:hidden;color:#edf8ff;
+font-family:Tahoma,Arial,sans-serif;
+background:
+radial-gradient(circle at 15% 0%,rgba(0,174,255,.16),transparent 28%),
+radial-gradient(circle at 100% 45%,rgba(0,105,255,.12),transparent 30%),
+linear-gradient(145deg,#02050a,#06111e 50%,#02060b);
+}
+button,input,textarea,select{font-family:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* ---------- پس زمینه ---------- */
+body:before,body:after{
+content:"";position:fixed;z-index:-1;border-radius:50%;pointer-events:none;
+filter:blur(1px);animation:float 9s ease-in-out infinite;
+}
+body:before{
+width:180px;height:180px;left:-90px;top:22%;
+background:rgba(0,155,255,.06);
+box-shadow:0 0 90px rgba(0,155,255,.1);
+}
+body:after{
+width:130px;height:130px;right:-65px;bottom:18%;
+background:rgba(0,115,255,.06);
+box-shadow:0 0 70px rgba(0,115,255,.1);
+animation-delay:2s;
+}
+@keyframes float{
+50%{transform:translate(15px,-25px) scale(1.08)}
 }
 
-button,
-input{
-    font-family:inherit;
+/* ---------- نوار بالا ---------- */
+.topbar{
+height:70px;position:sticky;top:0;z-index:100;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 13px;
+background:rgba(3,10,18,.78);
+border-bottom:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter:blur(25px);
+box-shadow:0 8px 35px rgba(0,0,0,.18);
 }
 
-button{
-    cursor:pointer;
+.brand{
+display:flex;align-items:center;gap:10px;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+.brand-image{
+width:44px;height:44px;object-fit:cover;
+border-radius:13px;
+border:1px solid rgba(255,255,255,.16);
+box-shadow:
+0 0 18px rgba(0,157,255,.25),
+inset 0 1px rgba(255,255,255,.2);
 }
 
-/* =========================
-   آیکون‌های داخلی SVG
-========================= */
+.brand-text{display:flex;flex-direction:column;gap:3px}
+.brand-title{
+font-size:15px;font-weight:950;
+background:linear-gradient(90deg,#fff,#66d7ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.brand-sub{font-size:9px;color:#7993a8}
+
+/* ---------- دکمه منو ---------- */
+.menu-toggle{
+width:46px;height:46px;border:1px solid rgba(255,255,255,.09);
+border-radius:15px;background:rgba(255,255,255,.045);
+color:#fff;display:flex;align-items:center;justify-content:center;
+box-shadow:inset 0 1px rgba(255,255,255,.07),0 8px 25px rgba(0,0,0,.2);
+transition:.25s;
+}
+.menu-toggle:active{transform:scale(.9)}
+.menu-toggle svg{width:24px;height:24px}
+.menu-toggle .line{transition:.28s;transform-origin:center}
+.menu-toggle.open .l1{transform:translateY(5px) rotate(45deg)}
+.menu-toggle.open .l2{opacity:0;transform:scaleX(0)}
+.menu-toggle.open .l3{transform:translateY(-5px) rotate(-45deg)}
+
+/* ---------- منوی کناری ---------- */
+.shade{
+position:fixed;inset:0;z-index:120;
+background:rgba(0,0,0,.7);
+backdrop-filter:blur(7px);
+opacity:0;visibility:hidden;transition:.25s;
+}
+.shade.show{opacity:1;visibility:visible}
+
+.side{
+position:fixed;z-index:130;right:-340px;top:0;
+width:min(320px,88vw);height:100vh;overflow-y:auto;
+padding:18px 14px 35px;
+background:
+radial-gradient(circle at 50% 0%,rgba(0,159,255,.13),transparent 30%),
+linear-gradient(180deg,#081827,#03080e);
+border-left:1px solid rgba(255,255,255,.09);
+box-shadow:-30px 0 80px rgba(0,0,0,.55);
+transition:right .32s cubic-bezier(.2,.8,.2,1);
+}
+.side.show{right:0}
+
+.side-head{
+display:flex;align-items:center;justify-content:space-between;
+padding:2px 2px 20px;
+}
+.side-title{font-size:14px;font-weight:950}
+.side-close{
+width:40px;height:40px;border:1px solid rgba(255,255,255,.08);
+border-radius:13px;background:rgba(255,255,255,.05);
+color:#fff;font-size:22px;
+}
+
+.menu-photo{
+display:block;width:115px;height:115px;object-fit:cover;
+margin:7px auto 25px;border-radius:25px;
+border:1px solid rgba(255,255,255,.18);
+box-shadow:
+0 0 35px rgba(0,155,255,.25),
+0 20px 50px rgba(0,0,0,.35);
+}
+
+.menu-items{display:flex;flex-direction:column;gap:9px}
+
+.menu-item{
+min-height:57px;padding:8px 11px;
+display:flex;align-items:center;gap:12px;
+border-radius:17px;
+border:1px solid rgba(255,255,255,.065);
+background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+box-shadow:inset 0 1px rgba(255,255,255,.04);
+transition:.2s;
+}
+.menu-item:active{transform:scale(.97)}
+.menu-icon{
+width:41px;height:41px;flex:none;
+display:flex;align-items:center;justify-content:center;
+border-radius:13px;
+color:#67d7ff;
+background:linear-gradient(145deg,rgba(0,165,255,.2),rgba(0,75,145,.06));
+border:1px solid rgba(0,165,255,.17);
+box-shadow:0 0 18px rgba(0,145,255,.08),inset 0 1px rgba(255,255,255,.1);
+}
+.menu-icon svg{width:21px;height:21px}
+.menu-text{font-size:11px;font-weight:900}
+
+/* ---------- صفحه ---------- */
+.page{
+width:min(980px,100%);
+margin:auto;padding:24px 13px 105px;
+display:none;position:relative;z-index:1;
+}
+.page.active{display:block}
+
+/* ---------- هدر صفحه ---------- */
+.hero{text-align:center;padding:10px 0 5px}
+.hero-title{
+font-size:25px;font-weight:950;
+letter-spacing:-.7px;
+background:linear-gradient(90deg,#fff,#6bdcff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.hero-desc{
+max-width:600px;margin:9px auto 0;
+font-size:10px;line-height:2;color:#7f98ab;
+}
+.online{
+display:inline-flex;align-items:center;gap:7px;
+margin-top:12px;padding:7px 13px;border-radius:30px;
+font-size:9px;color:#5ee6ae;
+background:rgba(0,215,130,.05);
+border:1px solid rgba(0,215,130,.13);
+}
+.online-dot{
+width:7px;height:7px;border-radius:50%;
+background:#22e198;box-shadow:0 0 12px #22e198;
+}
+
+/* ---------- بخش ---------- */
+.section{margin-top:30px}
+.section-head{
+display:flex;align-items:center;gap:9px;margin-bottom:12px;
+}
+.section-line{
+width:4px;height:21px;border-radius:10px;
+background:linear-gradient(#54d6ff,#0860ae);
+box-shadow:0 0 15px rgba(0,160,255,.5);
+}
+.section-title{font-size:15px;font-weight:950}
+
+/* ---------- کارت خدمات ---------- */
+.services{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+}
+.service{
+position:relative;overflow:hidden;min-height:174px;
+padding:14px;border-radius:21px;
+border:1px solid rgba(255,255,255,.07);
+background:
+linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+box-shadow:
+inset 0 1px rgba(255,255,255,.05),
+0 14px 40px rgba(0,0,0,.2);
+transition:.25s;
+}
+.service:before{
+content:"";position:absolute;width:130px;height:130px;
+left:-70px;bottom:-75px;border-radius:50%;
+background:rgba(0,145,255,.08);filter:blur(8px);
+}
+.service:after{
+content:"";position:absolute;right:25px;top:0;width:65px;height:1px;
+background:linear-gradient(90deg,transparent,#57d8ff,transparent);
+}
+.service:active{transform:scale(.985)}
+.service-top{position:relative;z-index:1}
 
 .icon{
-    width:22px;
-    height:22px;
-    display:block;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.8;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+width:49px;height:49px;border-radius:16px;
+display:flex;align-items:center;justify-content:center;
+color:#62d6ff;
+background:
+linear-gradient(145deg,rgba(0,174,255,.21),rgba(0,75,145,.07));
+border:1px solid rgba(0,164,255,.17);
+box-shadow:
+inset 0 1px rgba(255,255,255,.12),
+0 9px 25px rgba(0,120,255,.1);
+}
+.icon svg{
+width:25px;height:25px;
+filter:drop-shadow(0 0 6px rgba(75,210,255,.25));
+}
+.service-name{margin-top:11px;font-size:12px;font-weight:950}
+.service-desc{margin-top:5px;color:#728ca0;font-size:8.5px;line-height:1.7}
+
+.order-btn{
+width:100%;height:38px;margin-top:12px;
+border:0;border-radius:12px;color:#fff;
+font-size:10px;font-weight:950;
+background:linear-gradient(135deg,#0a9bff,#0751a0);
+box-shadow:0 8px 22px rgba(0,120,255,.2),inset 0 1px rgba(255,255,255,.15);
+transition:.2s;
+}
+.order-btn:active{transform:scale(.97)}
+
+/* ---------- درباره ---------- */
+.about-card{
+padding:22px;border-radius:25px;
+border:1px solid rgba(255,255,255,.08);
+background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+box-shadow:inset 0 1px rgba(255,255,255,.04),0 25px 60px rgba(0,0,0,.25);
+}
+.about-photo{
+display:block;width:135px;height:135px;object-fit:cover;
+margin:0 auto 18px;border-radius:28px;
+border:1px solid rgba(255,255,255,.17);
+box-shadow:0 0 35px rgba(0,155,255,.22);
+}
+.about-title{text-align:center;font-size:23px;font-weight:950}
+.about-creator{text-align:center;color:#5ccaff;font-size:11px;margin-top:7px}
+.about-text{color:#8aa3b7;font-size:10.5px;line-height:2.1;margin-top:20px}
+.about-row{
+margin-top:9px;padding:13px;border-radius:15px;
+border:1px solid rgba(255,255,255,.055);
+background:rgba(255,255,255,.03);
+font-size:10px;
+}
+.about-row a{color:#5bcaff}
+.back{
+width:100%;height:44px;margin-top:17px;
+border:1px solid rgba(255,255,255,.08);border-radius:14px;
+background:rgba(255,255,255,.04);color:#fff;font-size:10px;font-weight:900;
 }
 
-.logoIcon{
-    width:27px;
-    height:27px;
-    display:block;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.7;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+/* ---------- پایین ---------- */
+.bottom{
+position:fixed;z-index:90;left:50%;bottom:11px;
+transform:translateX(-50%);
+width:min(470px,calc(100% - 22px));
+padding:7px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
+border:1px solid rgba(255,255,255,.09);border-radius:21px;
+background:rgba(5,15,25,.86);
+backdrop-filter:blur(22px);
+box-shadow:0 18px 60px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.06);
+}
+.nav{
+height:51px;border:0;border-radius:15px;color:#6f8ba0;
+background:transparent;font-size:9px;font-weight:900;transition:.2s;
+}
+.nav svg{width:19px;height:19px;display:block;margin:0 auto 3px}
+.nav.active{
+color:#fff;background:linear-gradient(145deg,rgba(0,153,255,.18),rgba(0,75,160,.06));
+}
+.nav.active:after{
+content:"";display:block;width:20px;height:2px;border-radius:9px;
+background:#48cfff;margin:3px auto 0;box-shadow:0 0 10px #29bfff;
 }
 
-.serviceIcon .icon{
-    width:23px;
-    height:23px;
+/* ---------- مودال ---------- */
+.modal-layer{
+position:fixed;z-index:200;inset:0;
+display:flex;align-items:flex-end;justify-content:center;
+background:rgba(0,0,0,.76);
+backdrop-filter:blur(8px);
+opacity:0;visibility:hidden;transition:.25s;
+}
+.modal-layer.show{opacity:1;visibility:visible}
+
+.modal{
+width:min(570px,100%);max-height:93vh;overflow-y:auto;
+padding:18px;border-radius:28px 28px 0 0;
+background:linear-gradient(180deg,#0a1b2c,#030a12);
+border:1px solid rgba(255,255,255,.09);
+transform:translateY(40px);transition:.3s;
+box-shadow:0 -25px 80px rgba(0,0,0,.45);
+}
+.modal-layer.show .modal{transform:translateY(0)}
+
+.modal-head{
+display:flex;align-items:center;justify-content:space-between;margin-bottom:17px;
+}
+.modal-title{font-size:16px;font-weight:950}
+.modal-close{
+width:39px;height:39px;border:1px solid rgba(255,255,255,.08);
+border-radius:12px;background:rgba(255,255,255,.05);color:#fff;font-size:21px;
 }
 
-.nav .icon{
-    width:21px;
-    height:21px;
-    margin:0 auto 4px;
-}
-
-/* =========================
-   پس زمینه
-========================= */
-
-.ball{
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    opacity:.18;
-    filter:blur(2px);
-    z-index:0;
-    animation:float 10s ease-in-out infinite;
-}
-
-.ball1{
-    width:170px;
-    height:170px;
-    right:-90px;
-    top:8%;
-    background:#1977ff;
-}
-
-.ball2{
-    width:120px;
-    height:120px;
-    left:-60px;
-    bottom:20%;
-    background:#6d5cff;
-    animation-delay:2s;
-}
-
-.ball3{
-    width:70px;
-    height:70px;
-    right:8%;
-    top:48%;
-    background:#17d6b3;
-    animation-delay:4s;
-}
-
-@keyframes float{
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-25px);
-    }
-}
-
-/* =========================
-   برنامه
-========================= */
-
-.app{
-    position:relative;
-    z-index:2;
-    width:min(100%,520px);
-    min-height:100vh;
-    margin:auto;
-    padding-bottom:105px;
-}
-
-/* =========================
-   هدر
-========================= */
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    padding:13px 14px 10px;
-    background:rgba(5,9,18,.75);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-}
-
-.headerBox{
-    min-height:68px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:10px 12px;
-    border:1px solid var(--border);
-    border-radius:23px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.025)
-        );
-    box-shadow:
-        0 20px 55px rgba(0,0,0,.35),
-        inset 0 1px rgba(255,255,255,.04);
-}
-
-.logo{
-    width:48px;
-    height:48px;
-    display:grid;
-    place-items:center;
-    flex-shrink:0;
-    border-radius:16px;
-    color:#72b9ff;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(77,163,255,.18),
-            rgba(117,108,255,.08)
-        );
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:
-        0 8px 25px rgba(37,135,255,.12),
-        inset 0 1px rgba(255,255,255,.08);
-}
-
-.headerText{
-    flex:1;
-    min-width:0;
-}
-
-.headerText strong{
-    display:block;
-    font-size:16px;
-    margin-bottom:5px;
-}
-
-.headerText span{
-    color:var(--muted);
-    font-size:10px;
-}
-
-.online{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    padding:8px 10px;
-    border-radius:12px;
-    color:#78efc1;
-    font-size:10px;
-    background:rgba(39,213,154,.07);
-    border:1px solid rgba(39,213,154,.15);
-}
-
-.onlineDot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 10px var(--green);
-}
-
-/* =========================
-   هیرو
-========================= */
-
-.hero{
-    position:relative;
-    overflow:hidden;
-    margin:18px 14px;
-    padding:24px 20px;
-    border-radius:28px;
-    border:1px solid var(--border);
-    background:
-        linear-gradient(
-            135deg,
-            rgba(77,163,255,.13),
-            rgba(117,108,255,.08),
-            rgba(255,255,255,.025)
-        );
-    box-shadow:0 20px 55px rgba(0,0,0,.30);
-}
-
-.hero:after{
-    content:"";
-    position:absolute;
-    width:130px;
-    height:130px;
-    left:-70px;
-    top:-70px;
-    border-radius:50%;
-    background:rgba(77,163,255,.08);
-    filter:blur(3px);
-}
-
-.hero h1{
-    position:relative;
-    z-index:1;
-    font-size:23px;
-    margin-bottom:9px;
-}
-
-.hero p{
-    position:relative;
-    z-index:1;
-    color:var(--muted);
-    font-size:12px;
-    line-height:2;
-}
-
-.badges{
-    position:relative;
-    z-index:1;
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:15px;
-}
-
-.badge{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    padding:7px 10px;
-    border-radius:11px;
-    color:#cbd7e8;
-    font-size:10px;
-    background:rgba(255,255,255,.045);
-    border:1px solid var(--border);
-}
-
-/* =========================
-   محتوا
-========================= */
-
-.content{
-    padding:0 14px;
-}
-
-.tabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
-
-.tab{
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:12px;
-    color:var(--muted);
-    background:rgba(255,255,255,.035);
-    font-size:11px;
-    transition:.2s;
-}
-
-.tab.active{
-    color:#fff;
-    border-color:rgba(77,163,255,.35);
-    background:rgba(77,163,255,.13);
-    box-shadow:0 8px 25px rgba(77,163,255,.07);
-}
-
-.sectionTitle{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin:22px 2px 12px;
-}
-
-.sectionTitle h2{
-    font-size:15px;
-}
-
-.sectionTitle span{
-    color:var(--muted);
-    font-size:10px;
-}
-
-/* =========================
-   خدمات
-========================= */
-
-.services{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-}
-
-.service{
-    min-height:150px;
-    padding:15px;
-    border-radius:22px;
-    border:1px solid var(--border);
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.025)
-        );
-    box-shadow:0 12px 30px rgba(0,0,0,.20);
-    transition:
-        transform .2s,
-        border-color .2s,
-        box-shadow .2s;
-}
-
-.service:hover{
-    transform:translateY(-2px);
-    border-color:rgba(77,163,255,.22);
-    box-shadow:
-        0 16px 35px rgba(0,0,0,.28),
-        0 0 25px rgba(77,163,255,.04);
-}
-
-.serviceIcon{
-    width:43px;
-    height:43px;
-    display:grid;
-    place-items:center;
-    border-radius:15px;
-    color:#74baff;
-    background:rgba(77,163,255,.09);
-    border:1px solid rgba(77,163,255,.14);
-    margin-bottom:11px;
-}
-
-.service h3{
-    font-size:13px;
-    margin-bottom:7px;
-}
-
-.service p{
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.8;
-}
-
-.serviceBottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-top:12px;
-}
-
-.free{
-    color:#6cebb8;
-    font-size:10px;
-}
-
-.orderButton{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    border:0;
-    border-radius:11px;
-    padding:8px 12px;
-    color:#fff;
-    font-size:10px;
-    background:linear-gradient(135deg,var(--blue),var(--blue2));
-    box-shadow:0 7px 20px rgba(77,163,255,.12);
-}
-
-.orderButton svg{
-    width:13px;
-    height:13px;
-}
-
-/* =========================
-   فرم سفارش
-========================= */
-
-.orderBox{
-    display:none;
-    margin-top:18px;
-    padding:18px;
-    border-radius:24px;
-    border:1px solid var(--border2);
-    background:
-        linear-gradient(
-            145deg,
-            rgba(20,32,50,.95),
-            rgba(9,17,29,.92)
-        );
-    box-shadow:0 20px 55px rgba(0,0,0,.40);
-}
-
-.orderBox.show{
-    display:block;
-    animation:boxIn .25s ease;
-}
-
-@keyframes boxIn{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.orderHeader{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:16px;
-}
-
-.orderHeader strong{
-    font-size:15px;
-}
-
-.closeButton{
-    width:32px;
-    height:32px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    color:#fff;
-    background:rgba(255,255,255,.05);
-}
-
-.field{
-    margin-bottom:14px;
-}
-
+.field{margin-bottom:12px}
 .field label{
-    display:block;
-    margin-bottom:7px;
-    color:#c7d2e0;
-    font-size:11px;
+display:block;margin-bottom:6px;color:#9db4c5;font-size:9px;font-weight:800;
 }
-
-.input{
-    width:100%;
-    border:1px solid var(--border2);
-    border-radius:14px;
-    outline:none;
-    padding:12px;
-    color:#fff;
-    background:rgba(255,255,255,.045);
-    font-size:12px;
+.field input,.field textarea,.field select{
+width:100%;outline:none;color:#fff;
+border:1px solid rgba(255,255,255,.08);border-radius:14px;
+background:rgba(255,255,255,.045);font-size:10px;
 }
-
-.input:focus{
-    border-color:rgba(77,163,255,.55);
-    box-shadow:0 0 0 3px rgba(77,163,255,.08);
+.field input,.field select{height:45px;padding:0 12px}
+.field textarea{height:85px;padding:12px;resize:none}
+.field input:focus,.field textarea:focus,.field select:focus{
+border-color:rgba(0,164,255,.45);
+box-shadow:0 0 0 3px rgba(0,150,255,.06);
 }
+.field select option{background:#081624;color:#fff}
 
-.limitText{
-    color:#6cebb8;
-    font-size:10px;
+/* ---------- ریکشن ---------- */
+.reaction-box{
+padding:12px;border-radius:17px;
+border:1px solid rgba(255,255,255,.07);
+background:rgba(255,255,255,.025);
+margin-bottom:12px;
 }
-
-/* =========================
-   حالت ریکشن
-========================= */
-
-.reactionModes{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
+.reaction-head{
+display:flex;align-items:center;justify-content:space-between;
+margin-bottom:9px;
 }
-
-.modeButton{
-    padding:10px 5px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    color:var(--muted);
-    background:rgba(255,255,255,.035);
-    font-size:10px;
+.reaction-title{font-size:10px;font-weight:900}
+.select-all{
+border:1px solid rgba(0,163,255,.2);border-radius:10px;
+background:rgba(0,145,255,.08);color:#62d6ff;
+padding:7px 9px;font-size:8px;font-weight:900;
 }
-
-.modeButton.active{
-    color:#fff;
-    border-color:rgba(77,163,255,.45);
-    background:rgba(77,163,255,.13);
+.reactions{
+display:grid;grid-template-columns:repeat(4,1fr);gap:7px;
 }
-
-.allInfo{
-    display:none;
-    margin-top:8px;
-    padding:10px;
-    border-radius:12px;
-    color:#b9d9ff;
-    background:rgba(77,163,255,.07);
-    border:1px solid rgba(77,163,255,.18);
-    font-size:10px;
-    line-height:1.9;
+.react{
+height:48px;border:1px solid rgba(255,255,255,.07);
+border-radius:13px;background:rgba(255,255,255,.035);
+color:#fff;font-size:21px;transition:.2s;
 }
-
-.allInfo.show{
-    display:block;
+.react.selected{
+border-color:rgba(52,204,255,.65);
+background:rgba(0,158,255,.14);
+box-shadow:0 0 18px rgba(0,155,255,.13);
+transform:translateY(-1px);
 }
-
-/* =========================
-   ریکشن ها
-========================= */
-
-.emojiGrid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:7px;
-    max-height:420px;
-    overflow-y:auto;
-    padding:2px;
-}
-
-.emojiGrid::-webkit-scrollbar{
-    width:5px;
-}
-
-.emojiGrid::-webkit-scrollbar-thumb{
-    background:rgba(255,255,255,.12);
-    border-radius:20px;
-}
-
-.emoji{
-    min-height:44px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    color:#fff;
-    background:rgba(255,255,255,.04);
-    font-size:20px;
-    transition:.15s;
-}
-
-.emoji.active{
-    border-color:var(--blue);
-    background:rgba(77,163,255,.16);
-    transform:scale(1.04);
-}
-
-/* =========================
-   مراحل
-========================= */
-
-.stageInfo{
-    display:none;
-    margin:10px 0;
-    padding:12px;
-    border-radius:14px;
-    color:#b9d9ff;
-    background:rgba(77,163,255,.07);
-    border:1px solid rgba(77,163,255,.18);
-    font-size:10px;
-    line-height:2;
-}
-
-.stageInfo.show{
-    display:block;
-}
-
-/* =========================
-   دکمه ثبت
-========================= */
 
 .submit{
-    width:100%;
-    border:0;
-    border-radius:15px;
-    padding:14px;
-    color:#fff;
-    font-size:12px;
-    font-weight:bold;
-    background:linear-gradient(135deg,#248cff,#756cff);
-    box-shadow:0 12px 30px rgba(77,163,255,.12);
+width:100%;height:47px;border:0;border-radius:14px;
+color:#fff;font-size:11px;font-weight:950;
+background:linear-gradient(135deg,#0b9cff,#0752a0);
+box-shadow:0 10px 28px rgba(0,115,235,.2),inset 0 1px rgba(255,255,255,.13);
 }
 
-.submit:disabled{
-    opacity:.55;
-}
-
-.cancel{
-    width:100%;
-    margin-top:8px;
-    padding:11px;
-    border:1px solid var(--border);
-    border-radius:13px;
-    color:var(--muted);
-    background:rgba(255,255,255,.03);
-}
-
-/* =========================
-   پیشرفت
-========================= */
-
-.progressBox{
-    display:none;
-    margin-top:15px;
-    padding:15px;
-    border-radius:18px;
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--border);
-}
-
-.progressBox.show{
-    display:block;
-}
-
-.progressText{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:9px;
-}
-
+/* ---------- پیشرفت ---------- */
 .progress{
-    height:9px;
-    overflow:hidden;
-    border-radius:20px;
-    background:rgba(255,255,255,.07);
+display:none;margin-top:13px;padding:15px;border-radius:17px;
+border:1px solid rgba(255,255,255,.06);
+background:rgba(255,255,255,.025);
 }
-
-.progressBar{
-    width:0%;
-    height:100%;
-    border-radius:20px;
-    background:linear-gradient(
-        90deg,
-        #248cff,
-        #756cff,
-        #27d59a
-    );
-    transition:.3s;
+.progress.show{display:block}
+.progress-head{display:flex;justify-content:space-between;font-size:9px;color:#9ab1c1;margin-bottom:9px}
+.percent{color:#5ccfff;font-weight:950}
+.track{height:9px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.07)}
+.bar{
+width:0;height:100%;border-radius:20px;
+background:linear-gradient(90deg,#087dff,#52d7ff);
+box-shadow:0 0 18px rgba(0,155,255,.55);
+transition:width .25s;
 }
-
-/* =========================
-   موفقیت
-========================= */
-
-.successBox{
-    display:none;
-    margin-top:14px;
-    padding:16px;
-    border-radius:18px;
-    background:rgba(39,213,154,.07);
-    border:1px solid rgba(39,213,154,.2);
+.progress-info{font-size:8.5px;color:#728da1;line-height:1.8;margin-top:9px}
+.message{
+display:none;margin-top:9px;padding:11px;border-radius:13px;
+font-size:9px;line-height:1.8;
 }
+.message.show{display:block}
+.success{color:#70eabb;border:1px solid rgba(0,215,135,.15);background:rgba(0,215,135,.05)}
+.error{color:#ff8d95;border:1px solid rgba(255,70,80,.15);background:rgba(255,70,80,.05)}
 
-.successBox.show{
-    display:block;
+@media(max-width:560px){
+.topbar{height:64px}
+.brand-image{width:41px;height:41px}
+.brand-title{font-size:14px}
+.hero-title{font-size:21px}
+.services{gap:8px}
+.service{padding:11px;min-height:166px}
+.icon{width:43px;height:43px}
+.service-name{font-size:11px}
+.service-desc{font-size:8px}
+.order-btn{font-size:9px}
 }
-
-.successTitle{
-    color:#6cebb8;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.successText{
-    color:#a9b8c9;
-    font-size:10px;
-    line-height:2;
-}
-
-.ids{
-    margin-top:9px;
-    color:#fff;
-    font-size:9px;
-    line-height:2;
-    word-break:break-word;
-    direction:ltr;
-    text-align:left;
-}
-
-/* =========================
-   سفارش ها
-========================= */
-
-.orders{
-    display:none;
-    margin-top:18px;
-}
-
-.orders.show{
-    display:block;
-}
-
-.orderItem{
-    padding:14px;
-    margin-bottom:9px;
-    border-radius:18px;
-    background:rgba(255,255,255,.045);
-    border:1px solid var(--border);
-}
-
-.orderTop{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.orderTop strong{
-    font-size:12px;
-}
-
-.orderTop small{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.orderStatus{
-    padding:5px 8px;
-    border-radius:9px;
-    color:#6cebb8;
-    background:rgba(39,213,154,.08);
-    font-size:9px;
-    white-space:nowrap;
-}
-
-.orderDetails{
-    margin-top:9px;
-    color:var(--muted);
-    font-size:10px;
-    line-height:2;
-    word-break:break-word;
-}
-
-.empty{
-    padding:25px;
-    color:var(--muted);
-    text-align:center;
-    font-size:11px;
-}
-
-/* =========================
-   درباره
-========================= */
-
-#aboutPage{
-    display:none;
-    min-height:calc(100vh - 100px);
-    padding:28px 14px 120px;
-}
-
-#aboutPage.show{
-    display:block;
-}
-
-.aboutCard{
-    position:relative;
-    overflow:hidden;
-    padding:28px 20px;
-    border-radius:28px;
-    border:1px solid var(--border);
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.025)
-        );
-    box-shadow:0 20px 55px rgba(0,0,0,.35);
-    text-align:center;
-}
-
-.aboutCard:before{
-    content:"";
-    position:absolute;
-    width:170px;
-    height:170px;
-    right:-100px;
-    top:-90px;
-    border-radius:50%;
-    background:rgba(77,163,255,.10);
-    filter:blur(5px);
-}
-
-.aboutIcon{
-    position:relative;
-    width:78px;
-    height:78px;
-    display:grid;
-    place-items:center;
-    margin:0 auto 18px;
-    border-radius:24px;
-    color:#72b9ff;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(77,163,255,.17),
-            rgba(117,108,255,.09)
-        );
-    border:1px solid rgba(77,163,255,.25);
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.25),
-        0 0 35px rgba(77,163,255,.06);
-}
-
-.aboutIcon .logoIcon{
-    width:39px;
-    height:39px;
-}
-
-.aboutCard h1{
-    position:relative;
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-.aboutCard p{
-    position:relative;
-    color:var(--muted);
-    font-size:11px;
-    line-height:2;
-}
-
-.creator{
-    position:relative;
-    margin-top:22px;
-    padding:18px;
-    border-radius:20px;
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
-}
-
-.creatorTitle{
-    color:var(--muted);
-    font-size:10px;
-    margin-bottom:8px;
-}
-
-.creator a{
-    color:#71b9ff;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.creatorLinks{
-    position:relative;
-    display:grid;
-    gap:8px;
-    margin-top:12px;
-}
-
-.creatorLink{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px;
-    border-radius:14px;
-    color:#dce7f5;
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--border);
-    text-align:right;
-    transition:.2s;
-}
-
-.creatorLink:hover{
-    border-color:rgba(77,163,255,.28);
-    background:rgba(77,163,255,.07);
-}
-
-.creatorLinkIcon{
-    width:35px;
-    height:35px;
-    display:grid;
-    place-items:center;
-    flex-shrink:0;
-    border-radius:11px;
-    color:#72b9ff;
-    background:rgba(77,163,255,.09);
-}
-
-.creatorLinkIcon .icon{
-    width:18px;
-    height:18px;
-}
-
-.creatorLinkText{
-    min-width:0;
-}
-
-.creatorLinkText strong{
-    display:block;
-    font-size:10px;
-    margin-bottom:4px;
-}
-
-.creatorLinkText span{
-    display:block;
-    color:var(--muted);
-    font-size:9px;
-    direction:ltr;
-    text-align:right;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-}
-
-.aboutBadge{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    margin-top:17px;
-    padding:7px 11px;
-    border-radius:12px;
-    color:#6cebb8;
-    font-size:9px;
-    background:rgba(39,213,154,.07);
-    border:1px solid rgba(39,213,154,.15);
-}
-
-.backButton{
-    width:100%;
-    margin-top:14px;
-    padding:12px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    color:#fff;
-    background:rgba(255,255,255,.04);
-}
-
-/* =========================
-   پایین
-========================= */
-
-.bottom{
-    position:fixed;
-    left:50%;
-    bottom:0;
-    z-index:60;
-    width:min(100%,520px);
-    transform:translateX(-50%);
-    padding:10px 14px 13px;
-    background:
-        linear-gradient(
-            to top,
-            rgba(5,9,18,.98),
-            rgba(5,9,18,.72),
-            transparent
-        );
-}
-
-.bottomInner{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-    padding:7px;
-    border:1px solid var(--border);
-    border-radius:21px;
-    background:rgba(12,21,34,.84);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-}
-
-.nav{
-    border:0;
-    border-radius:15px;
-    padding:9px 5px;
-    color:var(--muted);
-    background:transparent;
-    font-size:9px;
-}
-
-.nav.active{
-    color:#fff;
-    background:rgba(77,163,255,.11);
-}
-
-.navIcon{
-    display:block;
-    height:22px;
-    margin-bottom:4px;
-}
-
-/* =========================
-   اعلان
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:94px;
-    z-index:100;
-    width:calc(100% - 30px);
-    max-width:470px;
-    padding:13px 15px;
-    border:1px solid var(--border2);
-    border-radius:15px;
-    color:#fff;
-    background:rgba(15,25,40,.96);
-    text-align:center;
-    font-size:11px;
-    opacity:0;
-    pointer-events:none;
-    transform:translate(-50%,20px);
-    transition:.25s;
-    backdrop-filter:blur(15px);
-}
-
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
-
-/* =========================
-   موبایل
-========================= */
-
-@media(max-width:390px){
-
-    .emojiGrid{
-        grid-template-columns:repeat(5,1fr);
-    }
-
-}
-
-@media(max-width:360px){
-
-    .services{
-        grid-template-columns:1fr;
-    }
-
-    .online{
-        display:none;
-    }
-
-    .reactionModes{
-        grid-template-columns:1fr;
-    }
-
+@media(max-width:350px){
+.services{grid-template-columns:1fr}
+.reactions{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- توپک‌های پس‌زمینه -->
-<div class="ball ball1"></div>
-<div class="ball ball2"></div>
-<div class="ball ball3"></div>
+<!-- =====================================================
+     تصویر فشرده و کاملاً آفلاین
+====================================================== -->
+<script>
+const LOGO =
+"data:image/webp;base64,UklGRvolAABXRUJQVlA4IO4lAAAQsgCdASpoAWgBPrVUo00nJKOipve60OAWiU3e2BoArdRgs+ljOB/2XckgP9D/hP3E/vXTcce+Jv6l06yOvYn6mnYfxf+9ewB/Cv4P/yv5J/c+zj/Z/QN/Qv+r+6PvV/hn8Bv/T6h//n9Pv1evQA/VX08vZF/cv93/Zo/8/Z9dIv2B/2Hch3++foNe1f7wBncg/4+/3fqDQa+s1BH6N5OH5Xnr/S+oLwWtAjydf+HyYfZvsD+XSV8G2yJSScwTjXy7r5VRrItQuTR+3humItfR+UbbIlNsiM78+nn8K8vHLwF/XSzjTGmlnfK2t8ra3ybG/W0J5XZmDOi0exlxXeMqfIN9wRQolNsiU1uNDpfTz+kt+ZuEMHTKPYQhoFPaEOeVET06tC2BrxU19NZG2u5lob+5/rWZG97NOt76nvOrtjBbrf6VngbegLUYPJmd8VFA7/lUTKOpuc+B9ecy7ryl1Zxnjimu/EesgF5A74/J986CHVr70DTbsHkwBIunRA+4KuALt2W0dxdH/4fgRXVT+ApqUrcjILo6PtHUfgDKVZG9uyX9qXIRQjd+6gP+//J7NrengtK+34/BWKSPbxNx77vrZohn3wnVf/7oOP0MpJsKyxb0lMefNeEg7qkXAZ/9nqXLjowzFSlxUSHlO57F+KrnFKxU38FTHfzc27OWlw3/R0VaD2+oMjG0mDwBDfIwuZx21qWRdwFq4gcGzl/pqv+I7li75O+iJ/RookfvOYYy2d67g1x3FAunKMzhkRzpgHOTI2Skhjy8aAwTSWk5MpQvIrENYINSBe9AfQjG+s3rFNCO8dcv50p2qTVyV6aRT2R5x5BP9kmeytKVw+2P0No4WsLv3tQDNwMp3xtXZz9IH+VrEruQ3nkt8WTCHrM4fpOy0FLr1qQp3OroIIWIQIhjh02byHhTdZM8LhNJWh3MZO16tdCIObTk6cHW9KLvrXxbJ0WttEKJe4Q+Ssr/IiCp+h3WzzkQA3Z7c+13lBzD+Zt2wGJcgrZuVk1M4B/Fks6f1FmRH2P10O9Wd4ZtNaFrlxN2Kwi0Eg3QmEHJ5GjGMVEV9h1Uqd7P1hJPjetkED5MYsKzHge7FUnz7jUg7MpT9P4TpNkeFOd7a8uGIHn4TRYK8CD+scFVlV54bm2Llvo6whbDsZ3vfTJw3vj/g/nsXbNTpRz7Gm2dx7TeM5rg+sHkXhn9Om70JqpnfuHjCVUbm+Ri+zVBpBRGP7hDF8x//WSr95CBVoPJSDg4Vhcj0FdMDXvgDhWe/VgmfLnRz3ggmhHeTVib25ocuxfRuXf0RyBnI4xR5QGnr/9qlfD93KYx9u4YFwjQnEOA37xxovNgB1igYaOHs2iFX+eIbVB3y9TD1goXlyiG5/Mo0GOh9mGz9nfLQDYTVdUILe59G8IKi7/EdtgHqPAWz1Sdjv8APsbiSptoearD7hzxPfdHWLdezxB2Ww90pVHjnk30Ue7anCw3ZXnD4/p3QKjxjTDdVH5Vk4tSELNaTg3lERcq018T9P50N7UXDhkKtvkXeXr3xaEnVS6lHNkiClj+aIW/Y/N+w/TPJ8vNqMgaQo1sWmYscHY47M3XxxywrXliH+WeSQvMduf4Bz+2U6yRNeqkmKZGHILcSWJhzf+Le5wk5NGql4n+IW3QU8dXe8RcyRjAIItX1eyLA2/pvmecZi+z+d59BpnuHfDqTO9/gPn7HQZblUJja63c44sRMvs7DUiFP/kYk/TJ53nYZbyNYS2p0002pTHCx9PP4KS+AlvmDTAe/fp29kxR/S+LCmMSkDf9I+Frz6/mcDEEHb5W1vliPrTUIxFlb9U9xzONtRvgwNW7C4mDbZEptkSm/siQ1/DB8lw/NeQWXSIv/3SgOWRtsiU2yJTa9DfrvD6Wc249l2RKbZEUAAD+/CsAAbTpTAvRWq89YRw+zS5ZFjulkIF9tf4gBuhE5FUP6ce9GgzwFTcDoqASyDwlSwTc5llWGFEAtrVHpqij/n8xOeE87gGH4qfttfjycrO7MNW7NaTiodS1kWOrBnozAWVgyXh52Wgby7djI3QT6dcN2A8sKR/LQY/DFtTZQkfbszpVaFRyfhLSmOG40dmJjowh+EPwh98ABkVIOY1pDuDoyazHUY8joDy22GFpjK8Gh+8lFZZPD3F0u8hvnUghX+HJ0PL4VpW1GFNsWaMRg9B8q7qSM7AJ4cM8cL9TK8jB/UMxqFVBm5gzVs8/WQFdjo0vf14sCxTaM8NX8FtWD8mwZaDqB1zH5HXT8byjZk1qBpWxQxLNd3b0SD1xJ/AJBLxhwgkAAAFEMM4qjATBknIN3w3RKTHO47wab553f342xyUJOVgIz6m0Uunp92t/aVYSL08PCcmZ37+kEaRpmYbzlExAhPVOr4AujsmIXruyqPAO6+tzKozFGSkAJ4uKBPRqbhA5e/VddZFnJrL8H8MepZN555iPEgFFR2JTlt72p+rH6TPJaOwNcNK99u4b520+lFF9PvxjmiZZQAEfhJ+UuNXybkXDlsbBgq406Nn3PVmQES8UCS5ciXggDx313sOyA7Dp+HCQ8T2j4CyGfeysZbgDzSNbpFq75m5Nzbq09JHdlXyW6sEyKD4hUs1d0ft702M8TMFhZzLUpQT87UW/US4SyFX52I10dAUN7FxCUfpCgGmurqC+MGQx6Rrr2+SVuU1gabbDxuOXbqpWkK1aCTyKkT92xP6E+MbKtUqZRR09lyRrReOh7FtqyYc0hgnN/q2B0P4cJVreSjXrDJRgBCAPGRuP5wnyfEvzSBvGFw2M4HAAXV0UPGqwhARPPRq1q1a7/SqNi4ujNmbSYPo9RV9bPbqW5zN6bnEcxphGiQxMJzsrj2/SYEKkMNjgwDt0Edwet5i2vAAKQPelQ7xoHBZ40cOO9uvRJCU+pC5afdDFpYzwGMHkzeFzVuqMBWJlzJDBB6mW4b6qSluGRtsE6sNwJRcIL8i7NrloNJ+TQQWpvEjDF2wbVfnNzNyBI3wcHUe+DJ1UcEx2GDeaaAQUS/pMCccI5qbuteZWpRQBp02Bj4qKZuUCisnZNAJc0AkuhYIdo51A7DmBm8ttAHS8toOo1bP4ZXhq27mw08UJ9nU/2vkNuo/YYYyg0i6KftTszehUZW6FjaQKyX/CHMPn6ktlILdKHvQzU8LaDu7Oii+27hAOQLbm4QJBOGLbReTkQaHIts9ZCQms4LBNUcfRqetZcXcUNuP4vx3yfJ/c19dUf3IE/Z2EaaubX90JcVMr4XcZnr1Sg9MPUW06zePQIhyZNynTCCiBstbQYyQBLzoKkYBhmXRLvdnnm8MZsFSKWfmetwUW6gzaKSv0/F4Rev1RBkm5ozobLXBK7F4WmVJKbTEfhjR2UlM6uewSIcGHuQxszTfOh0NN3KPpUCoQuoeoOqRiescGGq/E0boZGGT8nPehlhAr77x9NBzpO7tHTupiT7QE95fv7KGOOKV3LbI1tx9sMWduKjr0xdqVtdi39v2bF1LJUBJCS+5fAmyHgw20P2iHnowg8PK5r6kxi0bjg6X9JddlIQAm/6SJdlwYMCQBHNfsXzEkMbuRfYd24LgSMmvDO8zG0O5M2wM9apJM/DaF2CsE98ERv5zUTR+al7Kpdf/4PxTMuk/i9DZv2eM7B9Z428Re8/MqkjyFl1ILwiNu1K7fJQ1UvTcEU9G4y79r83ymzCxCtvrXhCfhPFwDB8dSNbbFbnHhq9izgIGamxIWG68PVi817iLhoDQZqw/cUmiu0O6PVTD8xJudsaC340NUSypBRIeIev6IwjBWbrREUVbx+ac45feALZ1tKZGxsszV5gddCHlgo3vsphMVU489ffyoU8OluG7+rVhwbNtQkSEn+vg+JTH/RA+OFf4dTX9K78kXMLAJGpim6/AptpUadRLjASSRVX7cAfvu8HTXDL4YIw6NI5BiySpNodFIgc3bYwwc3toDygSPEKErfJgcr3MDCYgOnnSQIx7ifrj8ABYtVUgUUT+9W5/Up9LsaGuCR/S5jvxR2miamJ4q/GkGif0uLXoT20ECejwOgEnmUeFrAw1A/4qxvpd7B49HR7om8kLLqM5rwLKqLl1xN2uJ6VePO60PivcDvbfNEM/tFainjRR1CaDwwYwl/wiYe7eKng1N+DlSkLm0RhUPVuo10rZPxeVUsmXdUxiKl+dFwsoKk1JIjkjGoVNcugcoihWwf84TrNhTrMu6OORdNuU1xanhSFv+STHd2xTQ6zn5hIzO5NGPzOdjDfxLU6XRAtnS7VCoq8iz/e/La27jyTf4c6qC7UPHj5lUUADPMP56PYSuuzaRUk6Bmx9O4jLIV5VyN7K8JnYzOfNTP3bsbswU07hwyxmMH3fkh4BGGoMV4lxWUXlvCFBRmNbnhwIoU8zwqVSx4CJP/LFZhdJ6v9zJmLSo5DYHzcHTfQdMCpdOrhHCQf8EMEFxjVHSs71uvo/pzbS8sMz7gyqUsZBv/xTGOPyDBYqrPW9IYsSjN9bPzhBPWOC/D+jPgv+bTm93P8PZCRlJbuwnJq7iOn00R2IVWtBGEZUWfukxUrgS+GyIM95SO6R7XknQIymRo+4FFNej8hzIl7Wf09UMyiRXsXb1GlNh7GUn2P0mHzapYaAAUON3BPTcHTDsJNoEJh20Id8SAC3SfI1N1Tyep1AqujNidr0856xE+BBnliJE8wzMsOIu/YTWuCUNkd8btuR8n/2MYOriDGujA12svnF1D2PpyKFvyosEHC4GcJKLckajCaMNYeNVBAm3mYpTtxk2xqRozcJ4e570Hw3C/FRh+TFD/HOMst6GJ9vXCZHMPCc8kBTZIBa5NkmXzs/uzov2IMXYkVrHEZkPAgjilRw7I/rcxclkRzd8q9mLnGKrr34+F/bFKc+uWeHPZV5pLb4MWC4x9L/r/AMZ5xQx2+oL7H6019z+Jv+UD5RnD1cVklT9SSHDtEB9HZSP/Y0PVcH+cChSenrLKhUJLg7+STYGy4JCZp5sFBmrxU6jeIG4NY02q8P7s8QDur+0Fx3uVQpDj9QfAbkfW3SXEGddnNVe0RKryb8WNoeqotFIkux76i3SSsFNiRJ7EL1vMfgORULY6MJKbRFNCWtMzFxYOPBcR5kDdcYoJg1BRvOaM4Qslo8Rtw5VlfQ6LZPEH9CTQ8LdwX5pLC+LAMCZCyj5v8ZAJDLiMIQXbH0duWHUiaiZ43sY2x8buUde/QzyNuRpmHOdsR3jHzLKRYIaWe21BOch5KkXseWKxr8zQvQYqi4d3OSCNmH5VqVjEOuEwBzLUXkDD1uTc7/R4jcWT2xsB0d0X/N8Tw1AUt0EtKYNiumfpe/jWRCyYSUYjIo7KNI6te2nuxqqkPYLOhUI5aGfJJ5+e8afx0jQNTASvva5GiYBz/IOWI+0NVcSyaGm9hh9RQ2lrysLgrkXuwJn5WI4PUAuU7j0CizXWtoL0SqFltwctwJzNQze/IpY5SnRsAoj1CVRAbPXd6wTwAtEZzq1p1XsU8QbHR4UqweRKT7r1oBN0LmncNfhcWSmbFwiawHkWYHK2livmX69J2EIwrHGVaEj7PkAAfqD/ae/R45mqX5d2GeW2KUv5nG7oBXjZjH5x/QqVeLKpl3t0Fyb7hPqW1rdbauueatvI5X8BLtYecZBsebjqXg+AromDgOx03naPeZSwpc2fS+m6A2S5dy8YbczCBmjsSygWf+Hfd1r/7IS6tAgl1OsXBLUGDeJUFUkIV/iqk4XElMjGtAmU+G54XJeJYpJL/ZN2udhtZ3b6yew9kWtJ/W/cTYPBCpeudgkVq7cIH5dZE/ofRlFA7mqGAihkrE2BVtvlA2/H2301fTdJ8/3PeCSZYwOwiNrt4NmF8si/epLppJTy1bGMRUTG3u6DmMIPFSe01SwwLY4Z0XejSYhynKs3g8gaP0jGXYeW1v/hYnuU9JdaA3UjvC/O9QxEqBLaNbjPtxnCRYmDtYPYt5p9d9qpLznh0Z9umcp83PM1uO7aC0hj2v1HXPd5NGRjK6KX30/iqucHsbWEIDKDdJIwCssilhiL/Ez2FXrikHQTUdOp4Uy14v4cvHJ67yE4zo8Qm1ICiMJa/jpPf8VDUB13arpEXJZoCxT5hBVI70N1OwGq5XGUuJPmhCZPQDvhvxWsR/4d0txprBls0Ig/2pp84ak8U6ci9gHbJgQ3Kp83XIUOe8p6bwjtBamj5cVdomEbICJix/mUtNcT3yNbvblCw+yBAVwhY9qk7txbkikhNHSXRiSMC5TUig4WYaahUspoJ+nIaOM7D01fk9h3cTL9+GzDdfn1qShvu45j3GIpbAzKRYp/nwZi4HkdNMdH33X7gVEdTQlv21IbeFMkyXIgle13r887irZg63VeGOPwpXl4BsR/MiMoWnuKO063JPN/mqTKTC1qC9edL+DluEahiQaH9Nh+wmIYkIAryTv9K5UajLGLlGJLabcTthgMz9zROQuk4UhSrTkyxqbubbgp3koI11BSR/CY7qz6ak8dbnoCqUhXwZqkQPrzqtpTn95aK7Vqku2U35I5tUBxXSFi9KiiH2VRpdR6/cTsPCw2sN4N5uS3OIUTEJ3JVU7z2I5KFHJcmcr2ZFq5pDClWLOZzrRhLggsniHYEkan1tLbJZOq6BXGY1PC6vp2QOL7wM4Xfdi+rCOIZG7QPRenIAx7TPJEZ/NhevYohnqzcYD5nH4mTcK9e16KzFrdyRBg6kzBNVjZzgb4lVpwUlayQgB27lPiSl2+/U22jLidCptjl7DtyYnqQNKiefBwHR4p9jBgb/KSLTKwm0ZSnCVA2xzTu5wKB+499CM7VxgIq0vVV7RMpKK5wvvTFuXsF1Oz2dqv0tr25/vPOBfEgcobYni/SrbdRV2gNQZ3Um6ZbxfIVciBrUo+T7xuK7FKVPM7JuGmxbSg/tnQHGMlX2zlSANTnV3BDUkEFcJCR5FwI16DBHo7Jzgj9hxAgQadYMshH7Cy03rlnrkxtBXH1kAgr96n1Vq+nf9Tx7hZHHDNsmRG6O84G4T2voUjUnEWiUuOzUkGr4NZQQI4Bt7tFcVUb3/H9j/nrldrvigyBm+oENf8t2WWUkCq1ujbyvRnTisB5MvP/WKBrEKnmNTW3Jj2ZhlXvU9KYHm/gB+rJxV42i6vVpL+sneba81Tv6EoFG15ArNM5WRCGJpzxMNUgTYRvCaWWOB6hZxk8NvW806E8h4W8JKCbwtd2qUyFEZSyz7k9AJWGSH+eBWX/8ga5QhPzTd0yAV4QMoP80Hi7h6lylfWVKEMihCYZ3aRO4eggxuH0sRKLGgQrVYVNsxxzxne0d5fJxEeayd6wI6W+r87ipNPnEyPHwWLqEx/f/rSfa6M416GT2nHKBfPxw4mT6nTGSW6cpDiKKP/40Apucxrn3mOCHAU8h/In62VBP868/8Q0ZOnk4WcqZreqBXvL3duwJ2rrfx4FvUP2iCd0GCXj0577+/RfVyglP2OQbOMSUgBbQ2D7Ns6/EE0OiiuwvZOtLfYVid+E+k4nK2UQ+pKkUp2nLLt2lz861h7EDxgIVypDSVPaTk4+T462sssgX5MBzzmnDe7Cb7EUlYzvj/Revk6nRAIq0WYNdRsbk8DUX+zogTVO6OoFuB6J1LvzQclq2dbQrMa669I68UuXMlJ4Nxwpljdc7UzEoMJi42Vk03RyB/7gMWY/g0DPW18ngmd3JxYru7OgdM1GPnt6Age3YoKR9xCtP8YZDZGES6IjQoRY+u5pfNSFl4P6ZBvJvRLhLz3kiFnSD7cBo0AoMXm3h3FaNMin0e2Kl3Uhd8/QSK3txveT+bNZ7sNnJrt+//dV94XGgPk/JfEvbsiGO+mCWANWYQ+9dhaCx9mUj04oPBSgQCqXMHhIAXXGPIfa1VaDwZZ46yUKja7yX3dZmmJPwsBB4DeAFIKjAIhA305GeneXSBlf7thf456+jLbyjiQREC6W5DsPtKjo/V1bG2aLjJ7HLxXztXisrwoFjl+QsNadOh5NBvQQJ7JNIwD3+nrHsVOeo1+GuLvrdeVWfnPVbyepopW3delV9ZTYkksgabmrcO5vq7FAqHqXQj0jz8XRbg6rWjISMdU3n5ASIsPw0yfrOoGqjGmFPSetatOiU4B5OfM5wTabyuRMjzHsYbrPzg9yR1jxm/IVyhHRXUW4ETX2jY8marQ6mH0nMwf9/tczF5m3I1DDTKQA4BiAs0zVnaXBUsyDpnY2GanKjQsHrj5QT2eaqSkPllKxgws1f2i/DCDA2CXA3E5BRwim0iYszy1aYL0b5LakC6xQ50fWMIap2Y0UZ3l45fjRpOmkK6lTee9goCbSHosm+2J5wa/XpRaHaUTRui6Yd8HnDapA3Gj/FmXPr2tP+EoN7B+1M4g2V0Qs56E0bOg93QiQkibSt5uP0aIaWY+aTBKPQRQoToz5fSlIVOtGZDZVnSgeEXXQqsl6PRS2T7enZbcQndk0Ptqt7IosEYw5PiejUNjIDY99W1JU/+4jCfNUgB+lcCzASnCyfCaNgwyoVkezjgS26aOaf3QCWRm9+ydbzXvRLGjR5RYXrQWdRtxNqA6LmtZIE4WdGuVADWsjtnmhrabXJDwEJpQRbQtGCiYYkaqB8IMq8Sx4OhZ6YAi8SXeYc7Ambww8P637vcZ7L9gQ5qRan926JBSq56X9i5gAoGyL583fXVG7GvGxFGPSZjI9gJhpGkFIIYtcbNVFG6fxdhDRtA6mesBwa+3hv7918VbZ4ow7OksW1if3O40btFuhrhFGFw9jSiI3FX+YD4kTncrhFBRR+qgnKV7gB+iuHsqvK31hC5jLcFxtDdBxIXjsaPTPFEQ8FFyhyGARb7IooUYQoB/E4gEwa63rb/FGoRpp11l6u7TBpoiDi7aqOh9cmgxdjzCWbx8y3biKqrV9Kh0er6RxrjfMXXWVRHe15AWx06J4/VWNa7cCbX44zR0ZoJyqI8Zht81/TNGkBnFR64v3VHyfStHEKdWlngq9O+r/XDmwDwgDaKMwtbR+xO27ka++1qD/LjW1YyIaQx4ajdF4nGtRpLaKQzZiUXDB89zckaziQV2g71jqIWvv+GKXOjumxcmXIDpFlssW4dN5uKLBdcz74UUS/imBKRUW1pysgkGwxCc+RVT5S0b/10VRf69euOKIkcW8TGcckXE2mzBMhGhspO16EgL5wpwCy4c6nnT/FWIStzY65KAZxgX6SlFlj0x7BQz3IsETBunoXGGeIFZ+ls/ConoMlNW3gF8QcJSSSl1GmIxxQOhxDeI267oezZUSSRGcTVcvOJuIk8/xvH/1sq7vfv5LZNOBVBQAy5ZtLvOKUp3mO3Hyef3Dh9kZdhxkmmpzpbWTSj+d6JIFFS3tn2qYZB+RJxxDIQ/Wo7/LbMsU+1MQIpNYIS4O+x1U589dUoQ0Rh9Unf+cRmMvVtWTh+SwfgX0Cd+8ldqMxmjCbrrkbREmcGN4fpCJ18dxOdb4/W93iEgiiXmcaQ2/is9bQyJEhLFzlV3XYwez6dJegDfHT9FwkdDPepZLhu1ECbTCUOJ2/elvugrQvlNWK39IW14frjIgu6PmtiXZQ2CvESqiJbUv5jZQ/x/Z3LjNryDk70D4P+lePJOlmyAQLFMSwcxTSX+pgnSq8BFJtn4njFyphtDXN3JjjL1c1lHU1CrCxx1XGk9ExxA6F5LXJZP6+4e+CxeEx7iTYA2v9/xu4tbXRZS+kj8dlCBzLjdPoyunkXD7hH+e+WZSoXZyBagK2HidxYM5bKPRAI7erub9OXrnVRAXpalmTashGl8tzdPeV6W0CZlNujjKXqit7EJiDiKyoUDuN5jXed85Qtkf0yF75D7zu86egXLH8E6xY6BoSKO8UgnSnkrIcqURYDMX7x49BW1v+MxuI9++ht+3dIcOLPadR5ofavI5/NkF1pzbGLtvaA8H2maUibIKgR70b2uqeaAh67RnskwjlU32FGPQ0yBsYPGhxFHwkkBEAi5+IbIxC/eQA567+mW3mhBjvu5p1wCKuCiCOOv18YMV17SX5mRpdtQyI11OjRCGf08v4XXSg45DxA5UzLgbenHqmcwXrosqVYw5Gycznr2AWeRzYc4Kbmi2f7gfzB4kWJfPI0dYPx4Tq4hn6VcQAwkJ9nh5oMN73LJBaALdVhM62//Hc7W9XKcm59WKq5CK/lH5xckhvn18H7N8RL3UVp/HwjoMuFzoCrlZQpSNzgxQb+Z7O+0lD3BJweZoYo71Q3YJHB1544aF5a4pIF/uxSA6+G+o3lLrOLPi/r5WLpTZaIqumhzhyFgoYBqG6M85aQRJeHHp7TcrEpEZBB5rga0gvfUjwVrrCW/D/Jsgqfj2dnSd7HpiD+zF22+7u0TwiQZ3dHs3FFsGlXBgS/t50RJOg/u06NfAI+xXY/EoIgvDfLxX+OAwwkxYyo1DF1zCi61lJrLhAPtsd1O25QNIdENph2KjN3tX1kknLYlxlnTL3cZq83qYUvKJlhHHg/RZ3Usy4TXnNQ4QLD9aJ1fGzuaCAJTrQh1qwav9gi4v/xqGaJ6FnuLu9s/U0i5QL0OzZQv7Fl4y36sd+3Svj+wui93BLFHXWDof985qrByKGO9L/Dzhqh9K8MSbXApcrMPasPXMStEhJAjnx2Xe/ovFpnhrfOwuIJwFWCg4bbBfVPWvTau3kYgXWn0ifsPl+WFKoPCaZGDVrg+ohn4KkyIrRCjQr1OGgxMH5BxpY5SdscTZnN1kb/WxfOXfY69M12aMM03IY5i8lDdXpvBLns6K52zb4hqycaTlMODcY5jvgU8ttn7yxdNyjB7rrt7z4z6pPoDd4OvSWUvJIXlyEZ4+i7XIrzqllFn3bxfiFvTvAmTmjewD6lZSbE1gxPDQlAeakYJFWgrZ+YrdLom/nbxrYbcu9t5+qjes5e1VGAzUqWRcKaryVuiXwpKCVaDPdrTSRRE6lo4hE7RTC5g21MQqh1RM7mM2yOKE4pv2Hv9gbAO0q1lam/0Tuv0Lbq3lOGo7ngQGdnVDLDMaCaIQnCAiIdOhZmfXi1yLRki2qykpK6rrevYEO25vyhuFuFRjspI10RHtBtKvJ4tBzwhSL68pbL3Z1gapz0UGhi1MmCDIfgPFOF7oOWXNkhzMl4k9Z16SSQXe53VybL37WeoZoyTlgWj9up0KgfCWs46IC5umuMSodkekeD4qnl0RDc7+h/CfQnZwqM5/UYBF7VwQ4w5Trjzh4TeI0g93rEMs7Cq1GuZTBDVHqCitbpqpIkDkMbimVsyoiFVgt8/AeYD2qdzfQ4ywYu5hyhBGuoS23u4gNDvdeECvIAbkon5XvEyY6xpkA7OMcO0b/mI3fgZkMAzkTxOgFJmXtWFRf7f/bf3QGHql6EhW4106xuXtPUCkZXA3HZI/+2pm4qRhXnxURF4utOPLuWxPYdaeMhwwiuecihggU7BNo19tsG3OIIXIFH9TfDd2d6slCnc3dw4t2fkwb2Sy0k0zh15+oANvVQdWcHoy9vOVUeZ162pA8AhDcmW5xP6gxaFJqpr5/dlD4o4125+akyczSKFMWiy9umRtdrAB4807vI93K2IZbqJUbyVM5DaoCTgAr1KhYNU/0Y5mOfV6qfN2A+m/w0NuPiiLjd/IZQT2wL3Umd8RTbxTa0XW4slcWWB8EcotytusKmZdGtjxXxaYEkhizyoc6T9Wum+OCPQddQ0u1z6jbWlDve5br+SarG30Z6EBLszHJ573vOb0C9A4U2CJuLP/E7f6JZMqwz+11Qj3ipod0ROhN7y3wjK9OJatTgyEqbYZcAeofXgjQeQd8DBkbr0A0ppD2EAR562X+EF9j6GCWYvajHdAJ/I81Hi0vg5Q3LFErEyZabpxDlXKRxwiT61Z1I9QaaahsLoMR/Cr3rJecne9CoZ3eBLTGzg3chB6LaXjMTSUs0CABIU7i2jykj4tYXuPFisZ8PRiQdjhYEMtVupn40eLe+wHz5/Fs+qalmVmnTYhBuAJ/WiFYcbZTl80m7yXQSdDibycpKJnyogh/suaWG9550oe+HiY3/jeseV5lDg63I1S6AgSwHUxx7EdO/+RKUaVQY8NvgLS/aXzkAfWBzZaMpmzFu8m2QsuAXZHJ7ReZQRo+rOJFjtlodEprCe8Pl7YkFy0B9oR2MxKc4HlOBljhVSukPp607/P03jeFbKdyPfZrBa39fPK52mIT1j/cl0GWi/FP2orNRBOAABk1TFmH/Wcz8k1TTHNLWNjVVAVLZTQ6ak4RceSIRx8gVCC7sebJPQjnEeDsgFyr/BYAPL5HLwkW1XEIdWUnQqyEPeFTrTcv3QxdS8GMc8vZ6Xos4xDqOvT+1BvssEmNz+LzOvVbvMVIhlpmIfyPt4Ogtdvuny8WZ5mgJWCTa07vTsA7ztNEK/7kywkL7flej6i9OovMYJIe5phBHd89plO/itkepStXixzJPc1K9FwTQvF1IgIPiLlZbQgYhSXnFCDNnJQAAAHkn5md9GPRlAZr0ioGfiUDpXIpZv+pAsQjAQOQZ1z7UVImcnCWBgP3UgZeMUbTx9kH/Lp1sn7t0Zhw6qSb/hOoAkhQzV/fUam4Nmcjv52DRePauO6MMDbLnDXNy2UY4BzFY7aCQkLL1PN1+JBnvuW6xFnFA1DRcHdQpmmZ7Ko3gTiIe4AAAAK6x807VJLQ4RkEUgbQOmA1U1eWVU3xzcIkh8HY+BYQMQgfzruXUylxjFK5FYQ9k1ssrJcvjJN2bBdU7U/LWM5A9OvS0hQbWvpn1ZErWGy0NDI9Th8Hbok/tuOs12W8vZlZR6n8TSQvVNrtjkhFKJyqWDG0wQ74cZzazDcDfZfKHjqUiR/AAAAAAqSpHh3FYEwzu8o8Cr8AB/eslyLu7zk6EZRvKXclvxI3h8YvAQc3TI/zmzmq55KOPPzeP6yDl30C/n7zZyo9T6OwQgljMAAAAAAA==";
+</script>
 
+<header class="topbar">
+<div class="brand">
+<img class="brand-image" id="topLogo" alt="پنل روبیکا رایگان">
+<div class="brand-text">
+<div class="brand-title">پنل روبیکا رایگان</div>
+<div class="brand-sub">خدمات حرفه‌ای روبیکا و روبینو</div>
+</div>
+</div>
 
-<!-- =========================
-     آیکون‌های SVG داخلی
-========================= -->
-
-<svg
-style="display:none"
-xmlns="http://www.w3.org/2000/svg">
-
-<symbol id="i-cart" viewBox="0 0 24 24">
-    <circle cx="9" cy="20" r="1.5"/>
-    <circle cx="18" cy="20" r="1.5"/>
-    <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/>
-    <path d="M9 11h8M10 8h7"/>
-</symbol>
-
-<symbol id="i-heart" viewBox="0 0 24 24">
-    <path d="M20.8 8.8c0 5.5-8.8 10.2-8.8 10.2S3.2 14.3 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/>
-</symbol>
-
-<symbol id="i-eye" viewBox="0 0 24 24">
-    <path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/>
-    <circle cx="12" cy="12" r="2.7"/>
-</symbol>
-
-<symbol id="i-users" viewBox="0 0 24 24">
-    <path d="M16 20v-1.5a4.5 4.5 0 0 0-4.5-4.5h-3A4.5 4.5 0 0 0 4 18.5V20"/>
-    <circle cx="10" cy="7.5" r="3.5"/>
-    <path d="M16 4.5a3.5 3.5 0 0 1 0 6.8M18 14a4.5 4.5 0 0 1 2 4v2"/>
-</symbol>
-
-<symbol id="i-chart" viewBox="0 0 24 24">
-    <path d="M4 19V5M4 19h17"/>
-    <path d="m7 15 3-4 3 2 5-7"/>
-    <circle cx="18" cy="6" r="1"/>
-</symbol>
-
-<symbol id="i-like" viewBox="0 0 24 24">
-    <path d="M7 10v10H4V10h3Z"/>
-    <path d="M7 18h9.5a2 2 0 0 0 1.9-1.4l1.7-5.3A2 2 0 0 0 18.2 9H14l.6-3.1A2.4 2.4 0 0 0 12.2 3L8 10"/>
-</symbol>
-
-<symbol id="i-user" viewBox="0 0 24 24">
-    <circle cx="12" cy="8" r="4"/>
-    <path d="M4 21a8 8 0 0 1 16 0"/>
-</symbol>
-
-<symbol id="i-comment" viewBox="0 0 24 24">
-    <path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-4 2 1.5-4A7.5 7.5 0 1 1 20 11.5Z"/>
-    <path d="M8 11h8M8 14h5"/>
-</symbol>
-
-<symbol id="i-send" viewBox="0 0 24 24">
-    <path d="m21 3-8.2 18-2.7-7.1L3 11.2 21 3Z"/>
-    <path d="m10.1 13.9 4.7-4.7"/>
-</symbol>
-
-<symbol id="i-home" viewBox="0 0 24 24">
-    <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z"/>
-</symbol>
-
-<symbol id="i-list" viewBox="0 0 24 24">
-    <path d="M8 6h12M8 12h12M8 18h12"/>
-    <path d="M4 6h.01M4 12h.01M4 18h.01"/>
-</symbol>
-
-<symbol id="i-info" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="9"/>
-    <path d="M12 10v6M12 7.5v.01"/>
-</symbol>
-
-<symbol id="i-rubika" viewBox="0 0 24 24">
-    <path d="M6 3h8l4 4v8a6 6 0 0 1-6 6H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"/>
-    <path d="M14 3v5h5"/>
-    <path d="M7 12h7M7 16h5"/>
-</symbol>
-
+<button class="menu-toggle" id="menuToggle" aria-label="منو">
+<svg viewBox="0 0 24 24" fill="none">
+<path class="line l1" d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+<path class="line l2" d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+<path class="line l3" d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 </svg>
-
-
-<div class="app">
-
-<header class="header">
-
-<div class="headerBox">
-
-<div class="logo">
-<svg class="logoIcon">
-    <use href="#i-cart"></use>
-</svg>
-</div>
-
-<div class="headerText">
-
-<strong>
-پنل خدمات روبیکا
-</strong>
-
-<span>
-ثبت سفارش خدمات روبیکا
-</span>
-
-</div>
-
-<div class="online">
-
-<span class="onlineDot"></span>
-
-آنلاین
-
-</div>
-
-</div>
-
+</button>
 </header>
 
+<div class="shade" id="shade"></div>
 
-<!-- =========================
-     صفحه اصلی
-========================= -->
+<aside class="side" id="side">
+<div class="side-head">
+<div class="side-title">منوی پنل</div>
+<button class="side-close" id="sideClose">×</button>
+</div>
 
-<main id="homePage">
+<img class="menu-photo" id="menuLogo" alt="پنل روبیکا رایگان">
+
+<div class="menu-items">
+
+<a class="menu-item" href="#home" onclick="goPage('home');return false">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M5.5 10.5V20h13v-9.5" stroke="currentColor" stroke-width="1.8"/>
+<path d="M9.5 20v-5h5v5" stroke="currentColor" stroke-width="1.8"/>
+</svg>
+</span>
+<span class="menu-text">صفحه اصلی</span>
+</a>
+
+<a class="menu-item" href="#about" onclick="goPage('about');return false">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="12" r="8.7" stroke="currentColor" stroke-width="1.8"/>
+<path d="M12 10.5V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+</svg>
+</span>
+<span class="menu-text">درباره پنل</span>
+</a>
+
+<a class="menu-item" href="https://rubika.ir/Counter2Mod" target="_blank">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v9a1.5 1.5 0 0 1-1.5 1.5H11l-4.3 3v-3H5.5A1.5 1.5 0 0 1 4 15.5v-9Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+</svg>
+</span>
+<span class="menu-text">کانال روبیکا</span>
+</a>
+
+<a class="menu-item" href="https://rubika.ir/Abolfazl_Kazemi_SFG" target="_blank">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="8" r="3.1" stroke="currentColor" stroke-width="1.7"/>
+<path d="M5.5 19c.7-3.3 2.8-5 6.5-5s5.8 1.7 6.5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+</svg>
+</span>
+<span class="menu-text">پشتیبانی</span>
+</a>
+
+<a class="menu-item" href="https://t.me/Counter2Mod" target="_blank">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="m20.5 4.5-2.8 14.4c-.2 1-.8 1.2-1.6.7l-4.3-3.2-2.2 2c-.2.2-.4.4-.8.4l.3-4.4 8.2-7.4c.4-.3-.1-.5-.6-.2L6.5 13 2.2 11.6c-.9-.3-.9-.9.2-1.3l16.8-6.5c.8-.3 1.5.2 1.3.7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+</svg>
+</span>
+<span class="menu-text">تلگرام</span>
+</a>
+
+<a class="menu-item" href="https://ble.ir/Countermod" target="_blank">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M7 5h10a2 2 0 0 1 2 2v6.5a2 2 0 0 1-2 2h-4.5L9 19v-3.5H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+</svg>
+</span>
+<span class="menu-text">بله</span>
+</a>
+
+<a class="menu-item" href="https://www.aparat.com/Abolfazl_Hakerr/shorts" target="_blank">
+<span class="menu-icon">
+<svg viewBox="0 0 24 24" fill="none">
+<rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" stroke-width="1.7"/>
+<path d="m10 9 5 3-5 3V9Z" fill="currentColor"/>
+</svg>
+</span>
+<span class="menu-text">آپارات</span>
+</a>
+
+</div>
+</aside>
+
+<!-- ================= صفحه اصلی ================= -->
+<main class="page active" id="homePage">
 
 <section class="hero">
-
-<h1>
-خدمات رایگان روبیکا
-</h1>
-
-<p>
-خدمت موردنظر خود را انتخاب کنید،
-لینک را وارد کنید و سفارش را ثبت کنید.
+<h1 class="hero-title">پنل روبیکا رایگان</h1>
+<p class="hero-desc">
+ثبت سفارش خدمات روبیکا و روبینو با محیطی سریع، شیشه‌ای و مدرن
 </p>
-
-<div class="badges">
-
-<span class="badge">
-✓ رایگان
-</span>
-
-<span class="badge">
-⚡ سریع
-</span>
-
-<span class="badge">
-▣ موبایل‌پسند
-</span>
-
-<span class="badge">
-🔐 امن
-</span>
-
+<div class="online">
+<span class="online-dot"></span>
+سرویس آنلاین است
 </div>
-
 </section>
 
-
-<section class="content">
-
-<div class="tabs">
-
-<button class="tab active" data-tab="rubika">
-💬 خدمات روبیکا
-</button>
-
-<button class="tab" data-tab="rubino">
-📸 خدمات روبینو
-</button>
-
+<!-- روبیکا -->
+<section class="section">
+<div class="section-head">
+<span class="section-line"></span>
+<h2 class="section-title">خدمات پیام‌رسان روبیکا</h2>
 </div>
-
-
-<!-- =========================
-     روبیکا
-========================= -->
-
-<section id="rubikaTab">
-
-<div class="sectionTitle">
-
-<h2>
-خدمات روبیکا
-</h2>
-
-<span>
-رایگان
-</span>
-
-</div>
-
 
 <div class="services">
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-heart"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M12 20.2S4 15.7 4 9.8C4 6.8 6.1 5 8.5 5c1.5 0 2.8.8 3.5 2 .7-1.2 2-2 3.5-2C17.9 5 20 6.8 20 9.8c0 5.9-8 10.4-8 10.4Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M8 10.5c.8-1 1.8-1.5 3-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
 </div>
-
-<h3>
-ری‌اکشن پیام
-</h3>
-
-<p>
-ثبت ریکشن روی پیام روبیکا
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="ری‌اکشن پیام"
-data-type="reaction">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">ری‌اکشن پیام</div>
+<div class="service-desc">انتخاب یک یا چند ریکشن برای پیام روبیکا</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('reaction')">ثبت سفارش</button>
 </article>
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-eye"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z" stroke="currentColor" stroke-width="1.7"/>
+<circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7"/>
+<circle cx="12" cy="12" r="1" fill="currentColor"/>
 </svg>
 </div>
-
-<h3>
-سین / بازدید پیام
-</h3>
-
-<p>
-ثبت درخواست بازدید پیام
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="سین / بازدید پیام"
-data-type="views">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">سین / بازدید</div>
+<div class="service-desc">ثبت سفارش بازدید پیام روبیکا</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('views')">ثبت سفارش</button>
 </article>
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-users"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
+<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+<circle cx="17" cy="9" r="2.2" stroke="currentColor" stroke-width="1.5"/>
+<path d="M15.5 14c2.2.4 3.6 2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>
 </div>
-
-<h3>
-عضو کانال
-</h3>
-
-<p>
-ثبت درخواست عضو کانال
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="عضو کانال"
-data-type="members">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">ممبر</div>
+<div class="service-desc">ثبت سفارش ممبر گروه یا کانال</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('members')">ثبت سفارش</button>
 </article>
 
+<article class="service">
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
+<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7"/>
+<path d="M17 8v6M14 11h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+</svg>
+</div>
+<div class="service-name">فالوور</div>
+<div class="service-desc">ثبت سفارش فالوور صفحه روبیکا</div>
+</div>
+<button class="order-btn" onclick="openOrder('followers')">ثبت سفارش</button>
+</article>
 
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-chart"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9h7.2" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
 </svg>
 </div>
-
-<h3>
-نظرسنجی
-</h3>
-
-<p>
-ثبت خدمات نظرسنجی
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="نظرسنجی"
-data-type="poll">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">لایک پیام</div>
+<div class="service-desc">ثبت سفارش لایک پیام روبیکا</div>
 </div>
+<button class="order-btn" onclick="openOrder('likes')">ثبت سفارش</button>
+</article>
 
+<article class="service">
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M7.5 9.5h9M7.5 12.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+</svg>
+</div>
+<div class="service-name">کامنت</div>
+<div class="service-desc">ثبت سفارش کامنت برای پیام</div>
+</div>
+<button class="order-btn" onclick="openOrder('comments')">ثبت سفارش</button>
 </article>
 
 </div>
-
 </section>
 
-
-<!-- =========================
-     روبینو
-========================= -->
-
-<section
-id="rubinoTab"
-style="display:none">
-
-<div class="sectionTitle">
-
-<h2>
-خدمات روبینو
-</h2>
-
-<span>
-رایگان
-</span>
-
+<!-- روبینو -->
+<section class="section">
+<div class="section-head">
+<span class="section-line"></span>
+<h2 class="section-title">خدمات روبینو</h2>
 </div>
-
 
 <div class="services">
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-like"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z" stroke="currentColor" stroke-width="1.7"/>
+<circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.7"/>
 </svg>
 </div>
-
-<h3>
-لایک پست
-</h3>
-
-<p>
-ثبت لایک برای پست روبینو
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="لایک پست روبینو"
-data-type="like">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">بازدید روبینو</div>
+<div class="service-desc">ثبت سفارش بازدید پست روبینو</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('rubinoViews')">ثبت سفارش</button>
 </article>
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-eye"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M7 10v9H4.5A1.5 1.5 0 0 1 3 17.5v-6A1.5 1.5 0 0 1 4.5 10H7Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M7 19h9.2c1 0 1.8-.6 2.1-1.5l1.2-4.3c.4-1.4-.7-2.7-2.1-2.7H14l.7-3.2c.2-1-.5-1.8-1.5-1.8L9 10v9" stroke="currentColor" stroke-width="1.7"/>
 </svg>
 </div>
-
-<h3>
-بازدید پست
-</h3>
-
-<p>
-ثبت بازدید پست روبینو
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="بازدید پست روبینو"
-data-type="views">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">لایک روبینو</div>
+<div class="service-desc">ثبت سفارش لایک پست روبینو</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('rubinoLikes')">ثبت سفارش</button>
 </article>
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-user"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/>
+<path d="M3.5 19c.6-3.2 2.4-5 5.5-5s4.9 1.8 5.5 5" stroke="currentColor" stroke-width="1.7"/>
+<path d="M17 8v6M14 11h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
 </svg>
 </div>
-
-<h3>
-فالوور
-</h3>
-
-<p>
-ثبت درخواست فالوور
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="فالوور روبینو"
-data-type="followers">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">فالوور روبینو</div>
+<div class="service-desc">ثبت سفارش فالوور پروفایل روبینو</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('rubinoFollowers')">ثبت سفارش</button>
 </article>
 
-
 <article class="service">
-
-<div class="serviceIcon">
-<svg class="icon">
-    <use href="#i-comment"></use>
+<div class="service-top">
+<div class="icon">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M5 5h14c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-7l-4.5 3v-3H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+<path d="M7.5 9.5h9M7.5 12.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
 </svg>
 </div>
-
-<h3>
-کامنت
-</h3>
-
-<p>
-ثبت درخواست کامنت
-</p>
-
-<div class="serviceBottom">
-
-<span class="free">
-رایگان
-</span>
-
-<button
-class="orderButton"
-data-service="کامنت روبینو"
-data-type="comment">
-
-سفارش
-
-<svg class="icon">
-    <use href="#i-send"></use>
-</svg>
-
-</button>
-
+<div class="service-name">کامنت روبینو</div>
+<div class="service-desc">ثبت سفارش کامنت برای پست روبینو</div>
 </div>
-
+<button class="order-btn" onclick="openOrder('rubinoComments')">ثبت سفارش</button>
 </article>
 
 </div>
-
-</section>
-
-
-<!-- =========================
-     فرم سفارش
-========================= -->
-
-<section
-class="orderBox"
-id="orderBox">
-
-<div class="orderHeader">
-
-<strong id="orderTitle">
-ثبت سفارش
-</strong>
-
-<button
-class="closeButton"
-id="closeOrder">
-
-✕
-
-</button>
-
-</div>
-
-
-<div class="field">
-
-<label>
-لینک پیام / پست / کانال
-</label>
-
-<input
-class="input"
-id="targetInput"
-type="url"
-inputmode="url"
-placeholder="https://rubika.ir/..."
-autocomplete="off">
-
-</div>
-
-
-<div class="field">
-
-<label>
-
-تعداد
-
-<span class="limitText">
-هر مرحله حداکثر ۵۰۰
-</span>
-
-</label>
-
-<input
-class="input"
-id="amountInput"
-type="number"
-min="1"
-max="10000"
-value="10"
-inputmode="numeric">
-
-</div>
-
-
-<div
-class="stageInfo"
-id="stageInfo">
-</div>
-
-
-<!-- ریکشن -->
-
-<div
-id="reactionArea"
-style="display:none">
-
-<div class="field">
-
-<label>
-نوع انتخاب ریکشن
-</label>
-
-<div class="reactionModes">
-
-<button
-class="modeButton active"
-data-mode="single"
-type="button">
-
-✨ تک انتخابی
-
-</button>
-
-<button
-class="modeButton"
-data-mode="random"
-type="button">
-
-🎲 رندم
-
-</button>
-
-<button
-class="modeButton"
-data-mode="all"
-type="button">
-
-🌈 همه ریکشن‌ها
-
-</button>
-
-</div>
-
-
-<div
-class="allInfo"
-id="allInfo">
-
-🌈 همه ریکشن‌ها انتخاب شده است.
-در حالت همه، پنل ریکشن‌های موجود را به صورت
-گروهی برای Worker ارسال می‌کند.
-
-</div>
-
-</div>
-
-
-<div class="field">
-
-<label>
-انتخاب ریکشن
-</label>
-
-<div
-class="emojiGrid"
-id="emojiGrid">
-
-<button class="emoji active" data-emoji="❤️" type="button">❤️</button>
-<button class="emoji" data-emoji="🧡" type="button">🧡</button>
-<button class="emoji" data-emoji="💛" type="button">💛</button>
-<button class="emoji" data-emoji="💚" type="button">💚</button>
-<button class="emoji" data-emoji="💙" type="button">💙</button>
-<button class="emoji" data-emoji="💜" type="button">💜</button>
-<button class="emoji" data-emoji="🖤" type="button">🖤</button>
-<button class="emoji" data-emoji="🤍" type="button">🤍</button>
-<button class="emoji" data-emoji="🤎" type="button">🤎</button>
-<button class="emoji" data-emoji="🩷" type="button">🩷</button>
-<button class="emoji" data-emoji="🩵" type="button">🩵</button>
-<button class="emoji" data-emoji="🩶" type="button">🩶</button>
-
-<button class="emoji" data-emoji="💕" type="button">💕</button>
-<button class="emoji" data-emoji="💞" type="button">💞</button>
-<button class="emoji" data-emoji="💓" type="button">💓</button>
-<button class="emoji" data-emoji="💗" type="button">💗</button>
-<button class="emoji" data-emoji="💖" type="button">💖</button>
-<button class="emoji" data-emoji="💘" type="button">💘</button>
-<button class="emoji" data-emoji="💝" type="button">💝</button>
-<button class="emoji" data-emoji="💟" type="button">💟</button>
-<button class="emoji" data-emoji="❤️‍🔥" type="button">❤️‍🔥</button>
-<button class="emoji" data-emoji="❤️‍🩹" type="button">❤️‍🩹</button>
-
-<button class="emoji" data-emoji="👍" type="button">👍</button>
-<button class="emoji" data-emoji="👎" type="button">👎</button>
-<button class="emoji" data-emoji="👏" type="button">👏</button>
-<button class="emoji" data-emoji="🙌" type="button">🙌</button>
-<button class="emoji" data-emoji="👌" type="button">👌</button>
-<button class="emoji" data-emoji="🤌" type="button">🤌</button>
-<button class="emoji" data-emoji="🤏" type="button">🤏</button>
-<button class="emoji" data-emoji="✌️" type="button">✌️</button>
-<button class="emoji" data-emoji="🤞" type="button">🤞</button>
-<button class="emoji" data-emoji="🤟" type="button">🤟</button>
-<button class="emoji" data-emoji="🤘" type="button">🤘</button>
-<button class="emoji" data-emoji="🤙" type="button">🤙</button>
-<button class="emoji" data-emoji="👊" type="button">👊</button>
-<button class="emoji" data-emoji="✊" type="button">✊</button>
-<button class="emoji" data-emoji="🙏" type="button">🙏</button>
-<button class="emoji" data-emoji="💪" type="button">💪</button>
-<button class="emoji" data-emoji="🫶" type="button">🫶</button>
-<button class="emoji" data-emoji="🫡" type="button">🫡</button>
-
-<button class="emoji" data-emoji="😂" type="button">😂</button>
-<button class="emoji" data-emoji="🤣" type="button">🤣</button>
-<button class="emoji" data-emoji="😊" type="button">😊</button>
-<button class="emoji" data-emoji="😃" type="button">😃</button>
-<button class="emoji" data-emoji="😄" type="button">😄</button>
-<button class="emoji" data-emoji="😁" type="button">😁</button>
-<button class="emoji" data-emoji="😆" type="button">😆</button>
-<button class="emoji" data-emoji="😅" type="button">😅</button>
-<button class="emoji" data-emoji="🙂" type="button">🙂</button>
-<button class="emoji" data-emoji="🙃" type="button">🙃</button>
-<button class="emoji" data-emoji="😉" type="button">😉</button>
-<button class="emoji" data-emoji="😌" type="button">😌</button>
-<button class="emoji" data-emoji="😍" type="button">😍</button>
-<button class="emoji" data-emoji="🥰" type="button">🥰</button>
-<button class="emoji" data-emoji="😘" type="button">😘</button>
-<button class="emoji" data-emoji="😗" type="button">😗</button>
-<button class="emoji" data-emoji="😙" type="button">😙</button>
-<button class="emoji" data-emoji="😚" type="button">😚</button>
-<button class="emoji" data-emoji="😋" type="button">😋</button>
-<button class="emoji" data-emoji="😛" type="button">😛</button>
-<button class="emoji" data-emoji="😝" type="button">😝</button>
-<button class="emoji" data-emoji="😜" type="button">😜</button>
-<button class="emoji" data-emoji="🤪" type="button">🤪</button>
-<button class="emoji" data-emoji="🤨" type="button">🤨</button>
-<button class="emoji" data-emoji="🧐" type="button">🧐</button>
-<button class="emoji" data-emoji="🤓" type="button">🤓</button>
-<button class="emoji" data-emoji="😎" type="button">😎</button>
-<button class="emoji" data-emoji="🤩" type="button">🤩</button>
-<button class="emoji" data-emoji="🥳" type="button">🥳</button>
-<button class="emoji" data-emoji="😏" type="button">😏</button>
-
-<button class="emoji" data-emoji="😒" type="button">😒</button>
-<button class="emoji" data-emoji="😞" type="button">😞</button>
-<button class="emoji" data-emoji="😔" type="button">😔</button>
-<button class="emoji" data-emoji="😟" type="button">😟</button>
-<button class="emoji" data-emoji="😕" type="button">😕</button>
-<button class="emoji" data-emoji="🙁" type="button">🙁</button>
-<button class="emoji" data-emoji="☹️" type="button">☹️</button>
-<button class="emoji" data-emoji="😣" type="button">😣</button>
-<button class="emoji" data-emoji="😖" type="button">😖</button>
-<button class="emoji" data-emoji="😫" type="button">😫</button>
-<button class="emoji" data-emoji="😩" type="button">😩</button>
-<button class="emoji" data-emoji="🥺" type="button">🥺</button>
-<button class="emoji" data-emoji="😢" type="button">😢</button>
-<button class="emoji" data-emoji="😭" type="button">😭</button>
-<button class="emoji" data-emoji="😤" type="button">😤</button>
-<button class="emoji" data-emoji="😠" type="button">😠</button>
-<button class="emoji" data-emoji="😡" type="button">😡</button>
-<button class="emoji" data-emoji="🤬" type="button">🤬</button>
-<button class="emoji" data-emoji="🤯" type="button">🤯</button>
-
-<button class="emoji" data-emoji="😳" type="button">😳</button>
-<button class="emoji" data-emoji="🥵" type="button">🥵</button>
-<button class="emoji" data-emoji="🥶" type="button">🥶</button>
-<button class="emoji" data-emoji="😱" type="button">😱</button>
-<button class="emoji" data-emoji="😨" type="button">😨</button>
-<button class="emoji" data-emoji="😰" type="button">😰</button>
-<button class="emoji" data-emoji="😥" type="button">😥</button>
-<button class="emoji" data-emoji="😓" type="button">😓</button>
-<button class="emoji" data-emoji="🤗" type="button">🤗</button>
-<button class="emoji" data-emoji="🤔" type="button">🤔</button>
-<button class="emoji" data-emoji="🤭" type="button">🤭</button>
-<button class="emoji" data-emoji="🤫" type="button">🤫</button>
-<button class="emoji" data-emoji="🤐" type="button">🤐</button>
-<button class="emoji" data-emoji="🤥" type="button">🤥</button>
-<button class="emoji" data-emoji="😶" type="button">😶</button>
-<button class="emoji" data-emoji="😐" type="button">😐</button>
-<button class="emoji" data-emoji="😑" type="button">😑</button>
-<button class="emoji" data-emoji="😬" type="button">😬</button>
-<button class="emoji" data-emoji="🙄" type="button">🙄</button>
-
-<button class="emoji" data-emoji="😮" type="button">😮</button>
-<button class="emoji" data-emoji="😯" type="button">😯</button>
-<button class="emoji" data-emoji="😲" type="button">😲</button>
-<button class="emoji" data-emoji="🥱" type="button">🥱</button>
-<button class="emoji" data-emoji="😴" type="button">😴</button>
-<button class="emoji" data-emoji="🤤" type="button">🤤</button>
-<button class="emoji" data-emoji="😪" type="button">😪</button>
-<button class="emoji" data-emoji="🤢" type="button">🤢</button>
-<button class="emoji" data-emoji="🤮" type="button">🤮</button>
-<button class="emoji" data-emoji="🤧" type="button">🤧</button>
-<button class="emoji" data-emoji="😷" type="button">😷</button>
-<button class="emoji" data-emoji="🤒" type="button">🤒</button>
-<button class="emoji" data-emoji="🤕" type="button">🤕</button>
-
-<button class="emoji" data-emoji="💩" type="button">💩</button>
-<button class="emoji" data-emoji="👻" type="button">👻</button>
-<button class="emoji" data-emoji="💀" type="button">💀</button>
-<button class="emoji" data-emoji="☠️" type="button">☠️</button>
-<button class="emoji" data-emoji="👽" type="button">👽</button>
-<button class="emoji" data-emoji="🤖" type="button">🤖</button>
-<button class="emoji" data-emoji="😈" type="button">😈</button>
-<button class="emoji" data-emoji="👿" type="button">👿</button>
-
-<button class="emoji" data-emoji="🎉" type="button">🎉</button>
-<button class="emoji" data-emoji="🎊" type="button">🎊</button>
-<button class="emoji" data-emoji="🔥" type="button">🔥</button>
-<button class="emoji" data-emoji="✨" type="button">✨</button>
-<button class="emoji" data-emoji="⭐" type="button">⭐</button>
-<button class="emoji" data-emoji="🌟" type="button">🌟</button>
-<button class="emoji" data-emoji="💯" type="button">💯</button>
-<button class="emoji" data-emoji="💥" type="button">💥</button>
-<button class="emoji" data-emoji="🎯" type="button">🎯</button>
-<button class="emoji" data-emoji="🚀" type="button">🚀</button>
-<button class="emoji" data-emoji="🏆" type="button">🏆</button>
-<button class="emoji" data-emoji="💎" type="button">💎</button>
-
-<button class="emoji" data-emoji="🥹" type="button">🥹</button>
-<button class="emoji" data-emoji="🫠" type="button">🫠</button>
-<button class="emoji" data-emoji="🫣" type="button">🫣</button>
-<button class="emoji" data-emoji="🫢" type="button">🫢</button>
-<button class="emoji" data-emoji="🫤" type="button">🫤</button>
-<button class="emoji" data-emoji="🫥" type="button">🫥</button>
-<button class="emoji" data-emoji="🫨" type="button">🫨</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<button
-class="submit"
-id="submitOrder">
-
-🚀 ثبت سفارش
-
-</button>
-
-
-<button
-class="cancel"
-id="cancelOrder">
-
-انصراف
-
-</button>
-
-
-<div
-class="progressBox"
-id="progressBox">
-
-<div class="progressText">
-
-<span id="progressText">
-آماده‌سازی...
-</span>
-
-<span id="progressPercent">
-0%
-</span>
-
-</div>
-
-<div class="progress">
-
-<div
-class="progressBar"
-id="progressBar">
-</div>
-
-</div>
-
-</div>
-
-
-<div
-class="successBox"
-id="successBox">
-
-<div class="successTitle">
-✓ سفارش با موفقیت ثبت شد
-</div>
-
-<div
-class="successText"
-id="successText">
-</div>
-
-<div
-class="ids"
-id="orderIds">
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     سفارش‌ها
-========================= -->
-
-<section
-class="orders"
-id="ordersSection">
-
-<div class="sectionTitle">
-
-<h2>
-سفارش‌های من
-</h2>
-
-<span>
-تاریخچه
-</span>
-
-</div>
-
-<div id="ordersList"></div>
-
-</section>
-
 </section>
 
 </main>
 
+<!-- ================= درباره ================= -->
+<section class="page" id="aboutPage">
+<div class="about-card">
 
-<!-- =========================
-     درباره
-========================= -->
+<img class="about-photo" id="aboutLogo" alt="پنل روبیکا رایگان">
 
-<section
-id="aboutPage">
+<div class="about-title">پنل روبیکا رایگان</div>
+<div class="about-creator">ساخته شده توسط ابوالفضل کاظمی</div>
 
-<div class="aboutCard">
-
-<div class="aboutIcon">
-<svg class="logoIcon">
-    <use href="#i-cart"></use>
-</svg>
+<div class="about-text">
+این پنل برای ثبت سفارش خدمات پیام‌رسان روبیکا و روبینو طراحی شده است.
+<br><br>
+تمام ظاهر پنل با طراحی شیشه‌ای، تاریک، مدرن و واکنش‌گرا ساخته شده و لوگوی اصلی نیز داخل خود کد قرار گرفته است.
 </div>
 
-<h1>
-درباره پنل
-</h1>
-
-<p>
-پنل خدمات روبیکا برای ثبت و مدیریت
-سفارش‌های خدمات روبیکا ساخته شده است.
-</p>
-
-
-<div class="creator">
-
-<div class="creatorTitle">
-سازنده پنل
+<div class="about-row">
+کانال روبیکا:
+<a href="https://rubika.ir/Counter2Mod" target="_blank">@Counter2Mod</a>
 </div>
 
-<a
-href="https://rubika.ir/Abolfazl_Kazemi_SFG"
-target="_blank"
-rel="noopener noreferrer">
-
-ابوالفضل کاظمی
-
-</a>
-
-
-<div class="creatorLinks">
-
-<a
-class="creatorLink"
-href="https://rubika.ir/Abolfazl_Kazemi_SFG"
-target="_blank"
-rel="noopener noreferrer">
-
-<div class="creatorLinkIcon">
-
-<svg class="icon">
-    <use href="#i-user"></use>
-</svg>
-
+<div class="about-row">
+سازنده:
+<a href="https://rubika.ir/Abolfazl_Kazemi_SFG" target="_blank">ابوالفضل کاظمی</a>
 </div>
 
-<div class="creatorLinkText">
+<div class="about-row">خدمات پیام‌رسان روبیکا</div>
+<div class="about-row">خدمات روبینو</div>
 
-<strong>
-آیدی روبیکای سازنده
-</strong>
-
-<span>
-@Abolfazl_Kazemi_SFG
-</span>
-
-</div>
-
-</a>
-
-
-<a
-class="creatorLink"
-href="https://rubika.ir/Counter2Mod"
-target="_blank"
-rel="noopener noreferrer">
-
-<div class="creatorLinkIcon">
-
-<svg class="icon">
-    <use href="#i-rubika"></use>
-</svg>
-
-</div>
-
-<div class="creatorLinkText">
-
-<strong>
-کانال روبیکا
-</strong>
-
-<span>
-@Counter2Mod
-</span>
-
-</div>
-
-</a>
-
-</div>
-
-
-<div class="aboutBadge">
-✓ ساخته شده توسط ابوالفضل کاظمی
-</div>
-
-</div>
-
-
-<button
-class="backButton"
-id="backButton">
-
-← بازگشت به پنل
-
+<button class="back" onclick="goPage('home')">
+← بازگشت به صفحه اصلی
 </button>
 
 </div>
-
 </section>
 
-</div>
-
-
-<!-- =========================
-     منوی پایین
-========================= -->
-
+<!-- ================= پایین ================= -->
 <nav class="bottom">
 
-<div class="bottomInner">
-
-<button
-class="nav active"
-data-nav="home">
-
-<span class="navIcon">
-
-<svg class="icon">
-    <use href="#i-home"></use>
+<button class="nav active" id="homeNav" onclick="goPage('home')">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 11.5 12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M5.5 10.5V20h13v-9.5" stroke="currentColor" stroke-width="1.8"/>
+<path d="M9.5 20v-5h5v5" stroke="currentColor" stroke-width="1.8"/>
 </svg>
-
-</span>
-
 خانه
-
 </button>
 
-
-<button
-class="nav"
-data-nav="orders">
-
-<span class="navIcon">
-
-<svg class="icon">
-    <use href="#i-list"></use>
+<button class="nav" onclick="openOrder('generic')">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/>
+<path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
 </svg>
-
-</span>
-
-سفارش‌ها
-
+ثبت سفارش
 </button>
 
-
-<button
-class="nav"
-data-nav="about">
-
-<span class="navIcon">
-
-<svg class="icon">
-    <use href="#i-info"></use>
+<button class="nav" id="aboutNav" onclick="goPage('about')">
+<svg viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/>
+<path d="M12 10.5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+<circle cx="12" cy="7.5" r="1" fill="currentColor"/>
 </svg>
-
-</span>
-
 درباره
-
 </button>
-
-</div>
 
 </nav>
 
+<!-- ================= مودال ================= -->
+<div class="modal-layer" id="layer">
 
-<div
-class="toast"
-id="toast">
+<div class="modal">
+
+<div class="modal-head">
+<div class="modal-title" id="modalTitle">ثبت سفارش</div>
+<button class="modal-close" onclick="closeOrder()">×</button>
 </div>
 
+<form id="form">
+<div id="fields"></div>
+<button class="submit" type="submit">ثبت سفارش</button>
+</form>
+
+<div class="progress" id="progress">
+<div class="progress-head">
+<span id="progressText">آماده ثبت سفارش</span>
+<span class="percent" id="percent">0٪</span>
+</div>
+
+<div class="track">
+<div class="bar" id="bar"></div>
+</div>
+
+<div class="progress-info" id="progressInfo">
+لطفاً تا پایان عملیات صبر کنید.
+</div>
+
+<div class="message success" id="success"></div>
+<div class="message error" id="error"></div>
+</div>
+
+</div>
+</div>
 
 <script>
 
-/* =========================
+/* =============================
+   لوگوی داخلی
+============================= */
+document.getElementById("topLogo").src=LOGO;
+document.getElementById("menuLogo").src=LOGO;
+document.getElementById("aboutLogo").src=LOGO;
+
+
+/* =============================
    API
-========================= */
-
-const API_URL =
-"https://rubika-panel-api.kantermodmeno.workers.dev";
-
-const STAGE_LIMIT = 500;
-
-const TOTAL_LIMIT = 10000;
+============================= */
+const API="https://rubika-panel-api.kantermodmeno.workers.dev";
 
 
-/* =========================
-   وضعیت
-========================= */
+/* =============================
+   منو
+============================= */
+const toggle=document.getElementById("menuToggle");
+const side=document.getElementById("side");
+const shade=document.getElementById("shade");
+const sideClose=document.getElementById("sideClose");
 
-let selectedService = "";
-let selectedType = "";
+function openMenu(){
+side.classList.add("show");
+shade.classList.add("show");
+toggle.classList.add("open");
+}
 
-let selectedEmoji = "❤️";
+function closeMenu(){
+side.classList.remove("show");
+shade.classList.remove("show");
+toggle.classList.remove("open");
+}
 
-let reactionMode = "single";
+toggle.onclick=()=>{
+side.classList.contains("show")?closeMenu():openMenu();
+};
 
-let orders =
-JSON.parse(
-localStorage.getItem(
-"counterModOrders"
-) || "[]"
-);
+sideClose.onclick=closeMenu;
+shade.onclick=closeMenu;
 
 
-/* =========================
+/* =============================
+   صفحات
+============================= */
+const homePage=document.getElementById("homePage");
+const aboutPage=document.getElementById("aboutPage");
+const homeNav=document.getElementById("homeNav");
+const aboutNav=document.getElementById("aboutNav");
+
+function goPage(page){
+
+closeMenu();
+
+if(page==="about"){
+homePage.classList.remove("active");
+aboutPage.classList.add("active");
+homeNav.classList.remove("active");
+aboutNav.classList.add("active");
+history.replaceState(null,"","#about");
+}else{
+aboutPage.classList.remove("active");
+homePage.classList.add("active");
+aboutNav.classList.remove("active");
+homeNav.classList.add("active");
+history.replaceState(null,"","#home");
+}
+
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+if(location.hash==="#about")goPage("about");
+
+
+/* =============================
+   سفارش‌ها
+============================= */
+const orders={
+
+reaction:{
+title:"ثبت سفارش ری‌اکشن پیام",
+fields:[
+["link","لینک پیام","url","لینک پیام روبیکا"],
+["count","تعداد","number","مثلاً 100"]
+],
+reaction:true
+},
+
+views:{
+title:"ثبت سفارش سین / بازدید",
+fields:[
+["link","لینک پیام","url","لینک پیام روبیکا"],
+["count","تعداد بازدید","number","مثلاً 1000"]
+]
+},
+
+members:{
+title:"ثبت سفارش ممبر",
+fields:[
+["target","لینک گروه / کانال","url","لینک گروه یا کانال"],
+["count","تعداد ممبر","number","مثلاً 100"]
+]
+},
+
+followers:{
+title:"ثبت سفارش فالوور",
+fields:[
+["target","لینک صفحه","url","لینک صفحه روبیکا"],
+["count","تعداد فالوور","number","مثلاً 100"]
+]
+},
+
+likes:{
+title:"ثبت سفارش لایک پیام",
+fields:[
+["link","لینک پیام","url","لینک پیام روبیکا"],
+["count","تعداد لایک","number","مثلاً 100"]
+]
+},
+
+comments:{
+title:"ثبت سفارش کامنت",
+fields:[
+["link","لینک پیام","url","لینک پیام روبیکا"],
+["count","تعداد کامنت","number","مثلاً 20"],
+["comment","متن کامنت","textarea","متن کامنت"]
+]
+},
+
+rubinoViews:{
+title:"ثبت سفارش بازدید روبینو",
+fields:[
+["link","لینک پست روبینو","url","لینک پست روبینو"],
+["count","تعداد بازدید","number","مثلاً 1000"]
+]
+},
+
+rubinoLikes:{
+title:"ثبت سفارش لایک روبینو",
+fields:[
+["link","لینک پست روبینو","url","لینک پست روبینو"],
+["count","تعداد لایک","number","مثلاً 100"]
+]
+},
+
+rubinoFollowers:{
+title:"ثبت سفارش فالوور روبینو",
+fields:[
+["target","لینک پروفایل روبینو","url","لینک پروفایل روبینو"],
+["count","تعداد فالوور","number","مثلاً 100"]
+]
+},
+
+rubinoComments:{
+title:"ثبت سفارش کامنت روبینو",
+fields:[
+["link","لینک پست روبینو","url","لینک پست روبینو"],
+["count","تعداد کامنت","number","مثلاً 20"],
+["comment","متن کامنت","textarea","متن کامنت"]
+]
+},
+
+generic:{
+title:"ثبت سفارش جدید",
+fields:[
+["target","لینک / شناسه","text","لینک یا شناسه"],
+["count","تعداد","number","تعداد موردنظر"],
+["description","توضیحات","textarea","توضیحات سفارش"]
+]
+}
+
+};
+
+let currentType="generic";
+
+
+/* =============================
    عناصر
-========================= */
-
-const homePage =
-document.getElementById("homePage");
-
-const aboutPage =
-document.getElementById("aboutPage");
-
-const orderBox =
-document.getElementById("orderBox");
-
-const ordersSection =
-document.getElementById("ordersSection");
-
-const targetInput =
-document.getElementById("targetInput");
-
-const amountInput =
-document.getElementById("amountInput");
-
-const reactionArea =
-document.getElementById("reactionArea");
-
-const stageInfo =
-document.getElementById("stageInfo");
-
-const submitOrder =
-document.getElementById("submitOrder");
-
-const progressBox =
-document.getElementById("progressBox");
-
-const progressBar =
-document.getElementById("progressBar");
-
-const progressText =
-document.getElementById("progressText");
-
-const progressPercent =
-document.getElementById("progressPercent");
-
-const successBox =
-document.getElementById("successBox");
-
-const successText =
-document.getElementById("successText");
-
-const orderIds =
-document.getElementById("orderIds");
-
-const allInfo =
-document.getElementById("allInfo");
+============================= */
+const layer=document.getElementById("layer");
+const modalTitle=document.getElementById("modalTitle");
+const fields=document.getElementById("fields");
+const form=document.getElementById("form");
+const progress=document.getElementById("progress");
+const bar=document.getElementById("bar");
+const percent=document.getElementById("percent");
+const progressText=document.getElementById("progressText");
+const progressInfo=document.getElementById("progressInfo");
+const success=document.getElementById("success");
+const error=document.getElementById("error");
 
 
-/* =========================
-   Toast
-========================= */
+/* =============================
+   ساخت فیلد
+============================= */
+function field(data){
 
-let toastTimer;
+const [name,label,type,placeholder]=data;
 
-function showToast(message){
+const box=document.createElement("div");
+box.className="field";
 
-    const box =
-        document.getElementById("toast");
+const lab=document.createElement("label");
+lab.textContent=label;
 
-    box.textContent =
-        message;
+let input;
 
-    box.classList.add("show");
+if(type==="textarea"){
+input=document.createElement("textarea");
+input.placeholder=placeholder;
+}
+else{
+input=document.createElement("input");
+input.type=type;
+input.placeholder=placeholder;
 
-    clearTimeout(toastTimer);
+if(type==="number")input.min="1";
+}
 
-    toastTimer =
-        setTimeout(
-            ()=>{
-                box.classList.remove("show");
-            },
-            3000
-        );
+input.name=name;
+input.required=true;
 
+box.appendChild(lab);
+box.appendChild(input);
+
+return box;
 }
 
 
-/* =========================
-   تب‌ها
-========================= */
+/* =============================
+   ریکشن‌ها
+============================= */
+const reactionList=[
+["❤️","قلب"],
+["👍","لایک"],
+["😂","خنده"],
+["😍","عاشقانه"],
+["🔥","آتش"],
+["👏","تشویق"],
+["😢","ناراحت"],
+["😡","عصبانی"]
+];
 
-document
-.querySelectorAll(".tab")
-.forEach(tab=>{
+function reactionSelector(){
 
-    tab.addEventListener(
-        "click",
-        ()=>{
+const box=document.createElement("div");
+box.className="reaction-box";
 
-            document
-            .querySelectorAll(".tab")
-            .forEach(x=>{
-                x.classList.remove(
-                    "active"
-                );
-            });
+const head=document.createElement("div");
+head.className="reaction-head";
 
-            tab.classList.add(
-                "active"
-            );
+const title=document.createElement("div");
+title.className="reaction-title";
+title.textContent="انتخاب ریکشن پیام";
 
-            const name =
-                tab.dataset.tab;
+const all=document.createElement("button");
+all.type="button";
+all.className="select-all";
+all.textContent="انتخاب همه";
 
-            document
-            .getElementById(
-                "rubikaTab"
-            )
-            .style.display =
-                name === "rubika"
-                ? "block"
-                : "none";
+const grid=document.createElement("div");
+grid.className="reactions";
 
-            document
-            .getElementById(
-                "rubinoTab"
-            )
-            .style.display =
-                name === "rubino"
-                ? "block"
-                : "none";
+reactionList.forEach(([emoji,name])=>{
 
-        }
-    );
+const b=document.createElement("button");
+b.type="button";
+b.className="react";
+b.dataset.value=emoji;
+b.title=name;
+b.textContent=emoji;
 
-});
+b.onclick=()=>{
+b.classList.toggle("selected");
+};
 
-
-/* =========================
-   باز کردن فرم
-========================= */
-
-document
-.querySelectorAll(".orderButton")
-.forEach(button=>{
-
-    button.addEventListener(
-        "click",
-        ()=>{
-
-            selectedService =
-                button.dataset.service;
-
-            selectedType =
-                button.dataset.type;
-
-            document
-            .getElementById(
-                "orderTitle"
-            )
-            .textContent =
-                "ثبت سفارش " +
-                selectedService;
-
-            targetInput.value =
-                "";
-
-            amountInput.value =
-                "10";
-
-            selectedEmoji =
-                "❤️";
-
-            reactionMode =
-                "single";
-
-            reactionArea.style.display =
-                selectedType === "reaction"
-                ? "block"
-                : "none";
-
-            allInfo.classList.remove(
-                "show"
-            );
-
-            stageInfo.classList.remove(
-                "show"
-            );
-
-            successBox.classList.remove(
-                "show"
-            );
-
-            progressBox.classList.remove(
-                "show"
-            );
-
-            document
-            .querySelectorAll(
-                ".modeButton"
-            )
-            .forEach(x=>{
-                x.classList.toggle(
-                    "active",
-                    x.dataset.mode ===
-                    "single"
-                );
-            });
-
-            document
-            .querySelectorAll(
-                ".emoji"
-            )
-            .forEach(x=>{
-                x.classList.toggle(
-                    "active",
-                    x.dataset.emoji ===
-                    "❤️"
-                );
-            });
-
-            orderBox.classList.add(
-                "show"
-            );
-
-            orderBox.scrollIntoView({
-                behavior:"smooth",
-                block:"center"
-            });
-
-        }
-    );
+grid.appendChild(b);
 
 });
 
+all.onclick=()=>{
 
-/* =========================
+const buttons=[...grid.querySelectorAll(".react")];
+const active=buttons.every(x=>x.classList.contains("selected"));
+
+buttons.forEach(x=>{
+x.classList.toggle("selected",!active);
+});
+
+all.textContent=active?"انتخاب همه":"لغو انتخاب همه";
+
+};
+
+head.appendChild(title);
+head.appendChild(all);
+
+box.appendChild(head);
+box.appendChild(grid);
+
+return box;
+}
+
+
+/* =============================
+   باز کردن سفارش
+============================= */
+function openOrder(type){
+
+currentType=type;
+
+const config=orders[type]||orders.generic;
+
+modalTitle.textContent=config.title;
+fields.innerHTML="";
+
+config.fields.forEach(x=>{
+fields.appendChild(field(x));
+});
+
+if(config.reaction){
+fields.appendChild(reactionSelector());
+}
+
+progress.classList.remove("show");
+success.classList.remove("show");
+error.classList.remove("show");
+
+bar.style.width="0%";
+percent.textContent="0٪";
+progressText.textContent="آماده ثبت سفارش";
+progressInfo.textContent="اطلاعات سفارش را کامل کنید.";
+
+layer.classList.add("show");
+}
+
+
+/* =============================
    بستن
-========================= */
-
+============================= */
 function closeOrder(){
-
-    orderBox.classList.remove(
-        "show"
-    );
-
-    successBox.classList.remove(
-        "show"
-    );
-
-    progressBox.classList.remove(
-        "show"
-    );
-
+layer.classList.remove("show");
 }
 
-document
-.getElementById("closeOrder")
-.onclick =
-    closeOrder;
-
-document
-.getElementById("cancelOrder")
-.onclick =
-    closeOrder;
-
-
-/* =========================
-   حالت ریکشن
-========================= */
-
-document
-.querySelectorAll(".modeButton")
-.forEach(button=>{
-
-    button.addEventListener(
-        "click",
-        ()=>{
-
-            reactionMode =
-                button.dataset.mode;
-
-            document
-            .querySelectorAll(
-                ".modeButton"
-            )
-            .forEach(x=>{
-                x.classList.toggle(
-                    "active",
-                    x === button
-                );
-            });
-
-            if(
-                reactionMode ===
-                "all"
-            ){
-
-                allInfo.classList.add(
-                    "show"
-                );
-
-                document
-                .querySelectorAll(
-                    ".emoji"
-                )
-                .forEach(x=>{
-                    x.classList.add(
-                        "active"
-                    );
-                });
-
-            }else{
-
-                allInfo.classList.remove(
-                    "show"
-                );
-
-                document
-                .querySelectorAll(
-                    ".emoji"
-                )
-                .forEach(x=>{
-
-                    x.classList.toggle(
-                        "active",
-                        reactionMode ===
-                        "single" &&
-                        x.dataset.emoji ===
-                        selectedEmoji
-                    );
-
-                });
-
-            }
-
-        }
-    );
-
+layer.addEventListener("click",e=>{
+if(e.target===layer)closeOrder();
 });
 
 
-/* =========================
-   انتخاب ایموجی
-========================= */
+/* =============================
+   پیشرفت
+============================= */
+function setProgress(v){
 
-document
-.querySelectorAll(".emoji")
-.forEach(button=>{
+v=Math.max(0,Math.min(100,Math.round(v)));
 
-    button.addEventListener(
-        "click",
-        ()=>{
-
-            selectedEmoji =
-                button.dataset.emoji;
-
-            reactionMode =
-                "single";
-
-            document
-            .querySelectorAll(
-                ".modeButton"
-            )
-            .forEach(x=>{
-                x.classList.toggle(
-                    "active",
-                    x.dataset.mode ===
-                    "single"
-                );
-            });
-
-            allInfo.classList.remove(
-                "show"
-            );
-
-            document
-            .querySelectorAll(
-                ".emoji"
-            )
-            .forEach(x=>{
-                x.classList.toggle(
-                    "active",
-                    x === button
-                );
-            });
-
-        }
-    );
-
-});
-
-
-/* =========================
-   محاسبه مراحل
-========================= */
-
-function makeStages(total){
-
-    const stages = [];
-
-    let remaining =
-        total;
-
-    while(
-        remaining > 0
-    ){
-
-        const current =
-            Math.min(
-                STAGE_LIMIT,
-                remaining
-            );
-
-        stages.push(
-            current
-        );
-
-        remaining -=
-            current;
-
-    }
-
-    return stages;
-
+bar.style.width=v+"%";
+percent.textContent=v+"٪";
 }
 
 
-/* =========================
-   نمایش مراحل
-========================= */
-
-function updateStageInfo(){
-
-    const total =
-        parseInt(
-            amountInput.value ||
-            "0"
-        );
-
-    if(
-        !total ||
-        total < 1
-    ){
-
-        stageInfo.classList.remove(
-            "show"
-        );
-
-        return;
-
-    }
-
-    const stages =
-        makeStages(total);
-
-    if(
-        stages.length <= 1
-    ){
-
-        stageInfo.classList.remove(
-            "show"
-        );
-
-        return;
-
-    }
-
-    stageInfo.classList.add(
-        "show"
-    );
-
-    stageInfo.innerHTML =
-        `
-        <b>تقسیم سفارش:</b><br>
-        تعداد کل: ${total}<br>
-        تعداد مراحل: ${stages.length}<br>
-        مراحل:
-        ${stages.join(" + ")}
-        `;
-
-}
-
-
-/* =========================
-   تعداد
-========================= */
-
-amountInput.addEventListener(
-    "input",
-    ()=>{
-
-        let value =
-            parseInt(
-                amountInput.value ||
-                "0"
-            );
-
-        if(
-            value >
-            TOTAL_LIMIT
-        ){
-
-            amountInput.value =
-                TOTAL_LIMIT;
-
-            value =
-                TOTAL_LIMIT;
-
-            showToast(
-                "حداکثر تعداد کل ۱۰۰۰۰ است."
-            );
-
-        }
-
-        updateStageInfo();
-
-    }
-);
-
-
-/* =========================
-   ریکشن
-========================= */
-
-function getReaction(){
-
-    if(
-        selectedType !==
-        "reaction"
-    ){
-
-        return "";
-
-    }
-
-    if(
-        reactionMode ===
-        "all"
-    ){
-
-        return "all";
-
-    }
-
-    if(
-        reactionMode ===
-        "random"
-    ){
-
-        return "random";
-
-    }
-
-    return selectedEmoji;
-
-}
-
-
-/* =========================
-   ارسال مرحله به Worker
-========================= */
-
-async function sendStage(
-    count,
-    stageNumber,
-    totalStages
-){
-
-    const payload = {
-
-        service:
-            selectedService,
-
-        chat_id:
-            "",
-
-        text:
-            targetInput.value.trim(),
-
-        link:
-            targetInput.value.trim(),
-
-        count:
-            count,
-
-        reaction:
-            getReaction(),
-
-        stage:
-            stageNumber,
-
-        totalStages:
-            totalStages
-
-    };
-
-
-    const response =
-        await fetch(
-            API_URL +
-            "/api/order",
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body:
-                    JSON.stringify(
-                        payload
-                    )
-            }
-        );
-
-
-    let data;
-
-    try{
-
-        data =
-            await response.json();
-
-    }catch(error){
-
-        throw new Error(
-            "پاسخ سرور قابل خواندن نیست."
-        );
-
-    }
-
-
-    if(
-        !response.ok ||
-        !data.ok
-    ){
-
-        throw new Error(
-            data.error ||
-            data.message ||
-            "ثبت مرحله ناموفق بود."
-        );
-
-    }
-
-
-    return data;
-
-}
-
-
-/* =========================
+/* =============================
    ثبت سفارش
-========================= */
+============================= */
+form.addEventListener("submit",async e=>{
 
-submitOrder.addEventListener(
-    "click",
-    async()=>{
+e.preventDefault();
 
-        const link =
-            targetInput.value.trim();
+success.classList.remove("show");
+error.classList.remove("show");
 
-        const total =
-            parseInt(
-                amountInput.value ||
-                "0"
-            );
+const data=new FormData(form);
+const values={};
 
+for(const [key,value] of data.entries()){
+values[key]=String(value).trim();
+}
 
-        if(!link){
 
-            showToast(
-                "لطفاً لینک پیام را وارد کنید."
-            );
+/* ریکشن */
+if(currentType==="reaction"){
 
-            targetInput.focus();
+const selected=
+[...document.querySelectorAll(".react.selected")]
+.map(x=>x.dataset.value);
 
-            return;
+if(!selected.length){
 
-        }
+error.textContent="✕ حداقل یک ریکشن را انتخاب کنید.";
+error.classList.add("show");
+return;
 
+}
 
-        if(
-            !total ||
-            total < 1
-        ){
+values.reactions=selected;
+}
 
-            showToast(
-                "تعداد صحیح وارد کنید."
-            );
 
-            return;
+/* نمایش پیشرفت */
+progress.classList.add("show");
+progressText.textContent="در حال آماده‌سازی سفارش...";
+progressInfo.textContent="اطلاعات سفارش در حال بررسی است.";
 
-        }
+let p=0;
+setProgress(0);
 
+const timer=setInterval(()=>{
 
-        if(
-            total >
-            TOTAL_LIMIT
-        ){
+if(p<88){
+p+=Math.random()*8;
+setProgress(p);
+}
 
-            showToast(
-                "حداکثر تعداد کل ۱۰۰۰۰ است."
-            );
+},250);
 
-            return;
 
-        }
+const config=orders[currentType]||orders.generic;
 
+const target=
+values.link||
+values.target||
+"";
 
-        const stages =
-            makeStages(total);
+const payload={
+service:config.title,
+chat_id:target,
+text:JSON.stringify({
+service:config.title,
+data:values,
+created_at:new Date().toISOString()
+},null,2)
+};
 
+try{
 
-        submitOrder.disabled =
-            true;
+let serverOK=false;
+let result=null;
 
-        progressBox.classList.add(
-            "show"
-        );
+try{
 
-        successBox.classList.remove(
-            "show"
-        );
+const response=await fetch(API+"/api/order",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(payload)
+});
 
+result=await response.json();
 
-        let ids = [];
+if(response.ok && result.ok===true){
+serverOK=true;
+}
 
-        let completed = 0;
+}catch(_){}
 
 
-        try{
+/* اگر سرور جواب داد */
+if(serverOK){
 
-            for(
-                let i = 0;
-                i < stages.length;
-                i++
-            ){
+clearInterval(timer);
+setProgress(100);
 
-                const current =
-                    stages[i];
-
-
-                progressText.textContent =
-                    "مرحله " +
-                    (i+1) +
-                    " از " +
-                    stages.length +
-                    " — تعداد " +
-                    current;
-
-
-                const result =
-                    await sendStage(
-                        current,
-                        i+1,
-                        stages.length
-                    );
-
-
-                if(
-                    result &&
-                    result.order &&
-                    result.order.order_id
-                ){
-
-                    ids.push(
-                        result.order.order_id
-                    );
-
-                }
-
-
-                completed++;
-
-
-                const percent =
-                    Math.round(
-                        completed /
-                        stages.length *
-                        100
-                    );
-
-
-                progressBar.style.width =
-                    percent + "%";
-
-                progressPercent.textContent =
-                    percent + "%";
-
-            }
-
-
-            const localOrder = {
-
-                id:
-                    ids[0] ||
-                    "CM-" +
-                    Date.now(),
-
-                service:
-                    selectedService,
-
-                type:
-                    selectedType,
-
-                target:
-                    link,
-
-                amount:
-                    total,
-
-                stages:
-                    stages,
-
-                stageIds:
-                    ids,
-
-                reaction:
-                    getReaction(),
-
-                status:
-                    "pending",
-
-                date:
-                    new Date()
-                    .toLocaleString(
-                        "fa-IR"
-                    )
-
-            };
-
-
-            orders.unshift(
-                localOrder
-            );
-
-
-            if(
-                orders.length >
-                50
-            ){
-
-                orders =
-                    orders.slice(
-                        0,
-                        50
-                    );
-
-            }
-
-
-            localStorage.setItem(
-                "counterModOrders",
-                JSON.stringify(
-                    orders
-                )
-            );
-
-
-            renderOrders();
-
-
-            successBox.classList.add(
-                "show"
-            );
-
-
-            if(
-                stages.length > 1
-            ){
-
-                successText.textContent =
-                    "سفارش " +
-                    total +
-                    " عددی در " +
-                    stages.length +
-                    " مرحله ثبت شد: " +
-                    stages.join(
-                        " + "
-                    );
-
-            }else{
-
-                successText.textContent =
-                    "سفارش با موفقیت در Worker ثبت شد.";
-
-            }
-
-
-            orderIds.textContent =
-                ids.length
-                ? "شناسه مراحل: " +
-                  ids.join(" | ")
-                : "شناسه سفارش در Worker ثبت شد.";
-
-
-            progressText.textContent =
-                "تمام مراحل ثبت شد";
-
-
-            showToast(
-                "تمام مراحل سفارش ثبت شد."
-            );
-
-
-        }catch(error){
-
-            showToast(
-                error.message ||
-                "خطا در ثبت سفارش."
-            );
-
-
-            progressText.textContent =
-                "ثبت سفارش متوقف شد.";
-
-        }finally{
-
-            submitOrder.disabled =
-                false;
-
-        }
-
-    }
+progressText.textContent="سفارش ثبت شد ✓";
+progressInfo.textContent="درخواست شما با موفقیت به سرور ارسال شد.";
+
+success.innerHTML=
+"✓ سفارش با موفقیت ثبت شد."+
+"<br>کد سفارش: <b>"+
+escapeHTML(result.order_id||"ثبت شد")+
+"</b>";
+
+success.classList.add("show");
+
+localStorage.setItem(
+"lastOrder",
+JSON.stringify({
+payload,
+result,
+time:new Date().toISOString()
+})
 );
 
-
-/* =========================
-   تاریخچه
-========================= */
-
-function renderOrders(){
-
-    const list =
-        document.getElementById(
-            "ordersList"
-        );
-
-
-    if(
-        !orders.length
-    ){
-
-        list.innerHTML =
-            `
-            <div class="empty">
-                هنوز سفارشی ثبت نکرده‌اید.
-            </div>
-            `;
-
-        return;
-
-    }
-
-
-    list.innerHTML =
-        orders.map(
-            order=>{
-
-                let reaction =
-                    "";
-
-                if(
-                    order.reaction ===
-                    "all"
-                ){
-
-                    reaction =
-                        "🌈 همه ریکشن‌ها";
-
-                }else if(
-                    order.reaction ===
-                    "random"
-                ){
-
-                    reaction =
-                        "🎲 رندم";
-
-                }else if(
-                    order.reaction
-                ){
-
-                    reaction =
-                        order.reaction;
-
-                }
-
-
-                return `
-                <div class="orderItem">
-
-                    <div class="orderTop">
-
-                        <div>
-
-                            <strong>
-                                ${escapeHTML(
-                                    order.service
-                                )}
-                            </strong>
-
-                            <br>
-
-                            <small>
-                                ${escapeHTML(
-                                    order.date || ""
-                                )}
-                            </small>
-
-                        </div>
-
-                        <span class="orderStatus">
-                            ${escapeHTML(
-                                orderStatus(
-                                    order.status
-                                )
-                            )}
-                        </span>
-
-                    </div>
-
-
-                    <div class="orderDetails">
-
-                        تعداد کل:
-                        ${escapeHTML(
-                            String(
-                                order.amount
-                            )
-                        )}
-
-                        <br>
-
-                        مراحل:
-                        ${escapeHTML(
-                            String(
-                                order.stages
-                                ?.join(" + ")
-                                ||
-                                order.amount
-                            )
-                        )}
-
-                        ${
-                            reaction
-                            ? "<br>ری‌اکشن: " +
-                              escapeHTML(
-                                  reaction
-                              )
-                            : ""
-                        }
-
-                    </div>
-
-                </div>
-                `;
-
-            }
-        ).join("");
-
+return;
 }
 
 
-/* =========================
-   وضعیت
-========================= */
+/* حالت آفلاین */
+clearInterval(timer);
 
-function orderStatus(status){
+let saved=JSON.parse(
+localStorage.getItem("offlineOrders")||"[]"
+);
 
-    if(
-        status ===
-        "completed"
-    ){
+saved.push({
+id:"OFF-"+Date.now(),
+payload,
+time:new Date().toISOString()
+});
 
-        return "تکمیل شده";
+localStorage.setItem(
+"offlineOrders",
+JSON.stringify(saved)
+);
 
-    }
+setProgress(100);
 
-    if(
-        status ===
-        "processing"
-    ){
+progressText.textContent="ذخیره آفلاین انجام شد ✓";
+progressInfo.textContent=
+"سرور در دسترس نبود؛ سفارش شما در همین مرورگر ذخیره شد.";
 
-        return "در حال انجام";
+success.innerHTML=
+"✓ اطلاعات سفارش با موفقیت ذخیره شد."+
+"<br>شناسه آفلاین: <b>OFF-"+Date.now()+"</b>";
 
-    }
+success.classList.add("show");
 
-    if(
-        status ===
-        "failed"
-    ){
+}catch(err){
 
-        return "ناموفق";
+clearInterval(timer);
 
-    }
+error.textContent=
+"✕ خطا در ثبت سفارش: "+
+(err.message||"خطای نامشخص");
 
-    return "در انتظار";
+error.classList.add("show");
 
 }
 
+});
 
-/* =========================
-   امنیت متن
-========================= */
 
+/* =============================
+   جلوگیری از HTML ناامن
+============================= */
 function escapeHTML(value){
 
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-   منوی پایین
-========================= */
+/* =============================
+   ESC
+============================= */
+document.addEventListener("keydown",e=>{
 
-document
-.querySelectorAll(".nav")
-.forEach(button=>{
+if(e.key==="Escape"){
 
-    button.addEventListener(
-        "click",
-        ()=>{
+closeMenu();
+closeOrder();
 
-            const nav =
-                button.dataset.nav;
-
-
-            document
-            .querySelectorAll(".nav")
-            .forEach(x=>{
-                x.classList.remove(
-                    "active"
-                );
-            });
-
-            button.classList.add(
-                "active"
-            );
-
-
-            if(
-                nav === "home"
-            ){
-
-                aboutPage.classList.remove(
-                    "show"
-                );
-
-                homePage.style.display =
-                    "block";
-
-                ordersSection.classList.remove(
-                    "show"
-                );
-
-                window.scrollTo({
-                    top:0,
-                    behavior:"smooth"
-                });
-
-            }
-
-
-            if(
-                nav === "orders"
-            ){
-
-                aboutPage.classList.remove(
-                    "show"
-                );
-
-                homePage.style.display =
-                    "block";
-
-                ordersSection.classList.add(
-                    "show"
-                );
-
-                renderOrders();
-
-                setTimeout(
-                    ()=>{
-                        ordersSection
-                        .scrollIntoView({
-                            behavior:"smooth"
-                        });
-                    },
-                    50
-                );
-
-            }
-
-
-            if(
-                nav === "about"
-            ){
-
-                homePage.style.display =
-                    "none";
-
-                aboutPage.classList.add(
-                    "show"
-                );
-
-                window.scrollTo({
-                    top:0,
-                    behavior:"smooth"
-                );
-
-            }
-
-        }
-    );
+}
 
 });
-
-
-/* =========================
-   بازگشت
-========================= */
-
-document
-.getElementById("backButton")
-.addEventListener(
-    "click",
-    ()=>{
-
-        document
-        .querySelector(
-            '[data-nav="home"]'
-        )
-        .click();
-
-    }
-);
-
-
-/* =========================
-   بررسی واقعی Worker
-========================= */
-
-async function checkAPI(){
-
-    const online =
-        document.querySelector(
-            ".online"
-        );
-
-    try{
-
-        const response =
-            await fetch(
-                API_URL +
-                "/api/test-token",
-                {
-                    method:"GET",
-                    cache:"no-store"
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            response.ok &&
-            data.ok === true
-        ){
-
-            online.innerHTML =
-                `
-                <span class="onlineDot"></span>
-                آنلاین
-                `;
-
-        }else{
-
-            online.innerHTML =
-                `
-                <span
-                    class="onlineDot"
-                    style="
-                    background:#ffb454;
-                    box-shadow:0 0 10px #ffb454">
-                </span>
-                آماده
-                `;
-
-        }
-
-    }catch(error){
-
-        online.innerHTML =
-            `
-            <span
-                class="onlineDot"
-                style="
-                background:#ffb454;
-                box-shadow:0 0 10px #ffb454">
-            </span>
-            آماده
-            `;
-
-    }
-
-}
-
-
-/* =========================
-   شروع
-========================= */
-
-renderOrders();
-
-checkAPI();
 
 </script>
 
 </body>
-        </html>
+    </html>
